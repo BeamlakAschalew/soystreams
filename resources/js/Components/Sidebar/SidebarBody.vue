@@ -1,5 +1,14 @@
 <script setup lang="ts">
 import SidebarMenuItem from '@/Components/Sidebar/SidebarMenuItem.vue';
+import {
+    House,
+    Languages,
+    MapPin,
+    Mic,
+    Music,
+    Search,
+    Volleyball,
+} from 'lucide-vue-next';
 </script>
 
 <template>
@@ -11,8 +20,44 @@ import SidebarMenuItem from '@/Components/Sidebar/SidebarMenuItem.vue';
             data-hs-accordion-always-open
         >
             <ul class="space-y-1">
-                <SidebarMenuItem path="/" active>Dashboard</SidebarMenuItem>
-                <SidebarMenuItem path="/genres">Genre</SidebarMenuItem>
+                <SidebarMenuItem path="/" active>
+                    <template #icon="{ size }"><House :size="size" /></template
+                    >Home</SidebarMenuItem
+                >
+                <SidebarMenuItem path="/search"
+                    ><template #icon="{ size }"
+                        ><Search :size="size"
+                    /></template>
+                    Search</SidebarMenuItem
+                >
+                <SidebarMenuItem path="/radio/music"
+                    ><template #icon="{ size }"
+                        ><Music :size="size"
+                    /></template>
+                    Music</SidebarMenuItem
+                >
+                <SidebarMenuItem path="/radio/sports"
+                    ><template #icon="{ size }"
+                        ><Volleyball :size="size"
+                    /></template>
+                    Sports</SidebarMenuItem
+                >
+                <SidebarMenuItem path="/podcasts"
+                    ><template #icon="{ size }"><Mic :size="size" /></template>
+                    Podcasts</SidebarMenuItem
+                >
+                <SidebarMenuItem path="/radio/local"
+                    ><template #icon="{ size }"
+                        ><MapPin :size="size"
+                    /></template>
+                    By Location</SidebarMenuItem
+                >
+                <SidebarMenuItem path="/radio/language"
+                    ><template #icon="{ size }"
+                        ><Languages :size="size"
+                    /></template>
+                    By Language</SidebarMenuItem
+                >
             </ul>
         </div>
     </nav>

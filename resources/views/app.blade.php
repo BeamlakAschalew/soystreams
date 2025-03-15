@@ -30,7 +30,7 @@
     </script>
 </head>
 
-<body class="font-sans antialiased bg-white dark:bg-black">
+<body class="font-sans antialiased bg-gray-100 dark:bg-black">
     @inertia
 </body>
 
