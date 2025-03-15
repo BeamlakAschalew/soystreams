@@ -1,3 +1,4 @@
+import 'preline';
 import '../css/app.css';
 import './bootstrap';
 
