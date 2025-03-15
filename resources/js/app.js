@@ -1,7 +1,7 @@
 import 'preline';
 import '../css/app.css';
 
-import { createInertiaApp } from '@inertiajs/vue3';
+import { createInertiaApp, router } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { HSStaticMethods } from 'preline';
 import { createApp, h } from 'vue';
@@ -10,7 +10,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/src/js';
 HSStaticMethods.autoInit();
 
 const observer = new MutationObserver((mutationsList) => {
-    for (const mutation of mutationsList) {
+    for (let i = 0; i < mutationsList.length; i++) {
         HSStaticMethods.autoInit();
     }
 });
@@ -40,4 +40,11 @@ createInertiaApp({
     progress: {
         color: '#50c878',
     },
+});
+
+router.on('after', () => {
+    console.log('trig');
+    // Remove the overlay class from the <html> element
+    document.documentElement.classList.remove('hs-overlay-backdrop');
+    return true; // Allow navigation to proceed
 });

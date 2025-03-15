@@ -1,7 +1,17 @@
 <script setup lang="ts">
+import { router } from '@inertiajs/vue3';
+import { onMounted } from 'vue';
 import SidebarBody from './SidebarBody.vue';
 import SidebarFooter from './SidebarFooter.vue';
 import SidebarHeader from './SidebarHeader.vue';
+
+onMounted(() => {
+    router.on('success', () => {
+        document
+            .getElementById('hs-sidebar-collapsible-group-backdrop')
+            ?.remove();
+    });
+});
 </script>
 
 <template>

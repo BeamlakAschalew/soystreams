@@ -24,7 +24,7 @@ import {
                     <template #icon="{ size }"><House :size="size" /></template
                     >Home</SidebarMenuItem
                 >
-                <SidebarMenuItem path="/search"
+                <SidebarMenuItem path="/about"
                     ><template #icon="{ size }"
                         ><Search :size="size"
                     /></template>
