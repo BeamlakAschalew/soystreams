@@ -20,11 +20,13 @@ import {
             data-hs-accordion-always-open
         >
             <ul class="space-y-1">
-                <SidebarMenuItem path="/" active>
+                <SidebarMenuItem path="/" :active="$page.component === 'Home'">
                     <template #icon="{ size }"><House :size="size" /></template
                     >Home</SidebarMenuItem
                 >
-                <SidebarMenuItem path="/about"
+                <SidebarMenuItem
+                    path="/about"
+                    :active="$page.component === 'About'"
                     ><template #icon="{ size }"
                         ><Search :size="size"
                     /></template>
