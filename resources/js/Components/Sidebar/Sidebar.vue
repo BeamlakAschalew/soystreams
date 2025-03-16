@@ -17,7 +17,7 @@ onMounted(() => {
 <template>
     <div
         id="hs-sidebar-collapsible-group"
-        class="hs-overlay z-60 fixed bottom-0 start-0 top-0 z-20 hidden h-full w-64 -translate-x-full transform border-e border-gray-200 bg-white transition-all duration-300 [--auto-close:lg] hs-overlay-open:translate-x-0 dark:border-neutral-700 dark:bg-neutral-800 lg:bottom-0 lg:end-auto lg:block lg:translate-x-0"
+        class="hs-overlay z-60 fixed bottom-0 start-0 top-0 z-20 hidden h-full w-64 -translate-x-full transform border-e border-gray-200 bg-white pb-20 transition-all duration-300 [--auto-close:lg] hs-overlay-open:translate-x-0 dark:border-neutral-700 dark:bg-neutral-800 lg:bottom-0 lg:end-auto lg:block lg:translate-x-0"
         role="dialog"
         tabindex="-1"
         aria-label="Sidebar"
