@@ -16,18 +16,20 @@ import { Heart, Play } from 'lucide-vue-next';
                 class="h-16"
                 alt=""
             />
-            <div id="radioTitle">Sheger</div>
+            <div id="radioTitle" class="text-neutral-900 dark:text-neutral-50">
+                Sheger
+            </div>
         </div>
         <div id="playControl">
             <div
                 id="playBtn"
-                class="rounded-full bg-gray-800 p-3 dark:bg-gray-100"
+                class="rounded-full bg-gray-800 p-3 dark:bg-gray-900"
             >
-                <Play class="text-gray-100 dark:text-gray-800" :size="32" />
+                <Play class="text-gray-100 dark:text-gray-200" :size="32" />
             </div>
         </div>
         <div id="trailing">
-            <Heart />
+            <Heart class="text-gray-100 dark:text-gray-200" />
         </div>
     </div>
 </template>
