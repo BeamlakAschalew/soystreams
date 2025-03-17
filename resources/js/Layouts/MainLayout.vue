@@ -2,15 +2,9 @@
 import LivePlayer from '@/Components/LivePlayer/LivePlayer.vue';
 import Navbar from '@/Components/Navbar.vue';
 import Sidebar from '@/Components/Sidebar/Sidebar.vue';
-import { Head } from '@inertiajs/vue3';
-
-defineProps<{
-    pageTitle: string;
-}>();
 </script>
 
 <template>
-    <Head :title="pageTitle"></Head>
     <Navbar />
     <div id="playerContainer" class="flex flex-col">
         <Sidebar />

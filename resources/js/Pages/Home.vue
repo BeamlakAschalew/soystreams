@@ -7,6 +7,7 @@ defineOptions({
 </script>
 
 <template>
+    <Head title="Home"></Head>
     <div id="home" class="">
         <RadioCard />
     </div>

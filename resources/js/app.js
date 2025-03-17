@@ -1,8 +1,9 @@
 import 'preline';
 import '../css/app.css';
 
-import { createInertiaApp, router } from '@inertiajs/vue3';
+import { createInertiaApp, Head, router } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { createPinia } from 'pinia';
 import { HSStaticMethods } from 'preline';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/src/js';
@@ -23,6 +24,7 @@ observer.observe(document.body, {
 });
 
 const appName = import.meta.env.VITE_APP_NAME || 'Soystreams';
+const pinia = createPinia();
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -34,6 +36,8 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(pinia)
+            .component('Head', Head)
             .use(ZiggyVue)
             .mount(el);
     },
@@ -43,8 +47,6 @@ createInertiaApp({
 });
 
 router.on('after', () => {
-    console.log('trig');
-    // Remove the overlay class from the <html> element
     document.documentElement.classList.remove('hs-overlay-backdrop');
-    return true; // Allow navigation to proceed
+    return true;
 });
