@@ -5,14 +5,22 @@ import { onMounted } from 'vue';
 import SidebarBody from './SidebarBody.vue';
 import SidebarFooter from './SidebarFooter.vue';
 import SidebarHeader from './SidebarHeader.vue';
-
 const playerStore = usePlayerStore();
 
-onMounted(() => {
-    router.on('success', () => {
+function closeSidebarDrawer() {
+    const sidebar = document.getElementById('hs-sidebar-collapsible-group');
+    if (sidebar) {
+        sidebar.classList.add('-translate-x-full');
+        sidebar.classList.add('hidden');
         document
             .getElementById('hs-sidebar-collapsible-group-backdrop')
             ?.remove();
+    }
+}
+
+onMounted(() => {
+    router.on('success', () => {
+        closeSidebarDrawer();
     });
 });
 </script>
