@@ -1,6 +1,6 @@
 {
-  "_MainLayout.vue_vue_type_script_setup_true_lang-CmzFAgZx.js": {
-    "file": "assets/MainLayout.vue_vue_type_script_setup_true_lang-CmzFAgZx.js",
+  "_MainLayout.vue_vue_type_script_setup_true_lang-D77nx-9X.js": {
+    "file": "assets/MainLayout.vue_vue_type_script_setup_true_lang-D77nx-9X.js",
     "name": "MainLayout.vue_vue_type_script_setup_true_lang",
     "imports": [
       "resources/js/app.js"
@@ -24,12 +24,12 @@
     "isEntry": true
   },
   "resources/js/Pages/About.vue": {
-    "file": "assets/About-HaC1Mgfq.js",
+    "file": "assets/About-C4qTLA7V.js",
     "name": "About",
     "src": "resources/js/Pages/About.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_MainLayout.vue_vue_type_script_setup_true_lang-CmzFAgZx.js",
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D77nx-9X.js",
       "resources/js/app.js"
     ],
     "css": [
@@ -37,12 +37,12 @@
     ]
   },
   "resources/js/Pages/Home.vue": {
-    "file": "assets/Home-DVnuLq8-.js",
+    "file": "assets/Home-DJDkKNsn.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_MainLayout.vue_vue_type_script_setup_true_lang-CmzFAgZx.js",
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D77nx-9X.js",
       "resources/js/app.js"
     ],
     "css": [
@@ -50,7 +50,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-RSjhH1-P.js",
+    "file": "assets/app-DoJzgihH.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
