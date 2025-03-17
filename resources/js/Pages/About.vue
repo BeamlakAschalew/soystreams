@@ -9,6 +9,6 @@ defineOptions({
 <template>
     <Head title="About" />
     <div id="about">
-        <div>About</div>
+        <div class="text-neutral-900 dark:text-neutral-50">About</div>
     </div>
 </template>
