@@ -1,6 +1,6 @@
 {
-  "_MainLayout.vue_vue_type_script_setup_true_lang-Bi7OTxGE.js": {
-    "file": "assets/MainLayout.vue_vue_type_script_setup_true_lang-Bi7OTxGE.js",
+  "_MainLayout.vue_vue_type_script_setup_true_lang-DtPAgcYF.js": {
+    "file": "assets/MainLayout.vue_vue_type_script_setup_true_lang-DtPAgcYF.js",
     "name": "MainLayout.vue_vue_type_script_setup_true_lang",
     "imports": [
       "resources/js/app.js"
@@ -19,38 +19,38 @@
     "src": "public/images/soy-short.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BRAno72q.css",
+    "file": "assets/app-rmyfhjim.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/Pages/About.vue": {
-    "file": "assets/About-C_FNeH2c.js",
+    "file": "assets/About-BKpRt0n9.js",
     "name": "About",
     "src": "resources/js/Pages/About.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_MainLayout.vue_vue_type_script_setup_true_lang-Bi7OTxGE.js",
+      "_MainLayout.vue_vue_type_script_setup_true_lang-DtPAgcYF.js",
       "resources/js/app.js"
     ],
     "css": [
-      "assets/app-BRAno72q.css"
+      "assets/app-rmyfhjim.css"
     ]
   },
   "resources/js/Pages/Home.vue": {
-    "file": "assets/Home-4C0rEhit.js",
+    "file": "assets/Home-CuJX0MG3.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_MainLayout.vue_vue_type_script_setup_true_lang-Bi7OTxGE.js",
+      "_MainLayout.vue_vue_type_script_setup_true_lang-DtPAgcYF.js",
       "resources/js/app.js"
     ],
     "css": [
-      "assets/app-BRAno72q.css"
+      "assets/app-rmyfhjim.css"
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-BNyFv3Vm.js",
+    "file": "assets/app-Pfrxwud9.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -59,7 +59,7 @@
       "resources/js/Pages/Home.vue"
     ],
     "css": [
-      "assets/app-BRAno72q.css"
+      "assets/app-rmyfhjim.css"
     ]
   }
 }
