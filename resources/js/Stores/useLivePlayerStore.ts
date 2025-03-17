@@ -1,22 +1,61 @@
+import Station from '@/Interfaces/Station';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const usePlayerStore = defineStore('player', () => {
+    const radioInit = ref(false);
     const isPlaying = ref(false);
     const volume = ref(50);
-    const audio = new Audio(
-        'https://stream-155.zeno.fm/umguj2baxdctv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJ1bWd1ajJiYXhkY3R2IiwiaG9zdCI6InN0cmVhbS0xNTUuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6ImdWa2czbkdFU1NlYlhHLWlWWllUNEEiLCJpYXQiOjE3NDIxOTY0NDQsImV4cCI6MTc0MjE5NjUwNH0.KdoRshWRPaDmyuZJ4RKFWNYGXXwuwC_W4uQwYi5I9Lg',
-    );
+    const station = ref<Station | null>(null);
+    const audio = ref(new Audio());
 
     function togglePlayPause() {
-        isPlaying.value ? audio.pause() : audio.play();
+        if (isPlaying.value) {
+            audio.value.pause();
+        } else {
+            audio.value.play();
+        }
         isPlaying.value = !isPlaying.value;
+    }
+
+    function turnOn() {
+        audio.value.play();
+        isPlaying.value = true;
+    }
+
+    function turnOff() {
+        audio.value.pause();
+        isPlaying.value = false;
     }
 
     function setVolume(newVolume: number) {
         volume.value = newVolume;
-        audio.volume = newVolume / 100;
+        audio.value.volume = newVolume / 100;
     }
 
-    return { isPlaying, volume, togglePlayPause, setVolume };
+    function setRadio(s: Station) {
+        radioInit.value = true;
+        if (audio.value.src !== s.url_resolved) {
+            station.value = s;
+            audio.value.src = s.url_resolved;
+            audio.value.load();
+            turnOn();
+        } else {
+            if (isPlaying.value) {
+                turnOff();
+            } else {
+                turnOn();
+            }
+        }
+    }
+
+    return {
+        isPlaying,
+        radioInit,
+        volume,
+        togglePlayPause,
+        setVolume,
+        setRadio,
+        station,
+    };
 });

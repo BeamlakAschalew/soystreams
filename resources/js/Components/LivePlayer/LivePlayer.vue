@@ -21,6 +21,7 @@ function toggleVolumeControl() {
 <template>
     <div
         id="livePlayer"
+        v-if="playerStore.radioInit"
         class="fixed bottom-0 z-50 flex w-full flex-row flex-wrap items-center justify-between border-t-2 border-gray-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800"
     >
         <div
@@ -28,12 +29,12 @@ function toggleVolumeControl() {
             class="flex flex-1 flex-row items-center justify-start gap-4"
         >
             <img
-                src="https://static.wixstatic.com/media/b24dd6_2ef687e27c8a41ac84e14a7ff8849f83~mv2.png/v1/fill/w_175,h_175,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/W_o%20Background.png"
-                class="h-16"
+                :src="playerStore.station?.favicon"
+                class="h-16 w-16 rounded-lg bg-white p-1 dark:bg-neutral-900 max-md:h-10 max-md:w-10"
                 alt=""
             />
             <div id="radioTitle" class="text-neutral-900 dark:text-neutral-50">
-                Sheger
+                {{ playerStore.station?.name }}
             </div>
         </div>
 
@@ -47,11 +48,27 @@ function toggleVolumeControl() {
                     class="rounded-full bg-gray-800 p-3 dark:bg-gray-900"
                     @click="playerStore.togglePlayPause"
                 >
-                    <component
-                        :is="playerStore.isPlaying ? Pause : Play"
-                        class="text-gray-100 dark:text-gray-200"
-                        :size="32"
-                    />
+                    <div class="hidden max-sm:block">
+                        <component
+                            :is="playerStore.isPlaying ? Pause : Play"
+                            :size="24"
+                            class="text-gray-100 dark:text-gray-200"
+                        />
+                    </div>
+                    <div class="hidden sm:max-lg:block">
+                        <component
+                            :is="playerStore.isPlaying ? Pause : Play"
+                            :size="32"
+                            class="text-gray-100 dark:text-gray-200"
+                        />
+                    </div>
+                    <div class="hidden lg:block">
+                        <component
+                            :is="playerStore.isPlaying ? Pause : Play"
+                            :size="40"
+                            class="text-gray-100 dark:text-gray-200"
+                        />
+                    </div>
                 </div>
             </div>
             <div id="endControls" class="flex items-center justify-end gap-8">

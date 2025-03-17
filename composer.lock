@@ -4,8 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e0d422d3949ac271c52b2af1e11420d",
+    "content-hash": "063d1c0a30b29204239c076f77c9b3cd",
     "packages": [
+        {
+            "name": "adinan-cenci/radio-browser",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adinan-cenci/radio-browser.git",
+                "reference": "0c1e737e74201830d6fcd738409ab16ed9138e18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adinan-cenci/radio-browser/zipball/0c1e737e74201830d6fcd738409ab16ed9138e18",
+                "reference": "0c1e737e74201830d6fcd738409ab16ed9138e18",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.4",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AdinanCenci\\RadioBrowser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adinan Cenci",
+                    "email": "adinancenci@protonmail.com",
+                    "role": "developer"
+                }
+            ],
+            "description": "A library to fetch radio stations from the radio-browser.info catalog.",
+            "keywords": [
+                "music",
+                "radio"
+            ],
+            "support": {
+                "issues": "https://github.com/adinan-cenci/radio-browser/issues",
+                "source": "https://github.com/adinan-cenci/radio-browser/tree/v2.1.0"
+            },
+            "time": "2022-03-05T12:11:17+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.12.3",

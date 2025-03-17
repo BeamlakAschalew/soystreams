@@ -1,5 +1,16 @@
 <script setup lang="ts">
-import { Play } from 'lucide-vue-next';
+import Station from '@/Interfaces/Station';
+import { usePlayerStore } from '@/Stores/useLivePlayerStore';
+import { Pause, Play } from 'lucide-vue-next';
+defineProps<{
+    station: Station;
+}>();
+
+const playerStore = usePlayerStore();
+
+function playRadio(station: Station) {
+    playerStore.setRadio(station);
+}
 </script>
 
 <template>
@@ -10,19 +21,29 @@ import { Play } from 'lucide-vue-next';
             >
                 <div
                     class="absolute bottom-0 right-0 mb-1 mr-2 cursor-pointer rounded-full bg-gray-800 p-3 dark:bg-gray-900"
+                    @click="playRadio(station)"
                 >
-                    <Play class="text-gray-100 dark:text-gray-200" :size="12" />
+                    <component
+                        :is="
+                            playerStore.station?.stationuuid ===
+                                station.stationuuid && playerStore.isPlaying
+                                ? Pause
+                                : Play
+                        "
+                        class="text-gray-100 dark:text-gray-200"
+                        :size="12"
+                    />
                 </div>
             </div>
             <img
-                src="https://static.wixstatic.com/media/b24dd6_2ef687e27c8a41ac84e14a7ff8849f83~mv2.png/v1/fill/w_175,h_175,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/W_o%20Background.png"
-                class="h-40 w-40 cursor-pointer rounded-xl bg-white dark:bg-neutral-800"
+                :src="station.favicon"
+                class="h-40 w-40 cursor-pointer rounded-xl bg-white p-2 dark:bg-neutral-800"
                 alt=""
             />
         </div>
 
         <div id="radioTitle" class="text-neutral-900 dark:text-neutral-50">
-            Sheger FM
+            {{ station.name }}
         </div>
     </div>
 </template>
