@@ -22,7 +22,7 @@ function toggleVolumeControl() {
     <div
         id="livePlayer"
         v-if="playerStore.radioInit"
-        class="fixed bottom-0 z-50 flex w-full flex-row flex-wrap items-center justify-between border-t-2 border-gray-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800"
+        class="fixed bottom-0 z-50 flex max-h-20 w-full flex-row flex-wrap items-center justify-between border-t-2 border-gray-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800"
     >
         <div
             id="imageTitle"
@@ -33,7 +33,10 @@ function toggleVolumeControl() {
                 class="h-16 w-16 rounded-lg bg-white p-1 dark:bg-neutral-900 max-md:h-10 max-md:w-10"
                 alt=""
             />
-            <div id="radioTitle" class="text-neutral-900 dark:text-neutral-50">
+            <div
+                id="radioTitle"
+                class="line-clamp-3 text-neutral-900 dark:text-neutral-50"
+            >
                 {{ playerStore.station?.name }}
             </div>
         </div>

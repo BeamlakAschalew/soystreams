@@ -14,10 +14,10 @@ function playRadio(station: Station) {
 </script>
 
 <template>
-    <div id="radioCard" class="w-fit">
-        <div id="imageContainer" class="group relative">
+    <div id="radioCard" class="w-full">
+        <div id="imageContainer" class="group relative aspect-square w-full">
             <div
-                class="absolute bottom-0 h-12 w-40 rounded-bl-lg rounded-br-lg bg-gradient-to-t from-green-300 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                class="absolute bottom-0 h-12 w-full rounded-bl-lg rounded-br-lg bg-gradient-to-t from-green-300 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             >
                 <div
                     class="absolute bottom-0 right-0 mb-1 mr-2 cursor-pointer rounded-full bg-gray-800 p-3 dark:bg-gray-900"
@@ -37,12 +37,15 @@ function playRadio(station: Station) {
             </div>
             <img
                 :src="station.favicon"
-                class="h-40 w-40 cursor-pointer rounded-xl bg-white p-2 dark:bg-neutral-800"
+                class="h-full w-full cursor-pointer rounded-xl bg-white p-2 dark:bg-neutral-800"
                 alt=""
             />
         </div>
 
-        <div id="radioTitle" class="text-neutral-900 dark:text-neutral-50">
+        <div
+            id="radioTitle"
+            class="mt-1 w-full truncate text-center text-neutral-900 dark:text-neutral-50"
+        >
             {{ station.name }}
         </div>
     </div>

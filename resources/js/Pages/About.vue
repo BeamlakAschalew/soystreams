@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import MainLayout from '@/Layouts/MainLayout.vue';
+
+defineOptions({
+    layout: MainLayout,
+});
 </script>
 
 <template>
-    <Head title="About"></Head>
-    <MainLayout pageTitle="Home">
-        <div id="home" class="flex h-screen items-center justify-center">
-            <h1 class="text-black dark:text-white">About</h1>
-        </div>
-    </MainLayout>
+    <Head title="About" />
+    <div id="about">
+        <div>About</div>
+    </div>
 </template>
