@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import RadioCard from '@/Components/RadioCard.vue';
 import MainLayout from '@/Layouts/MainLayout.vue';
 defineOptions({
     layout: MainLayout,
@@ -6,5 +7,7 @@ defineOptions({
 </script>
 
 <template>
-    <div id="home" class="flex h-screen items-center justify-center"></div>
+    <div id="home" class="">
+        <RadioCard />
+    </div>
 </template>
