@@ -21,7 +21,7 @@ onMounted(() => {
     <div
         id="hs-sidebar-collapsible-group"
         :class="[
-            'hs-overlay z-60 fixed bottom-0 start-0 top-0 hidden h-full w-64 -translate-x-full transform border-e border-gray-200 bg-white transition-all duration-300 [--auto-close:lg] hs-overlay-open:translate-x-0 dark:border-neutral-700 dark:bg-neutral-800 lg:bottom-0 lg:end-auto lg:block lg:translate-x-0',
+            'hs-overlay fixed bottom-0 start-0 top-0 z-20 hidden h-full w-64 -translate-x-full transform border-e border-gray-200 bg-white transition-all duration-300 [--auto-close:lg] hs-overlay-open:translate-x-0 dark:border-neutral-700 dark:bg-neutral-800 max-md:z-50 lg:bottom-0 lg:end-auto lg:block lg:translate-x-0',
             playerStore.radioInit ? 'pb-20' : '',
         ]"
         role="dialog"
