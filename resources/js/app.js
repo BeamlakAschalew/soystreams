@@ -1,7 +1,7 @@
 import 'preline';
 import '../css/app.css';
 
-import { createInertiaApp, Head } from '@inertiajs/vue3';
+import { createInertiaApp, Head, router } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createPinia } from 'pinia';
 import { HSStaticMethods } from 'preline';
@@ -44,4 +44,9 @@ createInertiaApp({
     progress: {
         color: '#50c878',
     },
+});
+
+router.on('after', () => {
+    document.documentElement.classList.remove('hs-overlay-backdrop');
+    return true;
 });
