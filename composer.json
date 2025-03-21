@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "adinan-cenci/radio-browser": "^2.1",
+        "beamlak/podcastindex-wrapper": "dev-master",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
