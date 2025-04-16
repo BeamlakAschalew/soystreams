@@ -1,23 +1,20 @@
 <script setup lang="ts">
-import RadioCard from '@/Components/RadioCard.vue';
-import Station from '@/Interfaces/Station';
-import MainLayout from '@/Layouts/MainLayout.vue';
+import RadioCard from '@/Components/RadioCard.vue'
+import Station from '@/Interfaces/Station'
+import MainLayout from '@/Layouts/MainLayout.vue'
 
 defineOptions({
     layout: MainLayout,
-});
+})
 defineProps<{
-    topStations: Station[];
-}>();
+    topStations: Station[]
+}>()
 </script>
 
 <template>
     <Head title="Home" />
     <div id="home">
-        <div
-            id="radiosName"
-            class="font-bold text-neutral-900 dark:text-neutral-50"
-        >
+        <div id="radiosName" class="font-bold text-neutral-900 dark:text-neutral-50">
             Top 200 Pop
         </div>
         <div

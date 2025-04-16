@@ -1,27 +1,24 @@
 <script setup lang="ts">
-import { usePlayerStore } from '@/Stores/useLivePlayerStore';
-import { router } from '@inertiajs/vue3';
-import { HSOverlay } from 'preline';
-import { onMounted } from 'vue';
-import SidebarBody from './SidebarBody.vue';
-import SidebarFooter from './SidebarFooter.vue';
-import SidebarHeader from './SidebarHeader.vue';
-const playerStore = usePlayerStore();
+import {usePlayerStore} from '@/Stores/useLivePlayerStore'
+import {router} from '@inertiajs/vue3'
+import {HSOverlay} from 'preline'
+import {onMounted} from 'vue'
+import SidebarBody from './SidebarBody.vue'
+import SidebarFooter from './SidebarFooter.vue'
+import SidebarHeader from './SidebarHeader.vue'
+const playerStore = usePlayerStore()
 
-function closeSidebarDrawer() {
-    document.getElementById('hs-sidebar-collapsible-group-backdrop')?.remove();
-}
 onMounted(() => {
     // Initialize only the sidebar overlay
-    const sidebarEl = document.getElementById('hs-sidebar-collapsible-group');
+    const sidebarEl = document.getElementById('hs-sidebar-collapsible-group')
     if (sidebarEl) {
-        const sidebar = new HSOverlay(sidebarEl);
+        const sidebar = new HSOverlay(sidebarEl)
 
         router.on('before', () => {
-            sidebar.close();
-        });
+            sidebar.close()
+        })
     }
-});
+})
 
 // onMounted(() => {
 //     router.on('success', () => {

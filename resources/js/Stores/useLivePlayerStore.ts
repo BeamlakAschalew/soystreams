@@ -1,50 +1,50 @@
-import Station from '@/Interfaces/Station';
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import Station from '@/Interfaces/Station'
+import {defineStore} from 'pinia'
+import {ref} from 'vue'
 
 export const usePlayerStore = defineStore('player', () => {
-    const radioInit = ref(false);
-    const isPlaying = ref(false);
-    const volume = ref(50);
-    const station = ref<Station | null>(null);
-    const audio = ref(new Audio());
+    const radioInit = ref(false)
+    const isPlaying = ref(false)
+    const volume = ref(50)
+    const station = ref<Station | null>(null)
+    const audio = ref(new Audio())
 
     function togglePlayPause() {
         if (isPlaying.value) {
-            audio.value.pause();
+            audio.value.pause()
         } else {
-            audio.value.play();
+            audio.value.play()
         }
-        isPlaying.value = !isPlaying.value;
+        isPlaying.value = !isPlaying.value
     }
 
     function turnOn() {
-        audio.value.play();
-        isPlaying.value = true;
+        audio.value.play()
+        isPlaying.value = true
     }
 
     function turnOff() {
-        audio.value.pause();
-        isPlaying.value = false;
+        audio.value.pause()
+        isPlaying.value = false
     }
 
     function setVolume(newVolume: number) {
-        volume.value = newVolume;
-        audio.value.volume = newVolume / 100;
+        volume.value = newVolume
+        audio.value.volume = newVolume / 100
     }
 
     function setRadio(s: Station) {
-        radioInit.value = true;
+        radioInit.value = true
         if (audio.value.src !== s.url_resolved) {
-            station.value = s;
-            audio.value.src = s.url_resolved;
-            audio.value.load();
-            turnOn();
+            station.value = s
+            audio.value.src = s.url_resolved
+            audio.value.load()
+            turnOn()
         } else {
             if (isPlaying.value) {
-                turnOff();
+                turnOff()
             } else {
-                turnOn();
+                turnOn()
             }
         }
     }
@@ -57,5 +57,5 @@ export const usePlayerStore = defineStore('player', () => {
         setVolume,
         setRadio,
         station,
-    };
-});
+    }
+})

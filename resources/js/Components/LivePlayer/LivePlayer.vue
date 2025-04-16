@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import { usePlayerStore } from '@/Stores/useLivePlayerStore';
-import {
-    Heart,
-    Pause,
-    Play,
-    Volume1,
-    Volume2,
-    VolumeOff,
-} from 'lucide-vue-next';
-import { ref } from 'vue';
+import {usePlayerStore} from '@/Stores/useLivePlayerStore'
+import {Heart, Pause, Play, Volume1, Volume2, VolumeOff} from 'lucide-vue-next'
+import {ref} from 'vue'
 
-const playerStore = usePlayerStore();
-const showVolumeControl = ref(false);
+const playerStore = usePlayerStore()
+const showVolumeControl = ref(false)
 
 function toggleVolumeControl() {
-    showVolumeControl.value = !showVolumeControl.value;
+    showVolumeControl.value = !showVolumeControl.value
 }
 </script>
 
@@ -24,19 +17,13 @@ function toggleVolumeControl() {
         v-if="playerStore.radioInit"
         class="fixed bottom-0 z-40 flex max-h-20 w-full flex-row flex-wrap items-center justify-between border-t-2 border-gray-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800"
     >
-        <div
-            id="imageTitle"
-            class="flex flex-1 flex-row items-center justify-start gap-4"
-        >
+        <div id="imageTitle" class="flex flex-1 flex-row items-center justify-start gap-4">
             <img
                 :src="playerStore.station?.favicon"
                 class="h-16 w-16 rounded-lg bg-white p-1 dark:bg-neutral-900 max-md:h-10 max-md:w-10"
                 alt=""
             />
-            <div
-                id="radioTitle"
-                class="line-clamp-1 text-neutral-900 dark:text-neutral-50"
-            >
+            <div id="radioTitle" class="line-clamp-1 text-neutral-900 dark:text-neutral-50">
                 {{ playerStore.station?.name }}
             </div>
         </div>
@@ -105,10 +92,7 @@ function toggleVolumeControl() {
                             :value="playerStore.volume"
                             @input="
                                 playerStore.setVolume(
-                                    Number(
-                                        ($event.target as HTMLInputElement)
-                                            .value,
-                                    ),
+                                    Number(($event.target as HTMLInputElement).value),
                                 )
                             "
                         />

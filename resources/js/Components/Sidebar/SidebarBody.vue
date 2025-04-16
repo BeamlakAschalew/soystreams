@@ -1,14 +1,6 @@
 <script setup lang="ts">
-import SidebarMenuItem from '@/Components/Sidebar/SidebarMenuItem.vue';
-import {
-    House,
-    Languages,
-    MapPin,
-    Mic,
-    Music,
-    Search,
-    Volleyball,
-} from 'lucide-vue-next';
+import SidebarMenuItem from '@/Components/Sidebar/SidebarMenuItem.vue'
+import {House, Languages, MapPin, Mic, Music, Search, Volleyball} from 'lucide-vue-next'
 </script>
 
 <template>
@@ -21,44 +13,31 @@ import {
         >
             <ul class="space-y-1">
                 <SidebarMenuItem path="/" :active="$page.component === 'Home'">
-                    <template #icon="{ size }"><House :size="size" /></template
-                    >Home</SidebarMenuItem
+                    <template #icon="{size}"><House :size="size" /></template>Home</SidebarMenuItem
                 >
-                <SidebarMenuItem
-                    path="/about"
-                    :active="$page.component === 'About'"
-                    ><template #icon="{ size }"
-                        ><Search :size="size"
-                    /></template>
+                <SidebarMenuItem path="/about" :active="$page.component === 'About'"
+                    ><template #icon="{size}"><Search :size="size" /></template>
                     Search</SidebarMenuItem
                 >
                 <SidebarMenuItem path="/radio/music"
-                    ><template #icon="{ size }"
-                        ><Music :size="size"
-                    /></template>
+                    ><template #icon="{size}"><Music :size="size" /></template>
                     Music</SidebarMenuItem
                 >
                 <SidebarMenuItem path="/radio/sports"
-                    ><template #icon="{ size }"
-                        ><Volleyball :size="size"
-                    /></template>
+                    ><template #icon="{size}"><Volleyball :size="size" /></template>
                     Sports</SidebarMenuItem
                 >
                 <SidebarMenuItem path="/podcasts"
-                    ><template #icon="{ size }"><Mic :size="size" /></template>
+                    ><template #icon="{size}"><Mic :size="size" /></template>
                     Podcasts</SidebarMenuItem
                 >
                 <SidebarMenuItem path="/radio/local"
-                    ><template #icon="{ size }"
-                        ><MapPin :size="size"
-                    /></template>
-                    By Location</SidebarMenuItem
+                    ><template #icon="{size}"><MapPin :size="size" /></template> By
+                    Location</SidebarMenuItem
                 >
                 <SidebarMenuItem path="/radio/language"
-                    ><template #icon="{ size }"
-                        ><Languages :size="size"
-                    /></template>
-                    By Language</SidebarMenuItem
+                    ><template #icon="{size}"><Languages :size="size" /></template> By
+                    Language</SidebarMenuItem
                 >
             </ul>
         </div>

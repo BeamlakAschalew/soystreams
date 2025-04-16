@@ -4,10 +4,7 @@
             class="focus:outline-hidden flex-none text-xl font-semibold text-black focus:opacity-80 dark:text-white"
             href="#"
             aria-label="Brand"
-            ><img
-                class="h-full w-52"
-                src="../../../../public/images/soy-long.png"
-                alt=""
+            ><img class="h-full w-52" src="../../../../public/images/soy-long.png" alt=""
         /></a>
         <div class="-me-2 lg:hidden">
             <!-- Close Button -->

@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { Search } from 'lucide-vue-next';
+import {Search} from 'lucide-vue-next'
 </script>
 
 <template>
     <header
         class="relative flex w-full flex-wrap bg-white py-3 text-sm dark:bg-neutral-800 sm:flex-nowrap sm:justify-start lg:hidden"
     >
-        <nav
-            class="mx-auto w-full max-w-[85rem] px-4 sm:flex sm:items-center sm:justify-between"
-        >
+        <nav class="mx-auto w-full max-w-[85rem] px-4 sm:flex sm:items-center sm:justify-between">
             <div class="flex w-full items-center justify-between">
                 <div class="flex items-center justify-start">
                     <div class="pr-3 lg:hidden">

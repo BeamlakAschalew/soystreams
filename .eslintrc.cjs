@@ -1,5 +1,5 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution');
+require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
     root: true,
@@ -16,4 +16,4 @@ module.exports = {
         'vue/multi-word-component-names': 'off',
         'no-undef': 'off',
     },
-};
+}

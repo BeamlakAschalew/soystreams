@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import Station from '@/Interfaces/Station';
-import { usePlayerStore } from '@/Stores/useLivePlayerStore';
-import { Pause, Play } from 'lucide-vue-next';
+import Station from '@/Interfaces/Station'
+import {usePlayerStore} from '@/Stores/useLivePlayerStore'
+import {Pause, Play} from 'lucide-vue-next'
 defineProps<{
-    station: Station;
-}>();
+    station: Station
+}>()
 
-const playerStore = usePlayerStore();
+const playerStore = usePlayerStore()
 
 function playRadio(station: Station) {
-    playerStore.setRadio(station);
+    playerStore.setRadio(station)
 }
 </script>
 
@@ -25,8 +25,8 @@ function playRadio(station: Station) {
                 >
                     <component
                         :is="
-                            playerStore.station?.stationuuid ===
-                                station.stationuuid && playerStore.isPlaying
+                            playerStore.station?.stationuuid === station.stationuuid &&
+                            playerStore.isPlaying
                                 ? Pause
                                 : Play
                         "
