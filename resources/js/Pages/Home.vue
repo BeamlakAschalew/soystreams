@@ -2,7 +2,6 @@
 import RadioCard from '@/Components/RadioCard.vue'
 import Station from '@/Interfaces/Station'
 import MainLayout from '@/Layouts/MainLayout.vue'
-import { onMounted, ref } from 'vue'
 
 defineOptions({
     layout: MainLayout,
@@ -13,26 +12,6 @@ defineProps<{
         stations: Station[]
     }>
 }>()
-
-const scrollContainer = ref<HTMLDivElement | null>(null)
-
-const scrollLeft = () => {
-    if (scrollContainer.value) {
-        scrollContainer.value.scrollBy({ left: -300, behavior: 'smooth' })
-    }
-}
-
-const scrollRight = () => {
-    if (scrollContainer.value) {
-        scrollContainer.value.scrollBy({ left: 300, behavior: 'smooth' })
-    }
-}
-
-onMounted(() => {
-    if (!scrollContainer.value) {
-        console.error('scrollContainer is not bound to the DOM element.')
-    }
-})
 </script>
 
 <template>
