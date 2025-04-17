@@ -1,6 +1,6 @@
 import Station from '@/Interfaces/Station'
-import {defineStore} from 'pinia'
-import {ref} from 'vue'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const usePlayerStore = defineStore('player', () => {
     const radioInit = ref(false)

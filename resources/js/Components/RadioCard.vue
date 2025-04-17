@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Station from '@/Interfaces/Station'
-import {usePlayerStore} from '@/Stores/useLivePlayerStore'
-import {Pause, Play} from 'lucide-vue-next'
+import { usePlayerStore } from '@/Stores/useLivePlayerStore'
+import { Pause, Play } from 'lucide-vue-next'
 defineProps<{
     station: Station
 }>()

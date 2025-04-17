@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {usePlayerStore} from '@/Stores/useLivePlayerStore'
-import {Heart, Pause, Play, Volume1, Volume2, VolumeOff} from 'lucide-vue-next'
-import {ref} from 'vue'
+import { usePlayerStore } from '@/Stores/useLivePlayerStore'
+import { Heart, Pause, Play, Volume1, Volume2, VolumeOff } from 'lucide-vue-next'
+import { ref } from 'vue'
 
 const playerStore = usePlayerStore()
 const showVolumeControl = ref(false)

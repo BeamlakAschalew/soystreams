@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {usePlayerStore} from '@/Stores/useLivePlayerStore'
-import {router} from '@inertiajs/vue3'
-import {HSOverlay} from 'preline'
-import {onMounted} from 'vue'
+import { usePlayerStore } from '@/Stores/useLivePlayerStore'
+import { router } from '@inertiajs/vue3'
+import { HSOverlay } from 'preline'
+import { onMounted } from 'vue'
 import SidebarBody from './SidebarBody.vue'
 import SidebarFooter from './SidebarFooter.vue'
 import SidebarHeader from './SidebarHeader.vue'
