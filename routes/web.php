@@ -4,14 +4,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use AdinanCenci\RadioBrowser\RadioBrowser;
 use App\Http\Controllers\HomeStationsController;
+use App\Http\Controllers\SearchController;
 
 Route::get('/', [HomeStationsController::class, 'index'])->name('home');
 
-Route::get('/search', function () {
-    return Inertia::render('About', [
-        'title' => 'Search'
-    ]);
-});
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 Route::get('/podcasts', function () {
     $client = new PodcastIndexWrapper\Client([

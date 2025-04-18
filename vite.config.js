@@ -10,6 +10,13 @@ export default defineConfig({
             refresh: true,
         }),
         tailwindcss(),
+        run([
+            {
+                name: 'wayfinder',
+                run: ['php', 'artisan', 'wayfinder:generate'],
+                pattern: ['routes/**/*.php', 'app/**/Http/**/*.php'],
+            },
+        ]),
         vue({
             template: {
                 transformAssetUrls: {
