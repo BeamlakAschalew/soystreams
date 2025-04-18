@@ -6,7 +6,7 @@
             <div id="themeToggler">
                 <button
                     type="button"
-                    class="hs-dark-mode focus:outline-hidden block rounded-full font-medium text-gray-800 hover:bg-gray-200 focus:bg-gray-200 hs-dark-mode-active:hidden dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                    class="hs-dark-mode hs-dark-mode-active:hidden block rounded-full font-medium text-gray-800 hover:bg-gray-200 focus:bg-gray-200 focus:outline-hidden dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
                     data-hs-theme-click-value="dark"
                 >
                     <span class="group inline-flex size-9 shrink-0 items-center justify-center">
@@ -28,7 +28,7 @@
                 </button>
                 <button
                     type="button"
-                    class="hs-dark-mode focus:outline-hidden hidden rounded-full font-medium text-gray-800 hover:bg-gray-200 focus:bg-gray-200 hs-dark-mode-active:block dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                    class="hs-dark-mode hs-dark-mode-active:block hidden rounded-full font-medium text-gray-800 hover:bg-gray-200 focus:bg-gray-200 focus:outline-hidden dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
                     data-hs-theme-click-value="light"
                 >
                     <span class="group inline-flex size-9 shrink-0 items-center justify-center">

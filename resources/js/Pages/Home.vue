@@ -44,9 +44,7 @@ defineProps<{
             }'
             class="relative"
         >
-            <div
-                class="hs-carousel w-full overflow-hidden rounded-lg bg-white py-4 dark:bg-neutral-950"
-            >
+            <div class="hs-carousel w-full overflow-hidden rounded-lg py-4">
                 <div class="relative -mx-1 min-h-44">
                     <div
                         class="hs-carousel-body hs-carousel-dragging:cursor-grabbing hs-carousel-dragging:transition-none absolute start-0 top-0 bottom-0 flex cursor-grab flex-nowrap items-center justify-center transition-transform duration-700"
@@ -67,7 +65,7 @@ defineProps<{
 
             <button
                 type="button"
-                class="hs-carousel-prev hs-carousel-disabled:pointer-events-none hs-carousel-disabled:opacity-50 absolute inset-y-0 start-0 inline-flex h-full w-11.5 items-center justify-center rounded-s-lg text-gray-800 hover:bg-gray-800/10 focus:bg-gray-800/10 focus:outline-hidden dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+                class="hs-carousel-prev hs-carousel-disabled:pointer-events-none hs-carousel-disabled:opacity-50 text-primary dark:text-primary absolute inset-y-0 start-0 inline-flex h-full w-11.5 items-center justify-center rounded-s-lg hover:bg-green-400/10 focus:bg-green-400/10 focus:outline-hidden dark:hover:bg-green-400/10 dark:focus:bg-green-400/10"
             >
                 <span class="text-2xl" aria-hidden="true">
                     <svg
@@ -89,7 +87,7 @@ defineProps<{
             </button>
             <button
                 type="button"
-                class="hs-carousel-next hs-carousel-disabled:pointer-events-none hs-carousel-disabled:opacity-50 absolute inset-y-0 end-0 inline-flex h-full w-11.5 items-center justify-center rounded-e-lg text-gray-800 hover:bg-gray-800/10 focus:bg-gray-800/10 focus:outline-hidden dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+                class="hs-carousel-next hs-carousel-disabled:pointer-events-none hs-carousel-disabled:opacity-50 text-primary dark:text-primary absolute inset-y-0 end-0 inline-flex h-full w-11.5 items-center justify-center rounded-e-lg hover:bg-green-400/10 focus:bg-green-400/10 focus:outline-hidden dark:hover:bg-green-400/10 dark:focus:bg-green-400/10"
             >
                 <span class="sr-only">Next</span>
                 <span class="text-2xl" aria-hidden="true">

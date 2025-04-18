@@ -5,6 +5,7 @@ import { createInertiaApp, Head } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createPinia } from 'pinia'
 import { createApp, h } from 'vue'
+import VueLazyload from 'vue-lazyload'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/src/js'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Soystreams'
@@ -20,6 +21,12 @@ createInertiaApp({
             .use(pinia)
             .component('Head', Head)
             .use(ZiggyVue)
+            .use(VueLazyload, {
+                preLoad: 1.3,
+                error: '/images/soy-square.png',
+                loading: '/images/soy-square.png',
+                attempt: 1,
+            })
             .mount(el)
     },
     progress: {

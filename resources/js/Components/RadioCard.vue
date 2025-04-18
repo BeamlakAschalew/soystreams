@@ -17,10 +17,10 @@ function playRadio(station: Station) {
     <div id="radioCard" class="w-full">
         <div id="imageContainer" class="group relative aspect-square w-full">
             <div
-                class="absolute bottom-0 h-12 w-full rounded-bl-lg rounded-br-lg bg-gradient-to-t from-green-300 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                class="absolute bottom-0 h-12 w-full rounded-br-lg rounded-bl-lg bg-gradient-to-t from-green-300 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             >
                 <div
-                    class="absolute bottom-0 right-0 mb-1 mr-2 cursor-pointer rounded-full bg-gray-800 p-3 dark:bg-gray-900"
+                    class="absolute right-0 bottom-0 mr-2 mb-1 cursor-pointer rounded-full bg-gray-800 p-3 dark:bg-gray-900"
                     @click="playRadio(station)"
                 >
                     <component
@@ -36,8 +36,8 @@ function playRadio(station: Station) {
                 </div>
             </div>
             <img
-                :src="station.favicon"
-                class="h-full w-full cursor-pointer rounded-xl bg-white p-2 dark:bg-neutral-800"
+                v-lazy="station.favicon"
+                class="h-full w-full cursor-pointer rounded-xl bg-white object-cover p-2 dark:bg-neutral-800"
                 alt=""
             />
         </div>
