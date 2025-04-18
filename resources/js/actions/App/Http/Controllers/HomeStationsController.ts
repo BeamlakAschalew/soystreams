@@ -5,16 +5,19 @@ import { queryParams, type QueryParams } from './../../../../wayfinder'
  * @see app/Http/Controllers/HomeStationsController.php:10
  * @route /
  */
-export const index = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
-    url: string,
-    method: 'get',
+export const index = (options?: {
+    query?: QueryParams
+    mergeQuery?: QueryParams
+}): {
+    url: string
+    method: 'get'
 } => ({
     url: index.url(options),
     method: 'get',
 })
 
 index.definition = {
-    methods: ['get','head'],
+    methods: ['get', 'head'],
     url: '\/',
 }
 
@@ -23,7 +26,7 @@ index.definition = {
  * @see app/Http/Controllers/HomeStationsController.php:10
  * @route /
  */
-index.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
+index.url = (options?: { query?: QueryParams; mergeQuery?: QueryParams }) => {
     return index.definition.url + queryParams(options)
 }
 
@@ -32,9 +35,12 @@ index.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
  * @see app/Http/Controllers/HomeStationsController.php:10
  * @route /
  */
-index.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
-    url: string,
-    method: 'get',
+index.get = (options?: {
+    query?: QueryParams
+    mergeQuery?: QueryParams
+}): {
+    url: string
+    method: 'get'
 } => ({
     url: index.url(options),
     method: 'get',
@@ -45,9 +51,12 @@ index.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
  * @see app/Http/Controllers/HomeStationsController.php:10
  * @route /
  */
-index.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
-    url: string,
-    method: 'head',
+index.head = (options?: {
+    query?: QueryParams
+    mergeQuery?: QueryParams
+}): {
+    url: string
+    method: 'head'
 } => ({
     url: index.url(options),
     method: 'head',
