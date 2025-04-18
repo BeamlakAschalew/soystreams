@@ -20,7 +20,7 @@ function toggleVolumeControl() {
         <div id="imageTitle" class="flex flex-1 flex-row items-center justify-start gap-4">
             <img
                 :src="playerStore.station?.favicon"
-                class="h-16 w-16 rounded-lg bg-white p-1 max-md:h-10 max-md:w-10 dark:bg-neutral-900"
+                class="h-16 w-16 rounded-lg bg-white object-cover p-1 max-md:h-10 max-md:w-10 dark:bg-neutral-900"
                 alt=""
             />
             <div id="radioTitle" class="line-clamp-1 text-neutral-900 dark:text-neutral-50">

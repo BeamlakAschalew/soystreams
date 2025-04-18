@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import SidebarMenuItem from '@/Components/Sidebar/SidebarMenuItem.vue'
+import { home } from '@/routes/home'
+import { search } from '@/routes/search'
 import { House, Languages, MapPin, Mic, Music, Search, Volleyball } from 'lucide-vue-next'
 </script>
 
@@ -12,11 +14,11 @@ import { House, Languages, MapPin, Mic, Music, Search, Volleyball } from 'lucide
             data-hs-accordion-always-open
         >
             <ul class="space-y-1">
-                <SidebarMenuItem path="/" :active="$page.component === 'Home'">
+                <SidebarMenuItem :path="home().url" :active="$page.component === 'Home'">
                     <template #icon="{ size }"><House :size="size" /></template
                     >Home</SidebarMenuItem
                 >
-                <SidebarMenuItem path="/about" :active="$page.component === 'About'"
+                <SidebarMenuItem :path="search().url" :active="$page.component === 'Search'"
                     ><template #icon="{ size }"><Search :size="size" /></template>
                     Search</SidebarMenuItem
                 >
