@@ -12,4 +12,9 @@
 @theme {
     --font-sans: 'Figtree', sans-serif;
     --color-primary: oklch(0.75 0.1577 151.54);
+    --color-lightPrimary: oklch(0.96 0.0434 156.74);
+}
+
+.nprogress .bar {
+    height: 2px;
 }

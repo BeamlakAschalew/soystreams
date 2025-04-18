@@ -7,6 +7,12 @@ use App\Http\Controllers\HomeStationsController;
 
 Route::get('/', [HomeStationsController::class, 'index'])->name('home');
 
+Route::get('/search', function () {
+    return Inertia::render('About', [
+        'title' => 'Search'
+    ]);
+});
+
 Route::get('/podcasts', function () {
     $client = new PodcastIndexWrapper\Client([
         'app' => 'AppName',
