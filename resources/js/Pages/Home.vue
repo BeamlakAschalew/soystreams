@@ -47,14 +47,14 @@ defineProps<{
             <div class="hs-carousel w-full overflow-hidden rounded-lg bg-white dark:bg-neutral-950">
                 <div class="relative -mx-1 min-h-52">
                     <div
-                        class="hs-carousel-body absolute bottom-0 start-0 top-0 flex cursor-grab flex-nowrap items-center justify-center transition-transform duration-700 hs-carousel-dragging:cursor-grabbing hs-carousel-dragging:transition-none"
+                        class="hs-carousel-body hs-carousel-dragging:cursor-grabbing hs-carousel-dragging:transition-none absolute start-0 top-0 bottom-0 flex cursor-grab flex-nowrap items-center justify-center transition-transform duration-700"
                     >
                         <div
                             v-for="station in stationCollection.stations"
                             :key="station.stationuuid"
                             class="hs-carousel-slide flex items-center justify-center"
                         >
-                            <RadioCard :station="station" class="w-[150px] flex-shrink-0" />
+                            <RadioCard :station="station" class="w-[150px] flex-shrink-0 p-4" />
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ defineProps<{
 
             <button
                 type="button"
-                class="hs-carousel-prev w-11.5 focus:outline-hidden absolute inset-y-0 start-0 inline-flex h-full items-center justify-center rounded-s-lg text-gray-800 hover:bg-gray-800/10 focus:bg-gray-800/10 hs-carousel-disabled:pointer-events-none hs-carousel-disabled:opacity-50 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+                class="hs-carousel-prev hs-carousel-disabled:pointer-events-none hs-carousel-disabled:opacity-50 absolute inset-y-0 start-0 inline-flex h-full w-11.5 items-center justify-center rounded-s-lg text-gray-800 hover:bg-gray-800/10 focus:bg-gray-800/10 focus:outline-hidden dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
             >
                 <span class="text-2xl" aria-hidden="true">
                     <svg
@@ -84,7 +84,7 @@ defineProps<{
             </button>
             <button
                 type="button"
-                class="hs-carousel-next w-11.5 focus:outline-hidden absolute inset-y-0 end-0 inline-flex h-full items-center justify-center rounded-e-lg text-gray-800 hover:bg-gray-800/10 focus:bg-gray-800/10 hs-carousel-disabled:pointer-events-none hs-carousel-disabled:opacity-50 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+                class="hs-carousel-next hs-carousel-disabled:pointer-events-none hs-carousel-disabled:opacity-50 absolute inset-y-0 end-0 inline-flex h-full w-11.5 items-center justify-center rounded-e-lg text-gray-800 hover:bg-gray-800/10 focus:bg-gray-800/10 focus:outline-hidden dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
             >
                 <span class="sr-only">Next</span>
                 <span class="text-2xl" aria-hidden="true">
