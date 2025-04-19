@@ -18,8 +18,8 @@ jobs:
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
       # Install Composer dependencies (including dev dependencies)
-      - name: Install Composer Dependencies
-        run: composer install --prefer-dist --no-progress
+      # - name: Install Composer Dependencies
+      #   run: composer install --prefer-dist --no-progress
 
       # Set up Node.js for Vite
       - name: Set up Node.js
