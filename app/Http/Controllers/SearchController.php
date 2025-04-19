@@ -30,8 +30,8 @@ class SearchController extends Controller {
         return Inertia::render('Search', [
             'title' => 'Search',
             'searched_stations' => $stations,
-            'query' => fn() => ['q' => $query],
-            'no_input' => !$query,
+            'query' => fn () => ['q' => $query],
+            'no_input' => ! $query,
         ]);
     }
 }

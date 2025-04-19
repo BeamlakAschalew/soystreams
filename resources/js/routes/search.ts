@@ -5,19 +5,16 @@ import { queryParams, type QueryParams } from './../wayfinder'
  * @see app/Http/Controllers/SearchController.php:24
  * @route /search
  */
-export const search = (options?: {
-    query?: QueryParams
-    mergeQuery?: QueryParams
-}): {
-    url: string
-    method: 'get'
+export const search = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+    url: string,
+    method: 'get',
 } => ({
     url: search.url(options),
     method: 'get',
 })
 
 search.definition = {
-    methods: ['get', 'head'],
+    methods: ['get','head'],
     url: '\/search',
 }
 
@@ -26,7 +23,7 @@ search.definition = {
  * @see app/Http/Controllers/SearchController.php:24
  * @route /search
  */
-search.url = (options?: { query?: QueryParams; mergeQuery?: QueryParams }) => {
+search.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
     return search.definition.url + queryParams(options)
 }
 
@@ -35,12 +32,9 @@ search.url = (options?: { query?: QueryParams; mergeQuery?: QueryParams }) => {
  * @see app/Http/Controllers/SearchController.php:24
  * @route /search
  */
-search.get = (options?: {
-    query?: QueryParams
-    mergeQuery?: QueryParams
-}): {
-    url: string
-    method: 'get'
+search.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+    url: string,
+    method: 'get',
 } => ({
     url: search.url(options),
     method: 'get',
@@ -51,12 +45,9 @@ search.get = (options?: {
  * @see app/Http/Controllers/SearchController.php:24
  * @route /search
  */
-search.head = (options?: {
-    query?: QueryParams
-    mergeQuery?: QueryParams
-}): {
-    url: string
-    method: 'head'
+search.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+    url: string,
+    method: 'head',
 } => ({
     url: search.url(options),
     method: 'head',

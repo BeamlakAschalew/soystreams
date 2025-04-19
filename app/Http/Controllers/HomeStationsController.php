@@ -3,29 +3,28 @@
 namespace App\Http\Controllers;
 
 use AdinanCenci\RadioBrowser\RadioBrowser;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class HomeStationsController extends Controller {
+class HomeStationsController extends Controller{
     public function index() {
         $browser = new RadioBrowser('https://de2.api.radio-browser.info/');
 
-        $searchTopMusicTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'tag' => 'music', 'tagExact' => true, 'hidebroken' => true,];
+        $searchTopMusicTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'tag' => 'music', 'tagExact' => true, 'hidebroken' => true];
         $musicStations = $browser->searchStation($searchTopMusicTerms);
 
-        $searchTopNewsTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'tag' => 'news', 'tagExact' => true, 'hidebroken' => true,];
+        $searchTopNewsTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'tag' => 'news', 'tagExact' => true, 'hidebroken' => true];
         $newsStations = $browser->searchStation($searchTopNewsTerms);
 
-        $searchTopTalkTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'tag' => 'talk', 'tagExact' => true, 'hidebroken' => true,];
+        $searchTopTalkTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'tag' => 'talk', 'tagExact' => true, 'hidebroken' => true];
         $talkStations = $browser->searchStation($searchTopTalkTerms);
 
-        $searchTopSportsTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'tag' => 'sports', 'tagExact' => true, 'hidebroken' => true,];
+        $searchTopSportsTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'tag' => 'sports', 'tagExact' => true, 'hidebroken' => true];
         $sportsStations = $browser->searchStation($searchTopSportsTerms);
 
-        $searchTopStationsTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'hidebroken' => true,];
+        $searchTopStationsTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'hidebroken' => true];
         $stations = $browser->searchStation($searchTopStationsTerms);
 
-        //$searchTerms = ['countrycode' => 'US', 'limit' => 50, 'order' => 'votes', 'language' => 'english', 'languageExact' => true, 'reverse' => true, 'hidebroken' => true,];
+        // $searchTerms = ['countrycode' => 'US', 'limit' => 50, 'order' => 'votes', 'language' => 'english', 'languageExact' => true, 'reverse' => true, 'hidebroken' => true,];
         return Inertia::render('Home', [
             'title' => 'Home',
             'home_stations' => [
@@ -49,7 +48,7 @@ class HomeStationsController extends Controller {
                     'name' => 'Top Stations',
                     'stations' => $stations,
                 ],
-            ]
+            ],
         ]);
     }
 }
