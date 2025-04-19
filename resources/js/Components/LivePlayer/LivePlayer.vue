@@ -19,7 +19,7 @@ function toggleVolumeControl() {
     >
         <div id="imageTitle" class="flex flex-1 flex-row items-center justify-start gap-4">
             <img
-                :src="playerStore.station?.favicon"
+                v-lazy="playerStore.station?.favicon"
                 class="h-16 w-16 rounded-lg bg-white object-cover p-1 max-md:h-10 max-md:w-10 dark:bg-neutral-900"
                 alt=""
             />

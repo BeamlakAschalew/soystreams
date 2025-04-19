@@ -7,7 +7,7 @@ use Inertia\Inertia;
 
 Route::get('/', [HomeStationsController::class, 'index'])->name('home');
 
-Route::get('/search', [SearchController::class, 'index'])->name('search');
+Route::match(['get', 'post'], '/search', [SearchController::class, 'index'])->name('search');
 
 Route::get('/podcasts', function () {
     $client = new PodcastIndexWrapper\Client([

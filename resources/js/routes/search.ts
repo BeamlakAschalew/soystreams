@@ -14,7 +14,7 @@ export const search = (options?: { query?: QueryParams, mergeQuery?: QueryParams
 })
 
 search.definition = {
-    methods: ['get','head'],
+    methods: ['get','post','head'],
     url: '\/search',
 }
 
@@ -38,6 +38,19 @@ search.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 } => ({
     url: search.url(options),
     method: 'get',
+})
+
+/**
+ * @see \App\Http\Controllers\SearchController::search
+ * @see app/Http/Controllers/SearchController.php:24
+ * @route /search
+ */
+search.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+    url: string,
+    method: 'post',
+} => ({
+    url: search.url(options),
+    method: 'post',
 })
 
 /**

@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import RadioCard from '@/Components/RadioCard.vue'
-import Station from '@/Interfaces/Station'
-import MainLayout from '@/Layouts/MainLayout.vue'
 import { router } from '@inertiajs/vue3'
 import Cookies from 'js-cookie'
 import { debounce } from 'lodash'
 import { Search } from 'lucide-vue-next'
 import { onMounted, ref, watch } from 'vue'
+
+import RadioCard from '@/Components/RadioCard.vue'
+import Station from '@/Interfaces/Station'
+import MainLayout from '@/Layouts/MainLayout.vue'
 
 defineOptions({ layout: MainLayout })
 
@@ -28,7 +29,7 @@ const searchHistoryList = ref(getSearchHistory())
 function loadMore() {
     if (!hasMore.value) return
     page.value++
-    router.get(
+    router.post(
         '/search',
         { q: searchQuery.value, page: page.value },
         {
@@ -39,6 +40,11 @@ function loadMore() {
             onSuccess: page => {
                 stations.value.push(...(page.props.searched_stations as Station[]))
                 hasMore.value = (page.props.meta as { has_more: boolean }).has_more
+
+                const url = new URL(window.location.href)
+                url.searchParams.set('q', searchQuery.value)
+                url.searchParams.delete('page')
+                window.history.replaceState({}, '', url)
             },
         },
     )
@@ -105,7 +111,7 @@ watch(searchQuery, newQuery => {
             <input
                 type="text"
                 v-model="searchQuery"
-                placeholder="Search for genres, stations, audiobooks, or podcasts"
+                placeholder="Search for genres, stations, or podcasts"
                 class="focus:ring-primary w-full rounded-full border border-gray-300 bg-white px-4 py-2 pl-10 text-neutral-900 placeholder-gray-500 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-50 dark:placeholder-gray-400"
             />
             <Search
@@ -134,7 +140,7 @@ watch(searchQuery, newQuery => {
                 >
                     <span class="text-neutral-900 dark:text-neutral-50">{{ searchItem }}</span>
                     <button
-                        @click="removeSearchHistory(searchItem)"
+                        @click.stop="removeSearchHistory(searchItem)"
                         class="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-400"
                     >
                         &times;
@@ -166,7 +172,7 @@ watch(searchQuery, newQuery => {
                 <div
                     v-if="hasMore"
                     @click="loadMore"
-                    class="px-4 py-2 text-gray-800 hover:cursor-pointer hover:text-green-600 dark:text-gray-300"
+                    class="px-4 py-2 font-semibold text-gray-800 hover:cursor-pointer hover:text-green-600 dark:text-gray-300"
                 >
                     See More
                 </div>
