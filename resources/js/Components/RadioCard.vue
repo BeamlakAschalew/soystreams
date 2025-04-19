@@ -15,7 +15,7 @@ function playRadio(station: Station) {
 
 <template>
     <div id="radioCard" class="w-full">
-        <div id="imageContainer" class="group relative aspect-square w-full">
+        <div id="imageContainer" class="group relative aspect-square w-full object-cover">
             <div
                 class="absolute bottom-0 h-12 w-full rounded-br-lg rounded-bl-lg bg-gradient-to-t from-green-300 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             >

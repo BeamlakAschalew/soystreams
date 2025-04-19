@@ -20,7 +20,7 @@ defineProps<{
     <div
         v-for="stationCollection in home_stations"
         :key="stationCollection.name"
-        class="mb-8 2xl:max-w-[80%]"
+        class="mb-8 text-neutral-900 2xl:max-w-[80%] dark:text-neutral-50"
     >
         <StationSlider :name="stationCollection.name" :stations="stationCollection.stations" />
     </div>

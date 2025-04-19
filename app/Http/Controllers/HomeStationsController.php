@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use AdinanCenci\RadioBrowser\RadioBrowser;
 use Inertia\Inertia;
 
-class HomeStationsController extends Controller{
+class HomeStationsController extends Controller {
     public function index() {
         $browser = new RadioBrowser('https://de2.api.radio-browser.info/');
 

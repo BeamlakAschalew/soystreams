@@ -23,15 +23,26 @@ class SearchController extends Controller {
 
     public function index(Request $request) {
         $browser = $this->getRadioBrowserInstance();
-        $searchStations = $this->getSearchParameters($request);
         $query = $request->input('q');
-        $stations = $query ? $browser->searchStation($searchStations) : [];
+        $page = $request->input('page', 1);
+        $limit = 20;
+        $offset = ($page - 1) * $limit;
+
+        $params = $this->getSearchParameters($request);
+        $params['limit'] = $limit;
+        $params['offset'] = $offset;
+        $stations = $query ? $browser->searchStation($params) : [];
+        $hasMore = $query && \count($stations) === $limit;
 
         return Inertia::render('Search', [
             'title' => 'Search',
             'searched_stations' => $stations,
-            'query' => fn () => ['q' => $query],
+            'query' => ['q' => $query],
             'no_input' => ! $query,
+            'meta' => [
+                'current_page' => $page,
+                'has_more' => $hasMore,
+            ],
         ]);
     }
 }

@@ -1,14 +1,18 @@
+<script setup lang="ts">
+import { home } from '@/routes/home'
+</script>
+
 <template>
     <header class="flex items-center justify-between gap-x-2 p-2">
-        <a
+        <Link
             class="flex-none text-xl font-semibold text-black focus:opacity-80 focus:outline-hidden dark:text-white"
-            href="#"
+            :href="home().url"
             aria-label="Brand"
             ><img
                 class="h-full w-60 object-cover"
                 src="../../../../public/images/soy-long.png"
                 alt=""
-        /></a>
+        /></Link>
         <div class="-me-2 lg:hidden">
             <!-- Close Button -->
             <!-- <button
