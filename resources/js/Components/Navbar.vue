@@ -62,8 +62,8 @@ import { Search } from 'lucide-vue-next'
                         aria-label="Brand"
                     >
                         <img
-                            class="h-full w-48"
-                            src="../../../public/images/soy-long.png"
+                            class="h-full w-24"
+                            src="../../../public/images/soy-short.png"
                             alt="Logo"
                         />
                     </Link>
