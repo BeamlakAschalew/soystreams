@@ -9,7 +9,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "adinan-cenci/radio-browser": "^2.1",
         "beamlak/podcastindex-wrapper": "dev-master",
         "inertiajs/inertia-laravel": "^2.0",
