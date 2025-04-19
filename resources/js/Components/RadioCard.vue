@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Station from '@/Interfaces/Station'
 import { usePlayerStore } from '@/Stores/useLivePlayerStore'
-import { Pause, Play } from 'lucide-vue-next'
+import { LoaderCircle, Pause, Play } from 'lucide-vue-next'
 import { computed } from 'vue'
 defineProps<{
     station: Station
@@ -10,7 +10,14 @@ defineProps<{
 const playerStore = usePlayerStore()
 
 function playRadio(station: Station) {
-    playerStore.setRadio(station)
+    if (
+        playerStore.station?.stationuuid === station.stationuuid &&
+        (playerStore.isPlaying || playerStore.loading)
+    ) {
+        playerStore.stop()
+    } else {
+        playerStore.setRadio(station)
+    }
 }
 
 const isTouchDevice = computed(() => {
@@ -35,15 +42,24 @@ const isTouchDevice = computed(() => {
                 @click="playRadio(station)"
             >
                 <component
-                    :is="
+                    v-if="
+                        playerStore.loading &&
+                        playerStore.station?.stationuuid === station.stationuuid
+                    "
+                    :is="LoaderCircle"
+                    class="animate-spin text-gray-100 dark:text-gray-200"
+                    :size="20"
+                />
+                <component
+                    v-else-if="
                         playerStore.station?.stationuuid === station.stationuuid &&
                         playerStore.isPlaying
-                            ? Pause
-                            : Play
                     "
+                    :is="Pause"
                     class="text-gray-100 dark:text-gray-200"
-                    :size="12"
+                    :size="20"
                 />
+                <component v-else :is="Play" class="text-gray-100 dark:text-gray-200" :size="20" />
             </div>
             <img
                 v-lazy="station.favicon"

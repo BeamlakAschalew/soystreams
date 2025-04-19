@@ -8,6 +8,18 @@ export const usePlayerStore = defineStore('player', () => {
     const volume = ref(50)
     const station = ref<Station | null>(null)
     const audio = ref(new Audio())
+    const loading = ref(false)
+    const stopped = ref(true)
+
+    audio.value.onwaiting = () => {
+        loading.value = true
+    }
+    audio.value.onplaying = () => {
+        loading.value = false
+    }
+    audio.value.onended = () => {
+        isPlaying.value = false
+    }
 
     function togglePlayPause() {
         if (isPlaying.value) {
@@ -21,6 +33,7 @@ export const usePlayerStore = defineStore('player', () => {
     function turnOn() {
         audio.value.play()
         isPlaying.value = true
+        stopped.value = false
     }
 
     function turnOff() {
@@ -35,6 +48,7 @@ export const usePlayerStore = defineStore('player', () => {
 
     function setRadio(s: Station) {
         radioInit.value = true
+        loading.value = true
         if (audio.value.src !== s.url_resolved) {
             station.value = s
             audio.value.src = s.url_resolved
@@ -49,13 +63,26 @@ export const usePlayerStore = defineStore('player', () => {
         }
     }
 
+    function stop() {
+        audio.value.pause()
+        audio.value.src = ''
+        station.value = null
+        radioInit.value = false
+        isPlaying.value = false
+        stopped.value = true
+        loading.value = false
+    }
+
     return {
         isPlaying,
         radioInit,
         volume,
+        loading,
+        stopped,
         togglePlayPause,
         setVolume,
         setRadio,
+        stop,
         station,
     }
 })
