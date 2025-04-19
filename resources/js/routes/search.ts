@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../wayfinder'
 
 /**
  * @see \App\Http\Controllers\SearchController::search
- * @see app/Http/Controllers/SearchController.php:24
+ * @see app/Http/Controllers/SearchController.php:25
  * @route /search
  */
 export const search = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ search.definition = {
 
 /**
  * @see \App\Http\Controllers\SearchController::search
- * @see app/Http/Controllers/SearchController.php:24
+ * @see app/Http/Controllers/SearchController.php:25
  * @route /search
  */
 search.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -29,7 +29,7 @@ search.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
 
 /**
  * @see \App\Http\Controllers\SearchController::search
- * @see app/Http/Controllers/SearchController.php:24
+ * @see app/Http/Controllers/SearchController.php:25
  * @route /search
  */
 search.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -42,7 +42,7 @@ search.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 
 /**
  * @see \App\Http\Controllers\SearchController::search
- * @see app/Http/Controllers/SearchController.php:24
+ * @see app/Http/Controllers/SearchController.php:25
  * @route /search
  */
 search.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -55,7 +55,7 @@ search.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 
 /**
  * @see \App\Http\Controllers\SearchController::search
- * @see app/Http/Controllers/SearchController.php:24
+ * @see app/Http/Controllers/SearchController.php:25
  * @route /search
  */
 search.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

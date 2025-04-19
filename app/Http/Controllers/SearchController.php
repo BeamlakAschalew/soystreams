@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use AdinanCenci\RadioBrowser\RadioBrowser;
+use App\Services\RadioBrowserServer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class SearchController extends Controller {
     private function getRadioBrowserInstance(): RadioBrowser {
-        return new RadioBrowser('https://de2.api.radio-browser.info/');
+        return new RadioBrowser(RadioBrowserServer::getServerUrl());
     }
 
     private function getSearchParameters(Request $request): array {

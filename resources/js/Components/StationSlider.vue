@@ -14,7 +14,7 @@ defineProps<{
         <div class="font-bold text-neutral-900 dark:text-neutral-50">
             {{ name }}
         </div>
-        <div class="text-primary">View more</div>
+        <div class="text-primary cursor-pointer font-semibold hover:text-green-800">View more</div>
     </div>
     <!-- Slider -->
     <div

@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../wayfinder'
 
 /**
  * @see \App\Http\Controllers\HomeStationsController::home
- * @see app/Http/Controllers/HomeStationsController.php:9
+ * @see app/Http/Controllers/HomeStationsController.php:10
  * @route /
  */
 export const home = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ home.definition = {
 
 /**
  * @see \App\Http\Controllers\HomeStationsController::home
- * @see app/Http/Controllers/HomeStationsController.php:9
+ * @see app/Http/Controllers/HomeStationsController.php:10
  * @route /
  */
 home.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -29,7 +29,7 @@ home.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
 
 /**
  * @see \App\Http\Controllers\HomeStationsController::home
- * @see app/Http/Controllers/HomeStationsController.php:9
+ * @see app/Http/Controllers/HomeStationsController.php:10
  * @route /
  */
 home.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -42,7 +42,7 @@ home.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 
 /**
  * @see \App\Http\Controllers\HomeStationsController::home
- * @see app/Http/Controllers/HomeStationsController.php:9
+ * @see app/Http/Controllers/HomeStationsController.php:10
  * @route /
  */
 home.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

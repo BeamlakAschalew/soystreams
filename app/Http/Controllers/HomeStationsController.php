@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use AdinanCenci\RadioBrowser\RadioBrowser;
+use App\Services\RadioBrowserServer;
 use Inertia\Inertia;
 
 class HomeStationsController extends Controller {
     public function index() {
-        $browser = new RadioBrowser('https://de2.api.radio-browser.info/');
+        $browser = new RadioBrowser(RadioBrowserServer::getServerUrl());
 
         $searchTopMusicTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'tag' => 'music', 'tagExact' => true, 'hidebroken' => true];
         $musicStations = $browser->searchStation($searchTopMusicTerms);

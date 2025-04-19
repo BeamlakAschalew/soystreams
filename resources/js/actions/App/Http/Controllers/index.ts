@@ -1,9 +1,11 @@
 import HomeStationsController from './HomeStationsController'
 import SearchController from './SearchController'
+import RadioCategoryItemController from './RadioCategoryItemController'
 
 const Controllers = {
     HomeStationsController, 
-    SearchController,
+    SearchController, 
+    RadioCategoryItemController,
 }
 
 export default Controllers
