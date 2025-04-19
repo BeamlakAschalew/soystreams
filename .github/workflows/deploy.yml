@@ -44,8 +44,8 @@ jobs:
       #   run: php artisan migrate --force
 
       # Clear caches
-      - name: Clear Cache
-        run: php artisan cache:clear
+      # - name: Clear Cache
+      #   run: php artisan cache:clear
 
       # Clear and cache routes
       - name: Cache Routes
