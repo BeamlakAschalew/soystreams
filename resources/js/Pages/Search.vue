@@ -3,7 +3,7 @@ import { router } from '@inertiajs/vue3'
 import Cookies from 'js-cookie'
 import { debounce } from 'lodash'
 import { Search } from 'lucide-vue-next'
-import { onMounted, ref, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 
 import RadioCard from '@/Components/RadioCard.vue'
 import Station from '@/Interfaces/Station'
@@ -22,6 +22,7 @@ const stations = ref<Station[]>([...props.searched_stations])
 const page = ref(props.meta.current_page)
 const hasMore = ref(props.meta.has_more)
 const observerTarget = ref<HTMLElement | null>(null)
+const searchInput = ref<HTMLInputElement | null>(null)
 
 const searchQuery = ref(props.query.q)
 const searchHistoryList = ref(getSearchHistory())
@@ -50,7 +51,7 @@ function loadMore() {
     )
 }
 
-onMounted(() => {
+onMounted(async () => {
     const io = new IntersectionObserver(
         ([e]) => {
             if (e.isIntersecting) loadMore()
@@ -58,6 +59,8 @@ onMounted(() => {
         { rootMargin: '200px' },
     )
     if (observerTarget.value) io.observe(observerTarget.value)
+    await nextTick()
+    searchInput.value?.focus()
 })
 
 const debouncedSearch = debounce(query => {
@@ -109,6 +112,7 @@ watch(searchQuery, newQuery => {
     <div class="mb-8 text-neutral-900 2xl:max-w-[80%] dark:text-neutral-50">
         <div class="relative">
             <input
+                ref="searchInput"
                 type="text"
                 v-model="searchQuery"
                 placeholder="Search for genres, stations, or podcasts"

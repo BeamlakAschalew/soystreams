@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import home from '@/routes/home'
+import search from '@/routes/search'
 import { Search } from 'lucide-vue-next'
 </script>
 
@@ -54,24 +56,25 @@ import { Search } from 'lucide-vue-next'
                             <span class="sr-only">Toggle navigation</span>
                         </button>
                     </div>
-                    <a
+                    <Link
                         class="flex-none text-xl font-semibold focus:opacity-80 focus:outline-hidden dark:text-white"
-                        href="#"
+                        :href="home().url"
                         aria-label="Brand"
                     >
                         <img
-                            class="h-full w-16"
-                            src="../../../public/images/soy-short.png"
+                            class="h-full w-48"
+                            src="../../../public/images/soy-long.png"
                             alt="Logo"
                         />
-                    </a>
+                    </Link>
                 </div>
-                <div
+                <Link
+                    :href="search().url"
                     class="relative flex size-9 items-center justify-center gap-x-2 rounded-lg bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:bg-gray-50 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
                     id="search"
                 >
                     <Search />
-                </div>
+                </Link>
             </div>
         </nav>
     </header>
