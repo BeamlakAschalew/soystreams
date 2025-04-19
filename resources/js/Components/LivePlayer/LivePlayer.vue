@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { usePlayerStore } from '@/Stores/useLivePlayerStore'
-import { Heart, Pause, Play, Volume1, Volume2, VolumeOff } from 'lucide-vue-next'
-import { ref } from 'vue'
+import { Heart, LoaderCircle, Pause, Play, Volume1, Volume2, VolumeOff } from 'lucide-vue-next'
+import { computed, ref } from 'vue'
 
 const playerStore = usePlayerStore()
 const showVolumeControl = ref(false)
+
+const currentIcon = computed(() => {
+    if (playerStore.loading) {
+        return LoaderCircle
+    }
+    return playerStore.isPlaying ? Pause : Play
+})
 
 function toggleVolumeControl() {
     showVolumeControl.value = !showVolumeControl.value
@@ -43,23 +50,32 @@ function toggleVolumeControl() {
                 >
                     <div class="hidden max-sm:block">
                         <component
-                            :is="playerStore.isPlaying ? Pause : Play"
+                            :is="currentIcon"
                             :size="20"
-                            class="text-gray-100 dark:text-gray-200"
+                            :class="[
+                                'text-gray-100 dark:text-gray-200',
+                                { 'animate-spin': playerStore.loading },
+                            ]"
                         />
                     </div>
                     <div class="hidden sm:max-lg:block">
                         <component
-                            :is="playerStore.isPlaying ? Pause : Play"
+                            :is="currentIcon"
                             :size="28"
-                            class="text-gray-100 dark:text-gray-200"
+                            :class="[
+                                'text-gray-100 dark:text-gray-200',
+                                { 'animate-spin': playerStore.loading },
+                            ]"
                         />
                     </div>
                     <div class="hidden lg:block">
                         <component
-                            :is="playerStore.isPlaying ? Pause : Play"
+                            :is="currentIcon"
                             :size="36"
-                            class="text-gray-100 dark:text-gray-200"
+                            :class="[
+                                'text-gray-100 dark:text-gray-200',
+                                { 'animate-spin': playerStore.loading },
+                            ]"
                         />
                     </div>
                 </div>
