@@ -8,7 +8,9 @@ class RadioCategoryItemController extends Controller {
     public function __invoke(Request $request, $channel) {
         switch ($channel) {
             case 'music':
-                MusicRadioController::class;
+                $controller = app(MusicRadioController::class);
+
+                return $controller();
                 break;
 
             default:

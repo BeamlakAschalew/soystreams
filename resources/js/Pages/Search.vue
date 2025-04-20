@@ -3,7 +3,7 @@ import { router } from '@inertiajs/vue3'
 import Cookies from 'js-cookie'
 import { debounce } from 'lodash'
 import { Search } from 'lucide-vue-next'
-import { nextTick, onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 import RadioCard from '@/Components/RadioCard.vue'
 import Station from '@/Interfaces/Station'
@@ -59,8 +59,8 @@ onMounted(async () => {
         { rootMargin: '200px' },
     )
     if (observerTarget.value) io.observe(observerTarget.value)
-    await nextTick()
-    searchInput.value?.focus()
+    // await nextTick()
+    // searchInput.value?.focus()
 })
 
 const debouncedSearch = debounce(query => {

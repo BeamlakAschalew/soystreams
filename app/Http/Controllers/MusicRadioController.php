@@ -11,7 +11,7 @@ class MusicRadioController extends Controller {
         $browser = new RadioBrowser(
             RadioBrowserServer::getServerUrl()
         );
-        $genres[] = [
+        $genres = [
             'pop',
             'rock',
             'jazz',
@@ -23,17 +23,20 @@ class MusicRadioController extends Controller {
 
         $stationResults = [];
 
-        foreach ($genres as $key => $value) {
-            $stationResults[$key] = $browser->searchStation([
-                'language' => 'english',
-                'languageExact' => true,
-                'limit' => 15,
-                'order' => 'clickcount',
-                'reverse' => true,
-                'tag' => $value,
-                'tagExact' => true,
-                'hidebroken' => true,
-            ]);
+        foreach ($genres as $genre) {
+            $stationResults[$genre] = [
+                'name' => \implode('-', \array_map('ucfirst', \explode('-', $genre))).' music',
+                'stations' => $browser->searchStation([
+                    'language' => 'english',
+                    'languageExact' => true,
+                    'limit' => 15,
+                    'order' => 'clickcount',
+                    'reverse' => true,
+                    'tag' => $genre,
+                    'tagExact' => true,
+                    'hidebroken' => true,
+                ]),
+            ];
         }
 
         return Inertia::render('CategoryRadio', [

@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeStationsController;
-use App\Http\Controllers\RadioCategoryItemController;
+use App\Http\Controllers\MusicRadioController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -10,7 +10,9 @@ Route::get('/', [HomeStationsController::class, 'index'])->name('home');
 
 Route::match(['get', 'post'], '/search', [SearchController::class, 'index'])->name('search');
 
-Route::get('/radio/{channel}', RadioCategoryItemController::class)->where('channel', 'music|news|talk');
+Route::get('/radio/music', MusicRadioController::class)->name('radio.music');
+Route::get('/radio/sports', MusicRadioController::class)->name('radio.sports');
+Route::get('/radio/talk', MusicRadioController::class)->name('radio.talk');
 
 Route::get('/podcasts', function () {
     $client = new PodcastIndexWrapper\Client([

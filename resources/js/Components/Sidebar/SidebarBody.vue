@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import SidebarMenuItem from '@/Components/Sidebar/SidebarMenuItem.vue'
 import { home } from '@/routes/home'
+import { music } from '@/routes/radio/music'
+import { sports } from '@/routes/radio/sports'
+import { talk } from '@/routes/radio/talk'
 import { search } from '@/routes/search'
-import { House, Languages, MapPin, Mic, Music, Search, Volleyball } from 'lucide-vue-next'
+import { House, Languages, MapPin, Mic, Music, Podcast, Search, Volleyball } from 'lucide-vue-next'
 </script>
 
 <template>
@@ -22,16 +25,22 @@ import { House, Languages, MapPin, Mic, Music, Search, Volleyball } from 'lucide
                     ><template #icon="{ size }"><Search :size="size" /></template>
                     Search</SidebarMenuItem
                 >
-                <SidebarMenuItem path="/radio/music"
+                <SidebarMenuItem :path="music().url" :active="$page.url.startsWith('/radio/music')"
                     ><template #icon="{ size }"><Music :size="size" /></template>
                     Music</SidebarMenuItem
                 >
-                <SidebarMenuItem path="/radio/sports"
+                <SidebarMenuItem
+                    :path="sports().url"
+                    :active="$page.url.startsWith('/radio/sports')"
                     ><template #icon="{ size }"><Volleyball :size="size" /></template>
                     Sports</SidebarMenuItem
                 >
-                <SidebarMenuItem path="/podcasts"
+                <SidebarMenuItem :path="talk().url" :active="$page.url.startsWith('/radio/talk')"
                     ><template #icon="{ size }"><Mic :size="size" /></template>
+                    Talk</SidebarMenuItem
+                >
+                <SidebarMenuItem path="/podcasts"
+                    ><template #icon="{ size }"><Podcast :size="size" /></template>
                     Podcasts</SidebarMenuItem
                 >
                 <SidebarMenuItem path="/radio/local"
