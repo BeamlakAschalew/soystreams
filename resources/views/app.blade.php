@@ -15,6 +15,9 @@
     @vite(['resources/js/app.ts', 'resources/css/app.css', "resources/js/Pages/{$page['component']}.vue"])
     @inertiaHead
 
+    <!-- favicon -->
+    <link rel="icon" href="/images/soy-square-fav.png">
+
     <script>
         const html = document.querySelector('html');
         const isLightOrAuto = localStorage.getItem('hs_theme') === 'light' || (localStorage.getItem('hs_theme') ===

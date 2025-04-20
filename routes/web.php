@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\HomeStationsController;
 use App\Http\Controllers\MusicRadioController;
+use App\Http\Controllers\NewsStationController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SportsRadioController;
+use App\Http\Controllers\TalkRadioController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -10,9 +13,11 @@ Route::get('/', [HomeStationsController::class, 'index'])->name('home');
 
 Route::match(['get', 'post'], '/search', [SearchController::class, 'index'])->name('search');
 
-Route::get('/radio/music', MusicRadioController::class)->name('radio.music');
-Route::get('/radio/sports', MusicRadioController::class)->name('radio.sports');
-Route::get('/radio/talk', MusicRadioController::class)->name('radio.talk');
+Route::match(['get', 'post'], '/radio/music', MusicRadioController::class)->name('radio.music');
+Route::post('/radio/music/chunk', [MusicRadioController::class, 'chunk'])->name('radio.music.chunk');
+Route::match(['get', 'post'], '/radio/news', NewsStationController::class)->name('radio.news');
+Route::match(['get', 'post'], '/radio/sports', SportsRadioController::class)->name('radio.sports');
+Route::match(['get', 'post'], '/radio/talk', TalkRadioController::class)->name('radio.talk');
 
 Route::get('/podcasts', function () {
     $client = new PodcastIndexWrapper\Client([

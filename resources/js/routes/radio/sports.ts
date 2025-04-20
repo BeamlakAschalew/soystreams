@@ -1,8 +1,8 @@
 import { queryParams, type QueryParams } from './../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::sports
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\SportsRadioController::sports
+ * @see app/Http/Controllers/SportsRadioController.php:11
  * @route /radio/sports
  */
 export const sports = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -14,13 +14,13 @@ export const sports = (options?: { query?: QueryParams, mergeQuery?: QueryParams
 })
 
 sports.definition = {
-    methods: ['get','head'],
+    methods: ['get','post','head'],
     url: '\/radio\/sports',
 }
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::sports
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\SportsRadioController::sports
+ * @see app/Http/Controllers/SportsRadioController.php:11
  * @route /radio/sports
  */
 sports.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -28,8 +28,8 @@ sports.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
 }
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::sports
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\SportsRadioController::sports
+ * @see app/Http/Controllers/SportsRadioController.php:11
  * @route /radio/sports
  */
 sports.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -41,8 +41,21 @@ sports.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 })
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::sports
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\SportsRadioController::sports
+ * @see app/Http/Controllers/SportsRadioController.php:11
+ * @route /radio/sports
+ */
+sports.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+    url: string,
+    method: 'post',
+} => ({
+    url: sports.url(options),
+    method: 'post',
+})
+
+/**
+ * @see \App\Http\Controllers\SportsRadioController::sports
+ * @see app/Http/Controllers/SportsRadioController.php:11
  * @route /radio/sports
  */
 sports.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

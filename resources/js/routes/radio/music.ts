@@ -14,7 +14,7 @@ export const music = (options?: { query?: QueryParams, mergeQuery?: QueryParams 
 })
 
 music.definition = {
-    methods: ['get','head'],
+    methods: ['get','post','head'],
     url: '\/radio\/music',
 }
 
@@ -38,6 +38,19 @@ music.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 } => ({
     url: music.url(options),
     method: 'get',
+})
+
+/**
+ * @see \App\Http\Controllers\MusicRadioController::music
+ * @see app/Http/Controllers/MusicRadioController.php:10
+ * @route /radio/music
+ */
+music.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+    url: string,
+    method: 'post',
+} => ({
+    url: music.url(options),
+    method: 'post',
 })
 
 /**

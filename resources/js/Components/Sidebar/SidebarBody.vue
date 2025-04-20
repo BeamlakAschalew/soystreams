@@ -2,10 +2,21 @@
 import SidebarMenuItem from '@/Components/Sidebar/SidebarMenuItem.vue'
 import { home } from '@/routes/home'
 import { music } from '@/routes/radio/music'
+import { news } from '@/routes/radio/news'
 import { sports } from '@/routes/radio/sports'
 import { talk } from '@/routes/radio/talk'
 import { search } from '@/routes/search'
-import { House, Languages, MapPin, Mic, Music, Podcast, Search, Volleyball } from 'lucide-vue-next'
+import {
+    House,
+    Languages,
+    MapPin,
+    Mic,
+    Music,
+    Newspaper,
+    Podcast,
+    Search,
+    Volleyball,
+} from 'lucide-vue-next'
 </script>
 
 <template>
@@ -34,6 +45,10 @@ import { House, Languages, MapPin, Mic, Music, Podcast, Search, Volleyball } fro
                     :active="$page.url.startsWith('/radio/sports')"
                     ><template #icon="{ size }"><Volleyball :size="size" /></template>
                     Sports</SidebarMenuItem
+                >
+                <SidebarMenuItem :path="news().url" :active="$page.url.startsWith('/radio/news')"
+                    ><template #icon="{ size }"><Newspaper :size="size" /></template>
+                    News</SidebarMenuItem
                 >
                 <SidebarMenuItem :path="talk().url" :active="$page.url.startsWith('/radio/talk')"
                     ><template #icon="{ size }"><Mic :size="size" /></template>

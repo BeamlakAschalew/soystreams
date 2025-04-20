@@ -1,168 +1,111 @@
 import { queryParams, type QueryParams } from './../../../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController6fdd1f2652787c6f76f28b051bcce88a
+ * @see \App\Http\Controllers\MusicRadioController::MusicRadioController
  * @see app/Http/Controllers/MusicRadioController.php:10
  * @route /radio/music
  */
-const MusicRadioController6fdd1f2652787c6f76f28b051bcce88a = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+const MusicRadioController = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
     method: 'get',
 } => ({
-    url: MusicRadioController6fdd1f2652787c6f76f28b051bcce88a.url(options),
+    url: MusicRadioController.url(options),
     method: 'get',
 })
 
-MusicRadioController6fdd1f2652787c6f76f28b051bcce88a.definition = {
-    methods: ['get','head'],
+MusicRadioController.definition = {
+    methods: ['get','post','head'],
     url: '\/radio\/music',
 }
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController6fdd1f2652787c6f76f28b051bcce88a
+ * @see \App\Http\Controllers\MusicRadioController::MusicRadioController
  * @see app/Http/Controllers/MusicRadioController.php:10
  * @route /radio/music
  */
-MusicRadioController6fdd1f2652787c6f76f28b051bcce88a.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
-    return MusicRadioController6fdd1f2652787c6f76f28b051bcce88a.definition.url + queryParams(options)
+MusicRadioController.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
+    return MusicRadioController.definition.url + queryParams(options)
 }
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController6fdd1f2652787c6f76f28b051bcce88a
+ * @see \App\Http\Controllers\MusicRadioController::MusicRadioController
  * @see app/Http/Controllers/MusicRadioController.php:10
  * @route /radio/music
  */
-MusicRadioController6fdd1f2652787c6f76f28b051bcce88a.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+MusicRadioController.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
     method: 'get',
 } => ({
-    url: MusicRadioController6fdd1f2652787c6f76f28b051bcce88a.url(options),
+    url: MusicRadioController.url(options),
     method: 'get',
 })
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController6fdd1f2652787c6f76f28b051bcce88a
+ * @see \App\Http\Controllers\MusicRadioController::MusicRadioController
  * @see app/Http/Controllers/MusicRadioController.php:10
  * @route /radio/music
  */
-MusicRadioController6fdd1f2652787c6f76f28b051bcce88a.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+MusicRadioController.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+    url: string,
+    method: 'post',
+} => ({
+    url: MusicRadioController.url(options),
+    method: 'post',
+})
+
+/**
+ * @see \App\Http\Controllers\MusicRadioController::MusicRadioController
+ * @see app/Http/Controllers/MusicRadioController.php:10
+ * @route /radio/music
+ */
+MusicRadioController.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
     method: 'head',
 } => ({
-    url: MusicRadioController6fdd1f2652787c6f76f28b051bcce88a.url(options),
+    url: MusicRadioController.url(options),
     method: 'head',
 })
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe
- * @see app/Http/Controllers/MusicRadioController.php:10
- * @route /radio/sports
+ * @see \App\Http\Controllers\MusicRadioController::chunk
+ * @see app/Http/Controllers/MusicRadioController.php:0
+ * @route /radio/music/chunk
  */
-const MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+export const chunk = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
-    method: 'get',
+    method: 'post',
 } => ({
-    url: MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe.url(options),
-    method: 'get',
+    url: chunk.url(options),
+    method: 'post',
 })
 
-MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe.definition = {
-    methods: ['get','head'],
-    url: '\/radio\/sports',
+chunk.definition = {
+    methods: ['post'],
+    url: '\/radio\/music\/chunk',
 }
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe
- * @see app/Http/Controllers/MusicRadioController.php:10
- * @route /radio/sports
+ * @see \App\Http\Controllers\MusicRadioController::chunk
+ * @see app/Http/Controllers/MusicRadioController.php:0
+ * @route /radio/music/chunk
  */
-MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
-    return MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe.definition.url + queryParams(options)
+chunk.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
+    return chunk.definition.url + queryParams(options)
 }
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe
- * @see app/Http/Controllers/MusicRadioController.php:10
- * @route /radio/sports
+ * @see \App\Http\Controllers\MusicRadioController::chunk
+ * @see app/Http/Controllers/MusicRadioController.php:0
+ * @route /radio/music/chunk
  */
-MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
+chunk.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     url: string,
-    method: 'get',
+    method: 'post',
 } => ({
-    url: MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe.url(options),
-    method: 'get',
+    url: chunk.url(options),
+    method: 'post',
 })
 
-/**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe
- * @see app/Http/Controllers/MusicRadioController.php:10
- * @route /radio/sports
- */
-MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
-    url: string,
-    method: 'head',
-} => ({
-    url: MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe.url(options),
-    method: 'head',
-})
-
-/**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController574ed980e55355fa9ce4f1f185db243f
- * @see app/Http/Controllers/MusicRadioController.php:10
- * @route /radio/talk
- */
-const MusicRadioController574ed980e55355fa9ce4f1f185db243f = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
-    url: string,
-    method: 'get',
-} => ({
-    url: MusicRadioController574ed980e55355fa9ce4f1f185db243f.url(options),
-    method: 'get',
-})
-
-MusicRadioController574ed980e55355fa9ce4f1f185db243f.definition = {
-    methods: ['get','head'],
-    url: '\/radio\/talk',
-}
-
-/**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController574ed980e55355fa9ce4f1f185db243f
- * @see app/Http/Controllers/MusicRadioController.php:10
- * @route /radio/talk
- */
-MusicRadioController574ed980e55355fa9ce4f1f185db243f.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
-    return MusicRadioController574ed980e55355fa9ce4f1f185db243f.definition.url + queryParams(options)
-}
-
-/**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController574ed980e55355fa9ce4f1f185db243f
- * @see app/Http/Controllers/MusicRadioController.php:10
- * @route /radio/talk
- */
-MusicRadioController574ed980e55355fa9ce4f1f185db243f.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
-    url: string,
-    method: 'get',
-} => ({
-    url: MusicRadioController574ed980e55355fa9ce4f1f185db243f.url(options),
-    method: 'get',
-})
-
-/**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController574ed980e55355fa9ce4f1f185db243f
- * @see app/Http/Controllers/MusicRadioController.php:10
- * @route /radio/talk
- */
-MusicRadioController574ed980e55355fa9ce4f1f185db243f.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
-    url: string,
-    method: 'head',
-} => ({
-    url: MusicRadioController574ed980e55355fa9ce4f1f185db243f.url(options),
-    method: 'head',
-})
-
-const MusicRadioController = {
-    '\/radio\/music': MusicRadioController6fdd1f2652787c6f76f28b051bcce88a,
-    '\/radio\/sports': MusicRadioController1e77ec7131f08ffa637ef31e5cb956fe,
-    '\/radio\/talk': MusicRadioController574ed980e55355fa9ce4f1f185db243f,
-}
+MusicRadioController.chunk = chunk
 
 export default MusicRadioController
