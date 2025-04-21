@@ -24,10 +24,12 @@ export const usePlayerStore = defineStore('player', () => {
     }
 
     audio.value.onstalled = () => {
+        console.log('Stream Stalled')
         handleStreamError()
     }
 
     audio.value.onerror = () => {
+        console.log('Stream Error')
         handleStreamError()
     }
 
