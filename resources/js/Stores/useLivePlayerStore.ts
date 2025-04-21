@@ -23,6 +23,39 @@ export const usePlayerStore = defineStore('player', () => {
         isPlaying.value = false
     }
 
+    audio.value.onstalled = () => {
+        handleStreamError()
+    }
+
+    audio.value.onerror = () => {
+        handleStreamError()
+    }
+
+    function handleStreamError() {
+        if (!stopped.value && station.value) {
+            console.warn('Stream stopped unexpectedly. Retrying...')
+            retryStream()
+        }
+    }
+
+    function retryStream() {
+        if (station.value) {
+            loading.value = true
+            audio.value.src = station.value.url_resolved
+            audio.value.load()
+            audio.value
+                .play()
+                .then(() => {
+                    isPlaying.value = true
+                    loading.value = false
+                })
+                .catch(err => {
+                    loading.value = false
+                    setTimeout(retryStream, 3000)
+                })
+        }
+    }
+
     function togglePlayPause() {
         if (isPlaying.value) {
             audio.value.pause()
