@@ -29,7 +29,7 @@ export const usePlayerStore = defineStore('player', () => {
     }
 
     audio.value.onerror = e => {
-        console.log('Stream Error', e.toString())
+        console.log('Stream Error', e)
         handleStreamError()
     }
 
