@@ -40,7 +40,7 @@ const isTouchDevice = computed(() => {
                     'opacity-100': isTouchDevice,
                     'pointer-events-auto': isTouchDevice,
                 }"
-                @click="playRadio(station)"
+                @click.prevent="playRadio(station)"
             >
                 <component
                     v-if="

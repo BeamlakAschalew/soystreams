@@ -59,7 +59,7 @@ function playRadio(station: Station) {
                     <img
                         v-lazy="station.favicon"
                         alt="Sheger FM Radio Logo"
-                        class="max-h-full max-w-full object-cover"
+                        class="h-full w-full object-cover"
                     />
                 </div>
             </div>
