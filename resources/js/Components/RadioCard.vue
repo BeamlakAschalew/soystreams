@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Station from '@/Interfaces/Station'
+import stationRoute from '@/routes/station/show'
 import { usePlayerStore } from '@/Stores/useLivePlayerStore'
+import { router } from '@inertiajs/vue3'
 import { LoaderCircle, Pause, Play } from 'lucide-vue-next'
 import { computed } from 'vue'
 defineProps<{
@@ -20,6 +22,10 @@ function playRadio(station: Station) {
     }
 }
 
+function navigateToStation(station: Station) {
+    router.get(stationRoute.url(station.stationuuid))
+}
+
 const isTouchDevice = computed(() => {
     return (
         typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)
@@ -28,7 +34,7 @@ const isTouchDevice = computed(() => {
 </script>
 
 <template>
-    <div id="radioCard" class="w-full">
+    <div id="radioCard" class="w-full" @click="navigateToStation(station)">
         <div id="imageContainer" class="group relative aspect-square w-full object-cover">
             <div
                 class="absolute bottom-0 h-12 w-full rounded-br-lg rounded-bl-lg bg-gradient-to-t from-green-300 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"

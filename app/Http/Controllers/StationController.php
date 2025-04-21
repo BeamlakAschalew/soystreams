@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use AdinanCenci\RadioBrowser\RadioBrowser;
+use App\Services\RadioBrowserServer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -10,7 +12,18 @@ class StationController extends Controller {
      * Display a listing of the resource.
      */
     public function index(string $uuid) {
-        return Inertia::render('Station');
+        $browser = new RadioBrowser(
+            RadioBrowserServer::getServerUrl()
+        );
+        $stations = $browser->getStationsByUuid($uuid);
+
+        if (empty($stations)) {
+            abort(404);
+        }
+
+        return Inertia::render('Station', [
+            'station' => $stations[0],
+        ]);
     }
 
     /**
