@@ -43,7 +43,13 @@ export const usePlayerStore = defineStore('player', () => {
     function retryStream() {
         if (station.value) {
             loading.value = true
-            audio.value.src = station.value.url_resolved
+            const url = new URL(station.value.url_resolved)
+            if (url.protocol === 'http:') {
+                audio.value.src = url.href // Explicitly set the HTTP URL
+            } else {
+                console.warn('Stream URL is not HTTP. Retrying might fail:', url.href)
+                audio.value.src = station.value.url_resolved
+            }
             audio.value.load()
             audio.value
                 .play()
