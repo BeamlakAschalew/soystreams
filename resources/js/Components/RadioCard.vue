@@ -2,7 +2,6 @@
 import Station from '@/Interfaces/Station'
 import stationRoute from '@/routes/station/show'
 import { usePlayerStore } from '@/Stores/useLivePlayerStore'
-import { router } from '@inertiajs/vue3'
 import { LoaderCircle, Pause, Play } from 'lucide-vue-next'
 import { computed } from 'vue'
 defineProps<{
@@ -20,10 +19,6 @@ function playRadio(station: Station) {
     } else {
         playerStore.setRadio(station)
     }
-}
-
-function navigateToStation(station: Station) {
-    router.get(stationRoute.url(station.stationuuid))
 }
 
 const isTouchDevice = computed(() => {
