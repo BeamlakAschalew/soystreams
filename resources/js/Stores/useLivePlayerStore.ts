@@ -29,9 +29,29 @@ export const usePlayerStore = defineStore('player', () => {
     }
 
     audio.value.onerror = e => {
-        console.log('Stream Error', e)
+        const src = station.value?.url_resolved || audio.value.src
+        const pageIsHttps = window.location.protocol === 'https:'
+        const streamIsHttp = src.startsWith('http:')
+        const mediaErr = audio.value.error
+
+        // MEDIA_ERR_SRC_NOT_SUPPORTED (code 4) is what Chrome/Firefox throw on mixed‐content
+        const isMixedContentBlocked =
+            pageIsHttps && streamIsHttp && mediaErr?.code === mediaErr?.MEDIA_ERR_SRC_NOT_SUPPORTED
+
+        if (isMixedContentBlocked) {
+            console.warn('Mixed‑content blocked HTTP stream, skipping retry:', src)
+            stopped.value = true
+            loading.value = false
+            isPlaying.value = false
+            return
+        }
+
+        // all other errors (including HTTP streams on HTTP pages)
+        console.log('Stream Error', e, mediaErr)
         handleStreamError()
     }
+
+    // ignore retry if stream is http
 
     function handleStreamError() {
         if (!stopped.value && station.value) {
@@ -43,13 +63,7 @@ export const usePlayerStore = defineStore('player', () => {
     function retryStream() {
         if (station.value) {
             loading.value = true
-            const url = new URL(station.value.url_resolved)
-            if (url.protocol === 'http:') {
-                audio.value.src = url.href // Explicitly set the HTTP URL
-            } else {
-                console.warn('Stream URL is not HTTP. Retrying might fail:', url.href)
-                audio.value.src = station.value.url_resolved
-            }
+            audio.value.src = station.value.url_resolved
             audio.value.load()
             audio.value
                 .play()
