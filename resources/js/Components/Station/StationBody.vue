@@ -44,7 +44,9 @@ function playRadio(station: Station) {
         <h1 class="text-3xl leading-tight font-bold text-gray-800 dark:text-gray-200">
             {{ station.name }}
         </h1>
-        <p class="mt-2 mb-6 text-gray-600 dark:text-gray-400">{{ station.votes }} Votes</p>
+        <p class="mt-2 mb-6 text-gray-600 dark:text-gray-400">
+            {{ station.votes }} Votes, {{ station.clickcount }} Clicks
+        </p>
 
         <div class="mb-6 flex items-center justify-center gap-6 md:justify-start">
             <button

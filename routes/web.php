@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeStationsController;
 use App\Http\Controllers\MusicRadioController;
 use App\Http\Controllers\NewsStationController;
+use App\Http\Controllers\RadioExploreController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SportsRadioController;
 use App\Http\Controllers\StationController;
@@ -18,6 +19,8 @@ Route::match(['get', 'post'], '/radio/music', MusicRadioController::class)->name
 Route::match(['get', 'post'], '/radio/news', NewsStationController::class)->name('radio.news');
 Route::match(['get', 'post'], '/radio/sports', SportsRadioController::class)->name('radio.sports');
 Route::match(['get', 'post'], '/radio/talk', TalkRadioController::class)->name('radio.talk');
+
+Route::get('/radio/explore', RadioExploreController::class)->name('radio.explore');
 
 Route::get('/station/{uuid}', [StationController::class, 'index'])->name('station.show');
 

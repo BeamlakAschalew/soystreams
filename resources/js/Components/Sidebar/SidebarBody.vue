@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import SidebarMenuItem from '@/Components/Sidebar/SidebarMenuItem.vue'
 import { home } from '@/routes/home'
+import { explore } from '@/routes/radio/explore'
 import { music } from '@/routes/radio/music'
 import { news } from '@/routes/radio/news'
 import { sports } from '@/routes/radio/sports'
 import { talk } from '@/routes/radio/talk'
 import { search } from '@/routes/search'
 import {
+    Compass,
     House,
     Languages,
     MapPin,
@@ -37,6 +39,10 @@ import {
                     :active="$page.component === 'Search'"
                     ><template #icon="{ size }"><Search :size="size" /></template>
                     Search</SidebarMenuItem
+                >
+                <SidebarMenuItem :path="explore().url" :active="$page.component === 'Explore'"
+                    ><template #icon="{ size }"><Compass :size="size" /></template>
+                    Explore</SidebarMenuItem
                 >
                 <SidebarMenuItem :path="music().url" :active="$page.url.startsWith('/radio/music')"
                     ><template #icon="{ size }"><Music :size="size" /></template>
