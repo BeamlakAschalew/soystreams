@@ -18,7 +18,7 @@ defineProps({
         >
             <img
                 v-lazy="stationFavicon"
-                alt="{{ stationName }} Logo"
+                :alt="`${stationName} Logo`"
                 class="h-full w-full object-cover"
             />
         </div>

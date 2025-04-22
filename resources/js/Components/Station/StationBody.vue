@@ -18,6 +18,7 @@ import {
 } from 'lucide-vue-next'
 import type { PropType } from 'vue'
 import { ref } from 'vue'
+import StationMap from './StationMap.vue'
 
 const showInfo = ref(false)
 
@@ -84,7 +85,7 @@ function playRadio(station: Station) {
         <!-- Toggle information button -->
         <button
             @click="toggleInfo"
-            class="mx-auto flex items-center justify-center bg-transparent px-4 py-2 font-medium text-gray-600 transition-colors hover:text-gray-900 md:mx-0 md:justify-start dark:text-gray-400 dark:hover:text-gray-200"
+            class="mx-auto flex items-center justify-center bg-transparent py-2 font-medium text-gray-600 transition-colors hover:text-gray-900 md:mx-0 md:justify-start dark:text-gray-400 dark:hover:text-gray-200"
         >
             <span>{{ showInfo ? 'LESS INFORMATION' : 'MORE INFORMATION' }}</span>
             <ChevronDownIcon v-if="!showInfo" class="ml-1 h-5 w-5" />
@@ -125,6 +126,13 @@ function playRadio(station: Station) {
                     }}</a>
                 </p>
             </div>
+
+            <!-- Station map -->
+            <StationMap
+                v-if="station.geo_lat && station.geo_long"
+                :latitude="station.geo_lat"
+                :longitude="station.geo_long"
+            />
         </div>
     </div>
 </template>
