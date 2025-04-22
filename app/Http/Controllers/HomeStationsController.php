@@ -32,18 +32,22 @@ class HomeStationsController extends Controller {
                 [
                     'name' => 'Top Music Stations',
                     'stations' => $musicStations,
+                    'view_more' => '/radio/music',
                 ],
                 [
                     'name' => 'Top News Stations',
                     'stations' => $newsStations,
+                    'view_more' => '/radio/news',
                 ],
                 [
                     'name' => 'Top Talk Stations',
                     'stations' => $talkStations,
+                    'view_more' => '/radio/talk',
                 ],
                 [
                     'name' => 'Top Sports Stations',
                     'stations' => $sportsStations,
+                    'view_more' => '/radio/sports',
                 ],
                 [
                     'name' => 'Top Stations',

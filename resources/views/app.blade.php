@@ -18,6 +18,9 @@
     <!-- favicon -->
     <link rel="icon" href="/images/soy-square-fav.png">
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <script>
         const html = document.querySelector('html');
         const isLightOrAuto = localStorage.getItem('hs_theme') === 'light' || (localStorage.getItem('hs_theme') ===

@@ -32,7 +32,9 @@ import {
                     <template #icon="{ size }"><House :size="size" /></template
                     >Home</SidebarMenuItem
                 >
-                <SidebarMenuItem :path="search().url" :active="$page.component === 'Search'"
+                <SidebarMenuItem
+                    :path="`${search().url}?focus`"
+                    :active="$page.component === 'Search'"
                     ><template #icon="{ size }"><Search :size="size" /></template>
                     Search</SidebarMenuItem
                 >

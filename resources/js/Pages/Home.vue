@@ -10,6 +10,7 @@ defineProps<{
     home_stations: Array<{
         name: string
         stations: Station[]
+        view_more: string
     }>
 }>()
 </script>
@@ -22,6 +23,10 @@ defineProps<{
         :key="stationCollection.name"
         class="mb-8 text-neutral-900 2xl:max-w-[80%] dark:text-neutral-50"
     >
-        <StationSlider :name="stationCollection.name" :stations="stationCollection.stations" />
+        <StationSlider
+            :name="stationCollection.name"
+            :stations="stationCollection.stations"
+            :viewMore="stationCollection.view_more"
+        />
     </div>
 </template>

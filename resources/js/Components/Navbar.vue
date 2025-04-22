@@ -2,6 +2,8 @@
 import home from '@/routes/home'
 import search from '@/routes/search'
 import { Search } from 'lucide-vue-next'
+
+console.log(`${search.url()}?focus`)
 </script>
 
 <template>
@@ -69,7 +71,7 @@ import { Search } from 'lucide-vue-next'
                     </Link>
                 </div>
                 <Link
-                    :href="search().url"
+                    :href="`${search().url}?focus`"
                     class="relative flex size-9 items-center justify-center gap-x-2 rounded-lg bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:bg-gray-50 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
                     id="search"
                 >

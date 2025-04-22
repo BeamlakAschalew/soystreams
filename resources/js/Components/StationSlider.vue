@@ -7,6 +7,7 @@ withDefaults(
         name: string
         stations: Station[]
         showViewMore?: boolean
+        viewMore?: string
     }>(),
     {
         showViewMore: true,
@@ -20,12 +21,13 @@ withDefaults(
         <div class="font-bold text-neutral-900 dark:text-neutral-50">
             {{ name }}
         </div>
-        <div
+        <Link
+            :href="viewMore"
             v-if="showViewMore"
             class="text-primary cursor-pointer font-semibold hover:text-green-800"
         >
             View more
-        </div>
+        </Link>
     </div>
     <!-- Slider -->
     <div

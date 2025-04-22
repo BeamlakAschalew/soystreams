@@ -72,8 +72,9 @@ export const usePlayerStore = defineStore('player', () => {
                     loading.value = false
                 })
                 .catch(err => {
+                    console.log(err)
                     loading.value = false
-                    setTimeout(retryStream, 3000)
+                    setTimeout(retryStream, 7000)
                 })
         }
     }

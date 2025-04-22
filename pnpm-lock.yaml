@@ -11,6 +11,9 @@ importers:
       js-cookie:
         specifier: ^3.0.5
         version: 3.0.5
+      leaflet:
+        specifier: ^1.9.4
+        version: 1.9.4
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -1174,6 +1177,9 @@ packages:
     hasBin: true
     peerDependencies:
       vite: ^5.0.0 || ^6.0.0
+
+  leaflet@1.9.4:
+    resolution: {integrity: sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==}
 
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
@@ -2822,6 +2828,8 @@ snapshots:
       picocolors: 1.1.1
       vite: 6.2.2(jiti@2.4.2)(lightningcss@1.29.2)(yaml@2.7.0)
       vite-plugin-full-reload: 1.2.0
+
+  leaflet@1.9.4: {}
 
   levn@0.4.1:
     dependencies:
