@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import MainLayout from '@/Layouts/MainLayout.vue'
-import { computed, ref } from 'vue'
+import { router } from '@inertiajs/vue3'
+import { ref } from 'vue'
 defineOptions({
     layout: MainLayout,
 })
-
-const activeTab = ref('basic')
 
 // Initialize form data with default values
 const formData = ref({
@@ -21,27 +20,10 @@ const formData = ref({
     languageExact: false,
     tag: '',
     tagExact: false,
-    tagList: '',
-
-    // Technical parameters
-    codec: '',
-    bitrateMin: 0,
-    bitrateMax: 1000000,
-    has_geo_info: 'both',
-    has_extended_info: 'both',
-    is_https: 'both',
-
-    // Geo parameters
-    geo_lat: '',
-    geo_long: '',
-    geo_distance: '',
 
     // Result parameters
     order: 'name',
     reverse: false,
-    offset: 0,
-    limit: 100000,
-    hidebroken: false,
 })
 
 // Country list for dropdown
@@ -144,15 +126,15 @@ const validateCustomTag = () => {
     }
 }
 
-// Format bitrate display
-const formattedBitrateMax = computed(() => {
-    return formData.value.bitrateMax === 1000000 ? 'No limit' : `${formData.value.bitrateMax} kbps`
-})
-
 // Handle form submission
 const handleSubmit = () => {
     console.log('Search parameters:', formData.value)
     // Here you would typically make an API call with the formData
+    router.get('/radio/explore', formData.value, {
+        preserveState: false,
+        replace: true,
+        preserveScroll: true,
+    })
 }
 
 // Reset form to default values
@@ -169,21 +151,8 @@ const resetForm = () => {
         languageExact: false,
         tag: '',
         tagExact: false,
-        tagList: '',
-        codec: '',
-        bitrateMin: 0,
-        bitrateMax: 1000000,
-        has_geo_info: 'both',
-        has_extended_info: 'both',
-        is_https: 'both',
-        geo_lat: '',
-        geo_long: '',
-        geo_distance: '',
         order: 'name',
         reverse: false,
-        offset: 0,
-        limit: 100000,
-        hidebroken: false,
     }
     selectedTag.value = ''
     showCustomTagInput.value = false
@@ -525,7 +494,7 @@ const resetForm = () => {
                     Reset
                 </button>
                 <button
-                    type="submit"
+                    @click="handleSubmit"
                     class="bg-primary hover:bg-primary-400 focus:ring-primary-500 rounded-md border border-transparent px-4 py-2 text-sm font-medium text-black shadow-sm focus:ring-2 focus:ring-offset-2 focus:outline-none"
                 >
                     Search Stations

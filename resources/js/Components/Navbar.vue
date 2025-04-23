@@ -2,13 +2,11 @@
 import home from '@/routes/home'
 import search from '@/routes/search'
 import { Search } from 'lucide-vue-next'
-
-console.log(`${search.url()}?focus`)
 </script>
 
 <template>
     <header
-        class="relative flex w-full flex-wrap bg-white py-3 text-sm sm:flex-nowrap sm:justify-start lg:hidden dark:bg-neutral-800"
+        class="relative flex w-full flex-wrap bg-white py-3 text-sm sm:flex-nowrap sm:justify-start lg:hidden dark:bg-neutral-950"
     >
         <nav class="mx-auto w-full max-w-[85rem] px-4 sm:flex sm:items-center sm:justify-between">
             <div class="flex w-full items-center justify-between">
