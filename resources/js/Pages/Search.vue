@@ -67,7 +67,7 @@ onMounted(async () => {
 
 const debouncedSearch = debounce(query => {
     router.get('/search', { q: query }, { preserveState: false, replace: true })
-}, 300)
+}, 800)
 
 const searchFromHistory = (query: string): void => {
     searchQuery.value = query
