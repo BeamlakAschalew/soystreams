@@ -65,17 +65,19 @@ export const usePlayerStore = defineStore('player', () => {
             loading.value = true
             audio.value.src = station.value.url_resolved
             audio.value.load()
-            audio.value
-                .play()
-                .then(() => {
-                    isPlaying.value = true
-                    loading.value = false
-                })
-                .catch(err => {
-                    console.log(err)
-                    loading.value = false
-                    setTimeout(retryStream, 7000)
-                })
+            if (isPlaying.value) {
+                audio.value
+                    .play()
+                    .then(() => {
+                        isPlaying.value = true
+                        loading.value = false
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        loading.value = false
+                        setTimeout(retryStream, 7000)
+                    })
+            }
         }
     }
 

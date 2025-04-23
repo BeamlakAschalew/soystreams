@@ -41,8 +41,8 @@ import {
                     Search</SidebarMenuItem
                 >
                 <SidebarMenuItem :path="explore().url" :active="$page.component === 'Explore'"
-                    ><template #icon="{ size }"><Compass :size="size" /></template>
-                    Explore</SidebarMenuItem
+                    ><template #icon="{ size }"><Compass :size="size" /></template> Explore
+                    Stations</SidebarMenuItem
                 >
                 <SidebarMenuItem :path="music().url" :active="$page.url.startsWith('/radio/music')"
                     ><template #icon="{ size }"><Music :size="size" /></template>
