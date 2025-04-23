@@ -193,130 +193,7 @@ const resetForm = () => {
     <Head title="Explore" />
     <div class="mb-8 rounded-xl bg-white p-6 shadow-lg dark:bg-neutral-950">
         <form @submit.prevent="handleSubmit">
-            <!-- Tabs Navigation -->
-            <div class="mb-6 flex overflow-x-auto border-b border-gray-200 dark:border-gray-700">
-                <button
-                    type="button"
-                    @click="activeTab = 'basic'"
-                    :class="[
-                        'rounded-t-lg px-4 py-2 text-sm font-medium whitespace-nowrap focus:outline-none',
-                        activeTab === 'basic'
-                            ? 'text-primary-500 border-primary-500 dark:text-primary-400 dark:border-primary-400 border-b-2'
-                            : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300',
-                    ]"
-                >
-                    <div class="flex items-center gap-2">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            />
-                        </svg>
-                        <span class="hidden sm:inline">Basic</span>
-                    </div>
-                </button>
-                <button
-                    type="button"
-                    @click="activeTab = 'technical'"
-                    :class="[
-                        'rounded-t-lg px-4 py-2 text-sm font-medium whitespace-nowrap focus:outline-none',
-                        activeTab === 'technical'
-                            ? 'text-primary-500 border-primary-500 dark:text-primary-400 dark:border-primary-400 border-b-2'
-                            : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300',
-                    ]"
-                >
-                    <div class="flex items-center gap-2">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                            />
-                        </svg>
-                        <span class="hidden sm:inline">Technical</span>
-                    </div>
-                </button>
-                <button
-                    type="button"
-                    @click="activeTab = 'geo'"
-                    :class="[
-                        'rounded-t-lg px-4 py-2 text-sm font-medium whitespace-nowrap focus:outline-none',
-                        activeTab === 'geo'
-                            ? 'text-primary-500 border-primary-500 dark:text-primary-400 dark:border-primary-400 border-b-2'
-                            : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300',
-                    ]"
-                >
-                    <div class="flex items-center gap-2">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                            />
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                            />
-                        </svg>
-                        <span class="hidden sm:inline">Geo</span>
-                    </div>
-                </button>
-                <button
-                    type="button"
-                    @click="activeTab = 'results'"
-                    :class="[
-                        'rounded-t-lg px-4 py-2 text-sm font-medium whitespace-nowrap focus:outline-none',
-                        activeTab === 'results'
-                            ? 'text-primary-500 border-primary-500 dark:text-primary-400 dark:border-primary-400 border-b-2'
-                            : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300',
-                    ]"
-                >
-                    <div class="flex items-center gap-2">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
-                            />
-                        </svg>
-                        <span class="hidden sm:inline">Results</span>
-                    </div>
-                </button>
-            </div>
-
-            <!-- Basic Tab Content -->
-            <div v-if="activeTab === 'basic'" class="space-y-6">
+            <div class="space-y-6">
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <!-- Station Name -->
                     <div class="space-y-2">
@@ -581,24 +458,59 @@ const resetForm = () => {
                             </label>
                         </div>
                     </div>
-
-                    <!-- Tag List -->
+                    <!-- Sort By -->
                     <div class="space-y-2">
                         <label
-                            for="tagList"
+                            for="order"
                             class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                            >Tag List (comma separated)</label
+                            >Sort By</label
                         >
-                        <input
-                            type="text"
-                            id="tagList"
-                            v-model="formData.tagList"
-                            placeholder="rock, pop, jazz"
-                            class="block w-full rounded-lg border-gray-200 px-4 py-2.5 focus:border-green-500 focus:ring-green-500 disabled:pointer-events-none disabled:opacity-50 sm:py-3 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                        />
-                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                            All tags in the list must match
-                        </p>
+                        <select
+                            id="order"
+                            v-model="formData.order"
+                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                        >
+                            <option value="name">Name</option>
+                            <option value="url">URL</option>
+                            <option value="homepage">Homepage</option>
+                            <option value="favicon">Favicon</option>
+                            <option value="tags">Tags</option>
+                            <option value="country">Country</option>
+                            <option value="state">State</option>
+                            <option value="language">Language</option>
+                            <option value="votes">Votes</option>
+                            <option value="codec">Codec</option>
+                            <option value="bitrate">Bitrate</option>
+                            <option value="lastcheckok">Last Check OK</option>
+                            <option value="lastchecktime">Last Check Time</option>
+                            <option value="clicktimestamp">Click Timestamp</option>
+                            <option value="clickcount">Click Count</option>
+                            <option value="clicktrend">Click Trend</option>
+                            <option value="changetimestamp">Change Timestamp</option>
+                            <option value="random">Random</option>
+                        </select>
+                    </div>
+
+                    <!-- Sort Order -->
+                    <div class="space-y-2">
+                        <label
+                            class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                            >Sort Order</label
+                        >
+                        <div class="flex items-center">
+                            <input
+                                type="checkbox"
+                                id="reverse"
+                                class="text-primary-500 focus focus:ring-primary-500 h-4 w-4 rounded border-gray-200"
+                                v-model="formData.reverse"
+                            />
+                            <label
+                                for="reverse"
+                                class="ml-2 block text-sm text-gray-700 dark:text-gray-300"
+                            >
+                                {{ formData.reverse ? 'Descending' : 'Ascending' }}
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -819,61 +731,6 @@ const resetForm = () => {
             <!-- Results Tab Content -->
             <div v-if="activeTab === 'results'" class="space-y-6">
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <!-- Sort By -->
-                    <div class="space-y-2">
-                        <label
-                            for="order"
-                            class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                            >Sort By</label
-                        >
-                        <select
-                            id="order"
-                            v-model="formData.order"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                        >
-                            <option value="name">Name</option>
-                            <option value="url">URL</option>
-                            <option value="homepage">Homepage</option>
-                            <option value="favicon">Favicon</option>
-                            <option value="tags">Tags</option>
-                            <option value="country">Country</option>
-                            <option value="state">State</option>
-                            <option value="language">Language</option>
-                            <option value="votes">Votes</option>
-                            <option value="codec">Codec</option>
-                            <option value="bitrate">Bitrate</option>
-                            <option value="lastcheckok">Last Check OK</option>
-                            <option value="lastchecktime">Last Check Time</option>
-                            <option value="clicktimestamp">Click Timestamp</option>
-                            <option value="clickcount">Click Count</option>
-                            <option value="clicktrend">Click Trend</option>
-                            <option value="changetimestamp">Change Timestamp</option>
-                            <option value="random">Random</option>
-                        </select>
-                    </div>
-
-                    <!-- Sort Order -->
-                    <div class="space-y-2">
-                        <label
-                            class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
-                            >Sort Order</label
-                        >
-                        <div class="flex items-center">
-                            <input
-                                type="checkbox"
-                                id="reverse"
-                                class="text-primary-500 focus focus:ring-primary-500 h-4 w-4 rounded border-gray-200"
-                                v-model="formData.reverse"
-                            />
-                            <label
-                                for="reverse"
-                                class="ml-2 block text-sm text-gray-700 dark:text-gray-300"
-                            >
-                                {{ formData.reverse ? 'Descending' : 'Ascending' }}
-                            </label>
-                        </div>
-                    </div>
-
                     <!-- Offset -->
                     <div class="space-y-2">
                         <label
