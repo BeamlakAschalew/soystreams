@@ -51,7 +51,7 @@ function playRadio(station: Station) {
         <div class="mb-6 flex items-center justify-center gap-6 md:justify-start">
             <button
                 @click="playRadio(station)"
-                class="flex h-14 w-14 items-center justify-center rounded-full bg-gray-900 text-white transition-colors hover:bg-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600"
+                class="flex h-14 w-14 items-center justify-center rounded-full bg-gray-900 text-white transition-colors hover:bg-gray-800 dark:bg-neutral-900 dark:hover:bg-gray-600"
             >
                 <component
                     v-if="

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import station from '@/routes/station/show'
 import { usePlayerStore } from '@/Stores/useLivePlayerStore'
 import { Heart, LoaderCircle, Pause, Play, Volume1, Volume2, VolumeOff } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
@@ -24,7 +25,11 @@ function toggleVolumeControl() {
         v-if="playerStore.radioInit"
         class="fixed bottom-0 z-40 flex max-h-24 w-full flex-row flex-wrap items-center justify-between border-t-2 border-gray-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-950"
     >
-        <div id="imageTitle" class="flex flex-1 flex-row items-center justify-start gap-4">
+        <Link
+            :href="station.url(playerStore.station?.stationuuid!)"
+            id="imageTitle"
+            class="flex flex-1 flex-row items-center justify-start gap-4"
+        >
             <img
                 v-lazy="playerStore.station?.favicon"
                 class="h-16 w-16 rounded-lg bg-white object-cover p-1 max-md:h-10 max-md:w-10 dark:bg-neutral-900"
@@ -33,7 +38,7 @@ function toggleVolumeControl() {
             <div id="radioTitle" class="line-clamp-1 text-neutral-900 dark:text-neutral-50">
                 {{ playerStore.station?.name }}
             </div>
-        </div>
+        </Link>
 
         <div
             id="trailing"

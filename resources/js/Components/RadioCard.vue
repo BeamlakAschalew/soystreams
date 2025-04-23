@@ -33,7 +33,7 @@ const isTouchDevice = computed(() => {
         <Link :href="stationRoute.url(station.stationuuid)">
             <div id="imageContainer" class="group relative aspect-square w-full object-cover">
                 <div
-                    class="absolute bottom-0 h-12 w-full rounded-br-lg rounded-bl-lg bg-gradient-to-t from-green-300 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    class="from-primary-600 absolute bottom-0 h-12 w-full rounded-br-lg rounded-bl-lg bg-gradient-to-t to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 ></div>
                 <div
                     class="absolute right-0 bottom-0 z-10 mr-2 mb-1 cursor-pointer rounded-full bg-gray-800 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-gray-900"
@@ -71,7 +71,7 @@ const isTouchDevice = computed(() => {
                 <img
                     v-lazy="station.favicon"
                     class="h-full w-full cursor-pointer rounded-xl bg-white object-cover p-2 dark:bg-neutral-800"
-                    alt=""
+                    :alt="`${station.name} Logo`"
                 />
             </div>
             <div

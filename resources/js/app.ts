@@ -23,8 +23,8 @@ createInertiaApp({
             .component('Link', Link)
             .use(VueLazyload, {
                 preLoad: 1.3,
-                error: '/images/soy-square.png',
-                loading: '/images/soy-square.png',
+                error: '/images/soy-square-hq.png',
+                loading: '/images/loading.gif',
                 attempt: 1,
             })
         vueApp.mixin({
