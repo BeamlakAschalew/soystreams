@@ -191,7 +191,7 @@ const resetForm = () => {
 </script>
 <template>
     <Head title="Explore" />
-    <div class="mb-8 rounded-xl bg-white p-6 shadow-lg dark:bg-gray-800">
+    <div class="mb-8 rounded-xl bg-white p-6 shadow-lg dark:bg-neutral-950">
         <form @submit.prevent="handleSubmit">
             <!-- Tabs Navigation -->
             <div class="mb-6 flex overflow-x-auto border-b border-gray-200 dark:border-gray-700">
@@ -330,14 +330,14 @@ const resetForm = () => {
                             id="name"
                             v-model="formData.name"
                             placeholder="Enter station name"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="block w-full rounded-lg border-gray-200 px-4 py-2.5 focus:border-green-500 focus:ring-green-500 disabled:pointer-events-none disabled:opacity-50 sm:py-3 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         />
                         <div class="mt-2 flex items-center">
                             <input
                                 type="checkbox"
                                 id="nameExact"
                                 v-model="formData.nameExact"
-                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-300"
+                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-200"
                             />
                             <label
                                 for="nameExact"
@@ -359,7 +359,7 @@ const resetForm = () => {
                             <select
                                 id="country"
                                 v-model="formData.country"
-                                class="focus:ring-primary-500 focus:border-primary-500 w-full appearance-none rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                class="focus:ring-primary-500 focus:border-primary-500 w-full appearance-none rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                             >
                                 <option value="">Select a country</option>
                                 <option
@@ -389,7 +389,7 @@ const resetForm = () => {
                                 type="checkbox"
                                 id="countryExact"
                                 v-model="formData.countryExact"
-                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-300"
+                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-200"
                             />
                             <label
                                 for="countryExact"
@@ -411,7 +411,7 @@ const resetForm = () => {
                             <select
                                 id="countrycode"
                                 v-model="formData.countrycode"
-                                class="focus:ring-primary-500 focus:border-primary-500 w-full appearance-none rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                class="focus:ring-primary-500 focus:border-primary-500 w-full appearance-none rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                             >
                                 <option value="">Select a country code</option>
                                 <option
@@ -450,14 +450,14 @@ const resetForm = () => {
                             id="state"
                             v-model="formData.state"
                             placeholder="Enter state"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         />
                         <div class="mt-2 flex items-center">
                             <input
                                 type="checkbox"
                                 id="stateExact"
                                 v-model="formData.stateExact"
-                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-300"
+                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-200"
                             />
                             <label
                                 for="stateExact"
@@ -479,7 +479,7 @@ const resetForm = () => {
                             <select
                                 id="language"
                                 v-model="formData.language"
-                                class="focus:ring-primary-500 focus:border-primary-500 w-full appearance-none rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                class="focus:ring-primary-500 focus:border-primary-500 w-full appearance-none rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                             >
                                 <option value="">Select a language</option>
                                 <option
@@ -509,7 +509,7 @@ const resetForm = () => {
                                 type="checkbox"
                                 id="languageExact"
                                 v-model="formData.languageExact"
-                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-300"
+                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-200"
                             />
                             <label
                                 for="languageExact"
@@ -533,7 +533,7 @@ const resetForm = () => {
                                     id="tag-select"
                                     v-model="selectedTag"
                                     @change="handleTagSelect"
-                                    class="focus:ring-primary-500 focus:border-primary-500 w-full appearance-none rounded-l-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                    class="focus:ring-primary-500 focus:border-primary-500 w-full appearance-none rounded-l-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                 >
                                     <option value="">Select or enter a tag</option>
                                     <option value="custom">Custom tag...</option>
@@ -547,7 +547,7 @@ const resetForm = () => {
                                     id="custom-tag"
                                     v-model="formData.tag"
                                     placeholder="Enter custom tag"
-                                    class="focus:ring-primary-500 focus:border-primary-500 flex-1 rounded-r-md border border-l-0 border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                    class="focus:ring-primary-500 focus:border-primary-500 flex-1 rounded-r-md border border-l-0 border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                     @blur="validateCustomTag"
                                 />
                             </div>
@@ -571,7 +571,7 @@ const resetForm = () => {
                                 type="checkbox"
                                 id="tagExact"
                                 v-model="formData.tagExact"
-                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-300"
+                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-200"
                             />
                             <label
                                 for="tagExact"
@@ -594,7 +594,7 @@ const resetForm = () => {
                             id="tagList"
                             v-model="formData.tagList"
                             placeholder="rock, pop, jazz"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="block w-full rounded-lg border-gray-200 px-4 py-2.5 focus:border-green-500 focus:ring-green-500 disabled:pointer-events-none disabled:opacity-50 sm:py-3 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         />
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                             All tags in the list must match
@@ -618,7 +618,7 @@ const resetForm = () => {
                             id="codec"
                             v-model="formData.codec"
                             placeholder="e.g. MP3, AAC"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         />
                     </div>
 
@@ -641,7 +641,7 @@ const resetForm = () => {
                             min="0"
                             max="320"
                             step="1"
-                            class="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
+                            class="h-2 w-full cursor-pointer appearance-none rounded-lg dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         />
                     </div>
 
@@ -678,7 +678,7 @@ const resetForm = () => {
                         <select
                             id="has_geo_info"
                             v-model="formData.has_geo_info"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         >
                             <option value="both">Show All</option>
                             <option value="true">Only With Geo Info</option>
@@ -696,7 +696,7 @@ const resetForm = () => {
                         <select
                             id="has_extended_info"
                             v-model="formData.has_extended_info"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         >
                             <option value="both">Show All</option>
                             <option value="true">Only With Extended Info</option>
@@ -714,7 +714,7 @@ const resetForm = () => {
                         <select
                             id="is_https"
                             v-model="formData.is_https"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         >
                             <option value="both">Show All</option>
                             <option value="true">Only HTTPS Streams</option>
@@ -742,7 +742,7 @@ const resetForm = () => {
                             min="-90"
                             max="90"
                             step="0.000001"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         />
                     </div>
 
@@ -761,7 +761,7 @@ const resetForm = () => {
                             min="-180"
                             max="180"
                             step="0.000001"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         />
                     </div>
 
@@ -778,7 +778,7 @@ const resetForm = () => {
                             v-model="formData.geo_distance"
                             placeholder="Distance in meters"
                             min="0"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         />
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                             Only stations within this distance from the specified coordinates will
@@ -788,7 +788,9 @@ const resetForm = () => {
                 </div>
 
                 <!-- Geo Search Help Box -->
-                <div class="mt-4 rounded-lg bg-gray-50 p-4 dark:bg-gray-700">
+                <div
+                    class="mt-4 rounded-lg bg-gray-50 p-4 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                >
                     <div class="mb-2 flex items-center gap-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -827,7 +829,7 @@ const resetForm = () => {
                         <select
                             id="order"
                             v-model="formData.order"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         >
                             <option value="name">Name</option>
                             <option value="url">URL</option>
@@ -860,7 +862,7 @@ const resetForm = () => {
                             <input
                                 type="checkbox"
                                 id="reverse"
-                                class="text-primary-500 focus focus:ring-primary-500 h-4 w-4 rounded border-gray-300"
+                                class="text-primary-500 focus focus:ring-primary-500 h-4 w-4 rounded border-gray-200"
                                 v-model="formData.reverse"
                             />
                             <label
@@ -885,7 +887,7 @@ const resetForm = () => {
                             v-model.number="formData.offset"
                             min="0"
                             placeholder="Starting index"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         />
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                             Starting index for pagination
@@ -905,7 +907,7 @@ const resetForm = () => {
                             v-model.number="formData.limit"
                             min="1"
                             placeholder="Maximum results"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         />
                         <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                             Maximum number of results to return
@@ -919,7 +921,7 @@ const resetForm = () => {
                                 type="checkbox"
                                 id="hidebroken"
                                 v-model="formData.hidebroken"
-                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-300"
+                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-200"
                             />
                             <label
                                 for="hidebroken"
@@ -937,7 +939,7 @@ const resetForm = () => {
                 <button
                     type="button"
                     @click="resetForm"
-                    class="focus:ring-primary-500 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                    class="focus:ring-primary-500 rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
                 >
                     Reset
                 </button>
@@ -952,9 +954,13 @@ const resetForm = () => {
     </div>
 
     <!-- Results Preview (Placeholder) -->
-    <div class="rounded-xl bg-white p-6 shadow-lg dark:bg-gray-800">
+    <div
+        class="rounded-xl bg-white p-6 shadow-lg dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400"
+    >
         <h2 class="mb-4 text-xl font-semibold text-gray-900 dark:text-white">Search Results</h2>
-        <div class="flex items-center justify-center rounded-lg bg-gray-100 p-8 dark:bg-gray-700">
+        <div
+            class="flex items-center justify-center rounded-lg bg-gray-100 p-8 dark:bg-neutral-800"
+        >
             <p class="text-center text-gray-500 dark:text-gray-400">
                 Your search results will appear here.<br />
                 Use the form above to search for radio stations.

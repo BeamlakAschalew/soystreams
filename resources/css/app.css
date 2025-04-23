@@ -11,8 +11,31 @@
 
 @theme {
     --font-sans: 'Figtree', sans-serif;
+    /* Primary Color Shades */
     --color-primary: oklch(0.75 0.1577 151.54);
+    --color-primary-50: oklch(0.95 0.1577 151.54);
+    --color-primary-100: oklch(0.9 0.1577 151.54);
+    --color-primary-200: oklch(0.85 0.1577 151.54);
+    --color-primary-300: oklch(0.8 0.1577 151.54);
+    --color-primary-400: oklch(0.77 0.1577 151.54);
+    --color-primary-500: oklch(0.75 0.1577 151.54);
+    --color-primary-600: oklch(0.7 0.1577 151.54);
+    --color-primary-700: oklch(0.65 0.1577 151.54);
+    --color-primary-800: oklch(0.6 0.1577 151.54);
+    --color-primary-900: oklch(0.55 0.1577 151.54);
+
+    /* Light Primary Color Shades */
     --color-lightPrimary: oklch(0.96 0.0434 156.74);
+    --color-lightPrimary-50: oklch(1 0.0434 156.74);
+    --color-lightPrimary-100: oklch(0.98 0.0434 156.74);
+    --color-lightPrimary-200: oklch(0.96 0.0434 156.74);
+    --color-lightPrimary-300: oklch(0.94 0.0434 156.74);
+    --color-lightPrimary-400: oklch(0.92 0.0434 156.74);
+    --color-lightPrimary-500: oklch(0.9 0.0434 156.74);
+    --color-lightPrimary-600: oklch(0.88 0.0434 156.74);
+    --color-lightPrimary-700: oklch(0.86 0.0434 156.74);
+    --color-lightPrimary-800: oklch(0.84 0.0434 156.74);
+    --color-lightPrimary-900: oklch(0.82 0.0434 156.74);
 }
 
 #nprogress .bar {
