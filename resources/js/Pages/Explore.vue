@@ -12,7 +12,15 @@ defineOptions({
 const props = defineProps<{
     stations: Station[]
     no_input: boolean
-    meta: { current_page: number; has_more: boolean; filters: any }
+
+    meta: {
+        current_page: number
+        has_more: boolean
+        filters: any
+        countries: Array<any>
+        languages: Array<any>
+        tags: Array<any>
+    }
 }>()
 
 const formData = ref({
@@ -20,92 +28,14 @@ const formData = ref({
     nameExact: props.meta.filters.nameExact,
     country: props.meta.filters.country,
     countryExact: props.meta.filters.countryExact,
-    countrycode: props.meta.filters.countrycode,
-    state: props.meta.filters.state,
-    stateExact: props.meta.filters.stateExact,
-    language: props.meta.filters.language,
+    language: props.meta.filters.language ?? 'english',
     languageExact: props.meta.filters.languageExact,
     tag: props.meta.filters.tag,
     tagExact: props.meta.filters.tagExact,
 
-    order: props.meta.filters.order,
-    reverse: props.meta.filters.reverse,
+    order: props.meta.filters.order ?? 'votes',
+    reverse: props.meta.filters.reverse.value ?? true,
 })
-
-const countries = [
-    { name: 'United States', code: 'US' },
-    { name: 'United Kingdom', code: 'GB' },
-    { name: 'Germany', code: 'DE' },
-    { name: 'France', code: 'FR' },
-    { name: 'Canada', code: 'CA' },
-    { name: 'Australia', code: 'AU' },
-    { name: 'Japan', code: 'JP' },
-    { name: 'Brazil', code: 'BR' },
-    { name: 'Spain', code: 'ES' },
-    { name: 'Italy', code: 'IT' },
-    { name: 'Netherlands', code: 'NL' },
-    { name: 'Sweden', code: 'SE' },
-    { name: 'Switzerland', code: 'CH' },
-    { name: 'Mexico', code: 'MX' },
-    { name: 'India', code: 'IN' },
-    { name: 'China', code: 'CN' },
-    { name: 'Russia', code: 'RU' },
-    { name: 'South Africa', code: 'ZA' },
-    { name: 'Argentina', code: 'AR' },
-    { name: 'New Zealand', code: 'NZ' },
-]
-
-const languages = [
-    'English',
-    'Spanish',
-    'German',
-    'French',
-    'Portuguese',
-    'Italian',
-    'Dutch',
-    'Russian',
-    'Japanese',
-    'Chinese',
-    'Arabic',
-    'Hindi',
-    'Korean',
-    'Swedish',
-    'Norwegian',
-    'Danish',
-    'Finnish',
-    'Polish',
-    'Turkish',
-    'Greek',
-]
-
-// Tag list for dropdown
-const tags = [
-    'Rock',
-    'Pop',
-    'Jazz',
-    'Classical',
-    'Hip Hop',
-    'R&B',
-    'Electronic',
-    'Dance',
-    'Country',
-    'Folk',
-    'Blues',
-    'Metal',
-    'Reggae',
-    'Latin',
-    'Alternative',
-    'Indie',
-    'Punk',
-    'Soul',
-    'Funk',
-    'Ambient',
-    'News',
-    'Talk',
-    'Sports',
-    'Comedy',
-    'Religious',
-]
 
 // For tag dropdown with custom input
 const selectedTag = ref('')
@@ -129,8 +59,7 @@ const validateCustomTag = () => {
 }
 
 const handleSubmit = () => {
-    console.log('Search parameters:', formData.value)
-    router.get('/radio/explore', formData.value, {
+    router.get(explore().url, formData.value, {
         preserveState: false,
         replace: true,
         preserveScroll: true,
@@ -143,15 +72,12 @@ const resetForm = () => {
         nameExact: false,
         country: '',
         countryExact: false,
-        countrycode: '',
-        state: '',
-        stateExact: false,
-        language: '',
+        language: 'english',
         languageExact: false,
         tag: '',
         tagExact: false,
-        order: 'name',
-        reverse: false,
+        order: 'votes',
+        reverse: true,
     }
     selectedTag.value = ''
     showCustomTagInput.value = false
@@ -162,12 +88,8 @@ const page = ref(props.meta.current_page)
 const hasMore = ref(props.meta.has_more)
 
 function loadMore() {
-    console.log('clicked')
-    console.log(hasMore.value)
     if (!hasMore.value) return
     page.value++
-    console.log('s1')
-    console.log({ ...formData.value, page: page.value })
     router.get(
         explore().url,
         { ...formData.value, page: page.value },
@@ -235,8 +157,8 @@ function loadMore() {
                             >
                                 <option value="">Select a country</option>
                                 <option
-                                    v-for="country in countries"
-                                    :key="country.code"
+                                    v-for="country in meta.countries"
+                                    :key="country.iso_3166_1"
                                     :value="country.name"
                                 >
                                     {{ country.name }}
@@ -272,74 +194,6 @@ function loadMore() {
                         </div>
                     </div>
 
-                    <!-- Country Code -->
-                    <div class="space-y-2">
-                        <label
-                            for="countrycode"
-                            class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                            >Country Code (ISO 3166-1)</label
-                        >
-                        <div class="relative">
-                            <select
-                                id="countrycode"
-                                v-model="formData.countrycode"
-                                class="focus:ring-primary-500 focus:border-primary-500 w-full appearance-none rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                            >
-                                <option value="">Select a country code</option>
-                                <option
-                                    v-for="country in countries"
-                                    :key="country.code"
-                                    :value="country.code"
-                                >
-                                    {{ country.code }} - {{ country.name }}
-                                </option>
-                            </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300"
-                            >
-                                <svg
-                                    class="h-4 w-4 fill-current"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path
-                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                                    />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- State -->
-                    <div class="space-y-2">
-                        <label
-                            for="state"
-                            class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                            >State</label
-                        >
-                        <input
-                            type="text"
-                            id="state"
-                            v-model="formData.state"
-                            placeholder="Enter state"
-                            class="focus:ring-primary-500 focus:border-primary-500 w-full rounded-md border border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                        />
-                        <div class="mt-2 flex items-center">
-                            <input
-                                type="checkbox"
-                                id="stateExact"
-                                v-model="formData.stateExact"
-                                class="text-primary-500 focus:ring-primary-500 h-4 w-4 rounded border-gray-200"
-                            />
-                            <label
-                                for="stateExact"
-                                class="ml-2 block text-sm text-gray-700 dark:text-gray-300"
-                            >
-                                Exact match only
-                            </label>
-                        </div>
-                    </div>
-
                     <!-- Language (Dropdown) -->
                     <div class="space-y-2">
                         <label
@@ -355,11 +209,11 @@ function loadMore() {
                             >
                                 <option value="">Select a language</option>
                                 <option
-                                    v-for="language in languages"
+                                    v-for="language in meta.languages"
                                     :key="language"
-                                    :value="language"
+                                    :value="language.name"
                                 >
-                                    {{ language }}
+                                    {{ language.name }}
                                 </option>
                             </select>
                             <div
@@ -409,8 +263,8 @@ function loadMore() {
                                 >
                                     <option value="">Select or enter a tag</option>
                                     <option value="custom">Custom tag...</option>
-                                    <option v-for="tag in tags" :key="tag" :value="tag">
-                                        {{ tag }}
+                                    <option v-for="tag in meta.tags" :key="tag" :value="tag.name">
+                                        {{ tag.name }}
                                     </option>
                                 </select>
                                 <input
@@ -530,7 +384,7 @@ function loadMore() {
     </div>
 
     <!-- Results Preview (Placeholder) -->
-    <div class="flex rounded-lg bg-gray-100 p-4 dark:bg-neutral-950">
+    <div class="flex rounded-lg bg-white p-4 dark:bg-neutral-950">
         <p v-if="no_input" class="text-center text-gray-500 dark:text-gray-400">
             Your search results will appear here.<br />
             Use the form above to search for radio stations.
@@ -541,7 +395,7 @@ function loadMore() {
             class="self-start justify-self-start"
             :stations="local_stations"
             :current-page="1"
-            :has-more="true"
+            :has-more="hasMore"
             :no-input="no_input"
             title="Search Results"
             :load-more="loadMore"

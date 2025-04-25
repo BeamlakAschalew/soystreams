@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use AdinanCenci\RadioBrowser\RadioBrowser;
 use App\Services\RadioBrowserServer;
+use App\Services\RadioBrowserStatics;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -30,6 +31,10 @@ class RadioExploreController extends Controller {
 
         $hasMore = $request->toArray() !== [] && \count($exploredStations) === $limit;
 
+        $countries = RadioBrowserStatics::getCountries();
+        $languages = RadioBrowserStatics::getLanguages();
+        $tags = RadioBrowserStatics::getTags();
+
         return Inertia::render('Explore', [
             'title' => 'Explore',
             'stations' => $exploredStations,
@@ -38,6 +43,9 @@ class RadioExploreController extends Controller {
                 'current_page' => $page,
                 'has_more' => $hasMore,
                 'filters' => $request->all(),
+                'countries' => $countries,
+                'languages' => $languages,
+                'tags' => $tags,
             ],
         ]);
     }
