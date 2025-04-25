@@ -44,16 +44,16 @@ jobs:
       #   run: php artisan migrate --force
 
       # Clear caches
-      - name: Clear Cache
-        run: php artisan cache:clear
+      # - name: Clear Cache
+      #   run: php artisan cache:clear
 
       # Clear and cache routes
       - name: Cache Routes
         run: php artisan route:cache
 
       # Clear and cache config
-      - name: Cache Config
-        run: php artisan config:cache
+      # - name: Cache Config
+      #   run: php artisan config:cache
 
       # Clear and cache views
       - name: Cache Views
