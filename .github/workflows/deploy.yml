@@ -48,16 +48,16 @@ jobs:
       #   run: php artisan cache:clear
 
       # Clear and cache routes
-      - name: Cache Routes
-        run: php artisan route:cache
+      # - name: Cache Routes
+      #   run: php artisan route:cache
 
       # Clear and cache config
       # - name: Cache Config
       #   run: php artisan config:cache
 
       # Clear and cache views
-      - name: Cache Views
-        run: php artisan view:cache
+      # - name: Cache Views
+      #   run: php artisan view:cache
 
       # Set directory permissions
       - name: Directory Permissions
