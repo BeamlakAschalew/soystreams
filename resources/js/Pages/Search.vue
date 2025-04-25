@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { search } from '@/routes/search'
 import { router } from '@inertiajs/vue3'
 import Cookies from 'js-cookie'
 import { debounce } from 'lodash'
@@ -31,7 +32,7 @@ function loadMore() {
     if (!hasMore.value) return
     page.value++
     router.post(
-        '/search',
+        search().url,
         { q: searchQuery.value, page: page.value },
         {
             preserveState: true,

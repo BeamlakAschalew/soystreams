@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\RadioExploreController::explore
- * @see app/Http/Controllers/RadioExploreController.php:12
+ * @see app/Http/Controllers/RadioExploreController.php:14
  * @route /radio/explore
  */
 export const explore = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ explore.definition = {
 
 /**
  * @see \App\Http\Controllers\RadioExploreController::explore
- * @see app/Http/Controllers/RadioExploreController.php:12
+ * @see app/Http/Controllers/RadioExploreController.php:14
  * @route /radio/explore
  */
 explore.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -29,7 +29,7 @@ explore.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
 
 /**
  * @see \App\Http\Controllers\RadioExploreController::explore
- * @see app/Http/Controllers/RadioExploreController.php:12
+ * @see app/Http/Controllers/RadioExploreController.php:14
  * @route /radio/explore
  */
 explore.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -42,7 +42,7 @@ explore.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 
 /**
  * @see \App\Http\Controllers\RadioExploreController::explore
- * @see app/Http/Controllers/RadioExploreController.php:12
+ * @see app/Http/Controllers/RadioExploreController.php:14
  * @route /radio/explore
  */
 explore.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

@@ -25,7 +25,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20" # Specify the version of Node.js you need could be 18
+          node-version: '20' # Specify the version of Node.js you need could be 18
 
       # Install NPM dependencies
       # - name: Install NPM Dependencies
@@ -44,20 +44,20 @@ jobs:
       #   run: php artisan migrate --force
 
       # Clear caches
-      # - name: Clear Cache
-      #   run: php artisan cache:clear
+      - name: Clear Cache
+        run: php artisan cache:clear
 
       # Clear and cache routes
-      # - name: Cache Routes
-      #   run: php artisan route:cache
+      - name: Cache Routes
+        run: php artisan route:cache
 
       # Clear and cache config
-      # - name: Cache Config
-      #   run: php artisan config:cache
+      - name: Cache Config
+        run: php artisan config:cache
 
       # Clear and cache views
-      # - name: Cache Views
-      #   run: php artisan view:cache
+      - name: Cache Views
+        run: php artisan view:cache
 
       # Set directory permissions
       - name: Directory Permissions

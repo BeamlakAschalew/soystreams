@@ -1,32 +1,37 @@
 <script setup lang="ts">
+import GridChannelsDisplay from '@/Components/GridChannelsDisplay.vue'
+import Station from '@/Interfaces/Station'
 import MainLayout from '@/Layouts/MainLayout.vue'
+import { explore } from '@/routes/radio/explore'
 import { router } from '@inertiajs/vue3'
 import { ref } from 'vue'
 defineOptions({
     layout: MainLayout,
 })
 
-// Initialize form data with default values
-const formData = ref({
-    // Basic parameters
-    name: '',
-    nameExact: false,
-    country: '',
-    countryExact: false,
-    countrycode: '',
-    state: '',
-    stateExact: false,
-    language: '',
-    languageExact: false,
-    tag: '',
-    tagExact: false,
+const props = defineProps<{
+    stations: Station[]
+    no_input: boolean
+    meta: { current_page: number; has_more: boolean; filters: any }
+}>()
 
-    // Result parameters
-    order: 'name',
-    reverse: false,
+const formData = ref({
+    name: props.meta.filters.name,
+    nameExact: props.meta.filters.nameExact,
+    country: props.meta.filters.country,
+    countryExact: props.meta.filters.countryExact,
+    countrycode: props.meta.filters.countrycode,
+    state: props.meta.filters.state,
+    stateExact: props.meta.filters.stateExact,
+    language: props.meta.filters.language,
+    languageExact: props.meta.filters.languageExact,
+    tag: props.meta.filters.tag,
+    tagExact: props.meta.filters.tagExact,
+
+    order: props.meta.filters.order,
+    reverse: props.meta.filters.reverse,
 })
 
-// Country list for dropdown
 const countries = [
     { name: 'United States', code: 'US' },
     { name: 'United Kingdom', code: 'GB' },
@@ -50,7 +55,6 @@ const countries = [
     { name: 'New Zealand', code: 'NZ' },
 ]
 
-// Language list for dropdown
 const languages = [
     'English',
     'Spanish',
@@ -107,7 +111,6 @@ const tags = [
 const selectedTag = ref('')
 const showCustomTagInput = ref(false)
 
-// Handle tag selection
 const handleTagSelect = () => {
     if (selectedTag.value === 'custom') {
         showCustomTagInput.value = true
@@ -118,7 +121,6 @@ const handleTagSelect = () => {
     }
 }
 
-// Validate custom tag
 const validateCustomTag = () => {
     if (!formData.value.tag) {
         selectedTag.value = ''
@@ -126,10 +128,8 @@ const validateCustomTag = () => {
     }
 }
 
-// Handle form submission
 const handleSubmit = () => {
     console.log('Search parameters:', formData.value)
-    // Here you would typically make an API call with the formData
     router.get('/radio/explore', formData.value, {
         preserveState: false,
         replace: true,
@@ -137,7 +137,6 @@ const handleSubmit = () => {
     })
 }
 
-// Reset form to default values
 const resetForm = () => {
     formData.value = {
         name: '',
@@ -156,6 +155,33 @@ const resetForm = () => {
     }
     selectedTag.value = ''
     showCustomTagInput.value = false
+}
+
+const local_stations = ref<Station[]>([...props.stations])
+const page = ref(props.meta.current_page)
+const hasMore = ref(props.meta.has_more)
+
+function loadMore() {
+    console.log('clicked')
+    console.log(hasMore.value)
+    if (!hasMore.value) return
+    page.value++
+    console.log('s1')
+    console.log({ ...formData.value, page: page.value })
+    router.get(
+        explore().url,
+        { ...formData.value, page: page.value },
+        {
+            preserveState: true,
+            preserveScroll: true,
+            replace: false,
+            only: ['stations', 'meta'],
+            onSuccess: page => {
+                local_stations.value.push(...(page.props.stations as Station[]))
+                hasMore.value = (page.props.meta as { has_more: boolean }).has_more
+            },
+        },
+    )
 }
 </script>
 <template>
@@ -504,18 +530,22 @@ const resetForm = () => {
     </div>
 
     <!-- Results Preview (Placeholder) -->
-    <div
-        class="rounded-xl bg-white p-6 shadow-lg dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-400"
-    >
-        <h2 class="mb-4 text-xl font-semibold text-gray-900 dark:text-white">Search Results</h2>
-        <div
-            class="flex items-center justify-center rounded-lg bg-gray-100 p-8 dark:bg-neutral-900"
-        >
-            <p class="text-center text-gray-500 dark:text-gray-400">
-                Your search results will appear here.<br />
-                Use the form above to search for radio stations.
-            </p>
-        </div>
+    <div class="flex rounded-lg bg-gray-100 p-4 dark:bg-neutral-950">
+        <p v-if="no_input" class="text-center text-gray-500 dark:text-gray-400">
+            Your search results will appear here.<br />
+            Use the form above to search for radio stations.
+        </p>
+
+        <GridChannelsDisplay
+            v-else
+            class="self-start justify-self-start"
+            :stations="local_stations"
+            :current-page="1"
+            :has-more="true"
+            :no-input="no_input"
+            title="Search Results"
+            :load-more="loadMore"
+        />
     </div>
 </template>
 
@@ -523,6 +553,7 @@ const resetForm = () => {
 /* Custom slider styling */
 input[type='range'] {
     -webkit-appearance: none;
+    appearance: none;
     height: 8px;
     border-radius: 4px;
     background: #e5e7eb;
