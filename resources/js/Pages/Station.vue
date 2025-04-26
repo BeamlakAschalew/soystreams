@@ -23,10 +23,10 @@ defineOptions({
     <Head>
         <!-- Primary Meta Tags -->
         <title>{{ station.name }}</title>
-        <meta name="title" content="{{ station.name }}" />
+        <meta name="title" :content="station.name" />
         <meta
             name="description"
-            content="Tune in to {{station.name}}, broadcasting in {{station.language}} from {{station.location}}. Specializing in {{station.genres}}, this station has attracted {{station.votes}} votes and {{station.clicks}} clicks from engaged listeners."
+            :content="`Tune in to ${station.name}, broadcasting in ${station.language} from ${station.country}. Specializing in ${station.tags}, this station has attracted ${station.votes} votes and ${station.clickcount} clicks from engaged listeners.`"
         />
 
         <!-- Open Graph / Facebook -->
@@ -37,24 +37,27 @@ defineOptions({
                 isProd ? `https://soystreams.com${radioLink}` : `http://soystreams.test${radioLink}`
             "
         />
-        <meta property="og:title" content="{{ station.name }}" />
+        <meta property="og:title" :content="station.name" />
         <meta
             property="og:description"
-            content="Tune in to {{station.name}}, broadcasting in {{station.language}} from {{station.location}}. Specializing in {{station.genres}}, this station has attracted {{station.votes}} votes and {{station.clicks}} clicks from engaged listeners."
+            :content="`Tune in to ${station.name}, broadcasting in ${station.language} from ${station.country}. Specializing in ${station.tags}, this station has attracted ${station.votes} votes and ${station.clickcount} clicks from engaged listeners.`"
         />
         <meta property="og:image" :content="station.favicon" />
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://metatags.io/" />
-        <meta property="twitter:title" content="{{ station.name }}" />
+        <meta
+            property="twitter:url"
+            :content="
+                isProd ? `https://soystreams.com${radioLink}` : `http://soystreams.test${radioLink}`
+            "
+        />
+        <meta property="twitter:title" :content="station.name" />
         <meta
             property="twitter:description"
-            content="Tune in to {{station.name}}, broadcasting in {{station.language}} from {{station.location}}. Specializing in {{station.genres}}, this station has attracted {{station.votes}} votes and {{station.clicks}} clicks from engaged listeners."
+            :content="`Tune in to ${station.name}, broadcasting in ${station.language} from ${station.country}. Specializing in ${station.tags}, this station has attracted ${station.votes} votes and ${station.clickcount} clicks from engaged listeners.`"
         />
         <meta property="twitter:image" :content="station.favicon" />
-
-        <!-- Meta Tags Generated with https://metatags.io -->
     </Head>
     <div class="mb-8 text-neutral-900 2xl:max-w-[80%] dark:text-neutral-50">
         <div
