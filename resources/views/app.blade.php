@@ -21,6 +21,9 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+
+    <meta property="og:logo" content="https://soystreams.beamlak.dev/images/soy-square.png" />
+
     <meta
         property="og:url" content="{{ $page['props']['pageInfo']['url'] }}"
     />
