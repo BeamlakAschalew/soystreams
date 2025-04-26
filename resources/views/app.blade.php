@@ -11,6 +11,39 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet" />
 
+    <!-- Primary Meta Tags -->
+    <title>{{ $page['props']['pageInfo']['title'] }}</title>
+    <meta name="title" content="{{ $page['props']['pageInfo']['title'] }}" />
+    <meta
+        name="description"
+        content="{{ $page['props']['pageInfo']['description'] }}"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+        property="og:url" content="{{ $page['props']['pageInfo']['url'] }}"
+    />
+    <meta property="og:title" content="{{ $page['props']['pageInfo']['title'] }}" />
+    <meta
+        property="og:description"
+        content="{{ $page['props']['pageInfo']['description'] }}"
+    />
+    <meta property="og:image" content="{{ $page['props']['pageInfo']['image'] }}" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+        property="twitter:url"
+        content="{{ $page['props']['pageInfo']['url'] }}"
+    />
+    <meta property="twitter:title" content="{{ $page['props']['pageInfo']['title'] }}" />
+    <meta
+        property="twitter:description"
+        content="{{ $page['props']['pageInfo']['description'] }}"
+    />
+    <meta property="twitter:image" content="{{ $page['props']['pageInfo']['image'] }}" />
+
     <!-- Scripts -->
     @vite(['resources/js/app.ts', 'resources/css/app.css', "resources/js/Pages/{$page['component']}.vue"])
     @inertiaHead

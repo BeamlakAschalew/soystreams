@@ -23,6 +23,12 @@ class StationController extends Controller {
 
         return Inertia::render('Station', [
             'station' => $stations[0],
+            'pageInfo' => [
+                'title' => $stations[0]['name'],
+                'description' => 'Tune in to '.$stations[0]['name'].', broadcasting in '.$stations[0]['language'].' from '.$stations[0]['country'].'. Specializing in '.$stations[0]['tags'].', this station has attracted '.$stations[0]['votes'].' votes and '.$stations[0]['clickcount'].' clicks from engaged listeners. ',
+                'image' => $stations[0]['favicon'],
+                'url' => env('APP_URL').'/station/'.$stations[0]['stationuuid'],
+            ],
         ]);
     }
 
