@@ -39,6 +39,12 @@ class TalkRadioController extends Controller {
         return Inertia::render('CategoryRadio', [
             'title' => 'Talk Radio',
             'stations' => $stationResults,
+            'pageInfo' => [
+                'title' => 'Soystreams - Listen to the Talk Radio Stations and Podcasts',
+                'description' => 'Discover the best talk radio stations and podcasts from around the world. Listen to your favorite genres, including music, news, talk, and sports. Tune in to top stations and enjoy a diverse range of content.',
+                'image' => 'https://soystreams.com/images/logo.png',
+                'url' => env('APP_URL').'/radio/talk',
+            ],
         ]);
     }
 }

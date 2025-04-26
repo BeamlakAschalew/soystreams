@@ -42,6 +42,12 @@ class MusicRadioController extends Controller {
         return Inertia::render('CategoryRadio', [
             'title' => 'Music Radio',
             'stations' => $stationResults,
+            'pageInfo' => [
+                'title' => 'Soystreams Music - Listen to the Best Music Radio Stations',
+                'description' => 'Discover the best radio stations and podcasts from around the world. Listen to your favorite genres, including music, news, talk, and sports. Tune in to top stations and enjoy a diverse range of content.',
+                'image' => 'https://soystreams.com/images/logo.png',
+                'url' => env('APP_URL').'/radio/music',
+            ],
         ]);
     }
 }

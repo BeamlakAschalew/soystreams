@@ -54,6 +54,12 @@ class HomeStationsController extends Controller {
                     'stations' => $stations,
                 ],
             ],
+            'pageInfo' => [
+                'title' => 'Soystreams - Listen to the Best Radio Stations and Podcasts',
+                'description' => 'Discover the best radio stations and podcasts from around the world. Listen to your favorite genres, including music, news, talk, and sports. Tune in to top stations and enjoy a diverse range of content.',
+                'image' => 'https://soystreams.com/images/logo.png',
+                'url' => env('APP_URL'),
+            ],
         ]);
     }
 }

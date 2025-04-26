@@ -17,6 +17,7 @@ defineOptions({
 </script>
 
 <template>
+    <Head :title="station.name" />
     <div class="mb-8 text-neutral-900 2xl:max-w-[80%] dark:text-neutral-50">
         <div
             class="relative flex w-full flex-col overflow-hidden rounded-lg bg-gradient-to-b from-green-400/80 via-green-200/40 to-transparent p-6 md:flex-row md:items-start md:p-8 dark:from-green-700/80 dark:via-green-900/40"
