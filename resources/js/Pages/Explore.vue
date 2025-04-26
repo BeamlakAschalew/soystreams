@@ -164,19 +164,6 @@ function loadMore() {
                                     {{ country.name }}
                                 </option>
                             </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300"
-                            >
-                                <svg
-                                    class="h-4 w-4 fill-current"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path
-                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                                    />
-                                </svg>
-                            </div>
                         </div>
                         <div class="mt-2 flex items-center">
                             <input
@@ -216,19 +203,6 @@ function loadMore() {
                                     {{ language.name }}
                                 </option>
                             </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300"
-                            >
-                                <svg
-                                    class="h-4 w-4 fill-current"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path
-                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                                    />
-                                </svg>
-                            </div>
                         </div>
                         <div class="mt-2 flex items-center">
                             <input
@@ -276,20 +250,6 @@ function loadMore() {
                                     class="focus:ring-primary-500 focus:border-primary-500 flex-1 rounded-r-md border border-l-0 border-gray-200 px-3 py-2 focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                     @blur="validateCustomTag"
                                 />
-                            </div>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300"
-                                v-if="!showCustomTagInput"
-                            >
-                                <svg
-                                    class="h-4 w-4 fill-current"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path
-                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                                    />
-                                </svg>
                             </div>
                         </div>
                         <div class="mt-2 flex items-center">
