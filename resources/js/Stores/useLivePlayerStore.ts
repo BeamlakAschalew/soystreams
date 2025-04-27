@@ -56,7 +56,7 @@ export const usePlayerStore = defineStore('player', () => {
     function handleStreamError() {
         if (!stopped.value && station.value) {
             console.warn('Stream stopped unexpectedly. Retrying...')
-            retryStream()
+            setTimeout(retryStream, 7000)
         }
     }
 
