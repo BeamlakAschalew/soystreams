@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use AdinanCenci\RadioBrowser\RadioBrowser;
+use App\Services\LocationService;
 use App\Services\RadioBrowserServer;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class HomeStationsController extends Controller {
-    public function index() {
+    public function index(Request $request) {
         $browser = new RadioBrowser(RadioBrowserServer::getServerUrl());
 
         $searchTopMusicTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'tag' => 'music', 'tagExact' => true, 'hidebroken' => true];
@@ -24,6 +26,10 @@ class HomeStationsController extends Controller {
 
         $searchTopStationsTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'hidebroken' => true];
         $stations = $browser->searchStation($searchTopStationsTerms);
+
+        $location = $request->ip() ? $request->ip() : '::1';
+        $country = LocationService::getCountry($location);
+        $locationStations = $browser->searchStation(['limit' => 15, 'country' => $country, 'order' => 'votes', 'reverse' => true, 'hidebroken' => true]);
 
         // $searchTerms = ['countrycode' => 'US', 'limit' => 50, 'order' => 'votes', 'language' => 'english', 'languageExact' => true, 'reverse' => true, 'hidebroken' => true,];
         return Inertia::render('Home', [
@@ -52,6 +58,11 @@ class HomeStationsController extends Controller {
                 [
                     'name' => 'Top Stations',
                     'stations' => $stations,
+                ],
+                [
+                    'name' => 'Top Stations in Your Country',
+                    'stations' => $locationStations,
+                    'view_more' => '/radio/country/'.$country,
                 ],
             ],
             'pageInfo' => [
