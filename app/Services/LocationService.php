@@ -2,20 +2,12 @@
 
 namespace App\Services;
 
+use Stevebauman\Location\Facades\Location;
+
 class LocationService {
-    public static function getLocation(string $ip): array {
-        // Simulate a location lookup
-        return [
-            'country' => 'US',
-            'city' => 'New York',
-            'latitude' => 40.7128,
-            'longitude' => -74.0060,
-        ];
-    }
+    public static function getCountry(): string {
+        $location = Location::get();
 
-    public static function getCountry(string $ip): string {
-        $location = self::getLocation($ip);
-
-        return $location['country'];
+        return $location->countryName ?? '';
     }
 }

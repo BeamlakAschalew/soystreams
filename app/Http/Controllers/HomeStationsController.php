@@ -27,8 +27,7 @@ class HomeStationsController extends Controller {
         $searchTopStationsTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'hidebroken' => true];
         $stations = $browser->searchStation($searchTopStationsTerms);
 
-        $location = $request->ip() ? $request->ip() : '::1';
-        $country = LocationService::getCountry($location);
+        $country = LocationService::getCountry();
         $locationStations = $browser->searchStation(['limit' => 15, 'country' => $country, 'order' => 'votes', 'reverse' => true, 'hidebroken' => true]);
 
         // $searchTerms = ['countrycode' => 'US', 'limit' => 50, 'order' => 'votes', 'language' => 'english', 'languageExact' => true, 'reverse' => true, 'hidebroken' => true,];
@@ -60,7 +59,7 @@ class HomeStationsController extends Controller {
                     'stations' => $stations,
                 ],
                 [
-                    'name' => 'Top Stations in Your Country',
+                    'name' => 'Top Stations in '.$country,
                     'stations' => $locationStations,
                     'view_more' => '/radio/country/'.$country,
                 ],
