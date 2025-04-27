@@ -29,7 +29,7 @@ export const usePlayerStore = defineStore('player', () => {
     }
 
     audio.value.onerror = e => {
-        const src = station.value?.url || audio.value.src
+        const src = station.value?.url_resolved || station.value?.url || audio.value.src
         const pageIsHttps = window.location.protocol === 'https:'
         const streamIsHttp = src.startsWith('http:')
         const mediaErr = audio.value.error
@@ -63,7 +63,7 @@ export const usePlayerStore = defineStore('player', () => {
     function retryStream() {
         if (station.value) {
             loading.value = true
-            audio.value.src = station.value.url
+            audio.value.src = station.value.url_resolved || station.value.url
             audio.value.load()
             if (isPlaying.value) {
                 audio.value
@@ -109,9 +109,9 @@ export const usePlayerStore = defineStore('player', () => {
     function setRadio(s: Station) {
         radioInit.value = true
         loading.value = true
-        if (audio.value.src !== s.url) {
+        if (audio.value.src !== s.url_resolved || s.url) {
             station.value = s
-            audio.value.src = s.url
+            audio.value.src = s.url_resolved || s.url
             audio.value.load()
             turnOn()
             updateMediaMetadata(s)
