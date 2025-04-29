@@ -12,8 +12,6 @@ export const usePlayerStore = defineStore('player', () => {
     const audio = ref(new Audio())
     const loading = ref(false)
     const stopped = ref(true)
-    // manage retry timer to avoid retries after manual pause/stop
-    const retryTimeout = ref<number | null>(null)
 
     audio.value.onwaiting = () => {
         loading.value = true
@@ -27,12 +25,11 @@ export const usePlayerStore = defineStore('player', () => {
 
     audio.value.onstalled = () => {
         console.log('Stream Stalled')
-        // only retry when audio is actually playing
-        if (isPlaying.value) handleStreamError()
+        handleStreamError()
     }
 
     audio.value.onerror = e => {
-        const src = station.value?.url_resolved || audio.value.src
+        const src = station.value?.url_resolved || station.value?.url || audio.value.src
         const pageIsHttps = window.location.protocol === 'https:'
         const streamIsHttp = src.startsWith('http:')
         const mediaErr = audio.value.error
@@ -54,24 +51,27 @@ export const usePlayerStore = defineStore('player', () => {
         handleStreamError()
     }
 
+    // ignore retry if stream is http
+
     function handleStreamError() {
-        if (isPlaying.value && station.value) {
+        if (!stopped.value && station.value) {
             console.warn('Stream stopped unexpectedly. Retrying...')
-            // clear any existing retry
-            if (retryTimeout.value) clearTimeout(retryTimeout.value)
-            retryTimeout.value = window.setTimeout(retryStream, 7000)
+            setTimeout(retryStream, 7000)
         }
     }
 
     function retryStream() {
-        // clear this retry handle
-        if (retryTimeout.value) {
-            clearTimeout(retryTimeout.value)
-            retryTimeout.value = null
-        }
         if (station.value) {
             loading.value = true
-            audio.value.src = station.value.url_resolved
+            // fallback to plain url if resolved url fails
+            const lastSrc = audio.value.src
+            const resolvedUrl = station.value.url_resolved
+            const plainUrl = station.value.url
+            const nextSrc = lastSrc === resolvedUrl && plainUrl ? plainUrl : resolvedUrl || plainUrl
+            if (nextSrc === plainUrl) {
+                console.warn('Falling back to station.url')
+            }
+            audio.value.src = nextSrc
             audio.value.load()
             if (isPlaying.value) {
                 audio.value
@@ -107,11 +107,6 @@ export const usePlayerStore = defineStore('player', () => {
     function turnOff() {
         audio.value.pause()
         isPlaying.value = false
-        // clear any pending retries on manual pause
-        if (retryTimeout.value) {
-            clearTimeout(retryTimeout.value)
-            retryTimeout.value = null
-        }
     }
 
     function setVolume(newVolume: number) {
@@ -122,9 +117,9 @@ export const usePlayerStore = defineStore('player', () => {
     function setRadio(s: Station) {
         radioInit.value = true
         loading.value = true
-        if (audio.value.src !== s.url_resolved) {
+        if (audio.value.src !== s.url_resolved || s.url) {
             station.value = s
-            audio.value.src = s.url_resolved
+            audio.value.src = s.url_resolved || s.url
             audio.value.load()
             turnOn()
             updateMediaMetadata(s)
@@ -195,11 +190,6 @@ export const usePlayerStore = defineStore('player', () => {
         isPlaying.value = false
         stopped.value = true
         loading.value = false
-        // clear any pending retries on stop
-        if (retryTimeout.value) {
-            clearTimeout(retryTimeout.value)
-            retryTimeout.value = null
-        }
     }
 
     return {
