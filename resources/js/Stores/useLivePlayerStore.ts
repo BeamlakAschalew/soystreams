@@ -25,30 +25,36 @@ export const usePlayerStore = defineStore('player', () => {
 
     audio.value.onstalled = () => {
         console.log('Stream Stalled')
-        handleStreamError()
+        if (!isPlaying.value) {
+            handleStreamError()
+        }
     }
 
     audio.value.onerror = e => {
-        const src = station.value?.url_resolved || station.value?.url || audio.value.src
-        const pageIsHttps = window.location.protocol === 'https:'
-        const streamIsHttp = src.startsWith('http:')
-        const mediaErr = audio.value.error
+        if (!isPlaying.value) {
+            const src = station.value?.url_resolved || station.value?.url || audio.value.src
+            const pageIsHttps = window.location.protocol === 'https:'
+            const streamIsHttp = src.startsWith('http:')
+            const mediaErr = audio.value.error
 
-        // MEDIA_ERR_SRC_NOT_SUPPORTED (code 4) is what Chrome/Firefox throw on mixed‐content
-        const isMixedContentBlocked =
-            pageIsHttps && streamIsHttp && mediaErr?.code === mediaErr?.MEDIA_ERR_SRC_NOT_SUPPORTED
+            // MEDIA_ERR_SRC_NOT_SUPPORTED (code 4) is what Chrome/Firefox throw on mixed‐content
+            const isMixedContentBlocked =
+                pageIsHttps &&
+                streamIsHttp &&
+                mediaErr?.code === mediaErr?.MEDIA_ERR_SRC_NOT_SUPPORTED
 
-        if (isMixedContentBlocked) {
-            console.warn('Mixed‑content blocked HTTP stream, skipping retry:', src)
-            stopped.value = true
-            loading.value = false
-            isPlaying.value = false
-            return
+            if (isMixedContentBlocked) {
+                console.warn('Mixed‑content blocked HTTP stream, skipping retry:', src)
+                stopped.value = true
+                loading.value = false
+                isPlaying.value = false
+                return
+            }
+
+            // all other errors (including HTTP streams on HTTP pages)
+            console.log('Stream Error', e, mediaErr)
+            handleStreamError()
         }
-
-        // all other errors (including HTTP streams on HTTP pages)
-        console.log('Stream Error', e, mediaErr)
-        handleStreamError()
     }
 
     // ignore retry if stream is http
