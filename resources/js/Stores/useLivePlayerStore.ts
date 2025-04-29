@@ -61,16 +61,16 @@ export const usePlayerStore = defineStore('player', () => {
     }
 
     function retryStream() {
-        console.log('Retrying stream!')
         if (station.value) {
             loading.value = true
-            // fallback to plain url if resolved url fails
-            const lastSrc = audio.value.src
-            const resolvedUrl = station.value.url_resolved
+            // fallback to plain url first, then resolved
             const plainUrl = station.value.url
-            const nextSrc = lastSrc === resolvedUrl && plainUrl ? plainUrl : resolvedUrl || plainUrl
-            if (nextSrc === plainUrl) {
-                console.warn('Falling back to station.url')
+            const resolvedUrl = station.value.url_resolved
+            const currentSrc = audio.value.src
+            const nextSrc =
+                currentSrc === plainUrl && resolvedUrl ? resolvedUrl : plainUrl || resolvedUrl
+            if (nextSrc === resolvedUrl) {
+                console.warn('Falling back to station.url_resolved')
             }
             audio.value.src = nextSrc
             audio.value.load()
@@ -118,9 +118,10 @@ export const usePlayerStore = defineStore('player', () => {
     function setRadio(s: Station) {
         radioInit.value = true
         loading.value = true
-        if (audio.value.src !== s.url_resolved || s.url) {
+        // prioritize plain url over resolved
+        if (audio.value.src !== s.url || s.url_resolved) {
             station.value = s
-            audio.value.src = s.url_resolved || s.url
+            audio.value.src = s.url || s.url_resolved
             audio.value.load()
             turnOn()
             updateMediaMetadata(s)
