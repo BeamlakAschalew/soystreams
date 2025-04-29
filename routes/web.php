@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeStationsController;
 use App\Http\Controllers\MusicRadioController;
 use App\Http\Controllers\NewsStationController;
 use App\Http\Controllers\RadioExploreController;
+use App\Http\Controllers\RadioIneractionController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SportsRadioController;
 use App\Http\Controllers\StationController;
@@ -25,6 +26,10 @@ Route::get('/radio/explore', RadioExploreController::class)->name('radio.explore
 Route::get('/radio/favorites', FavoriteStationsController::class)->name('radio.favorites');
 
 Route::get('/station/{uuid}', [StationController::class, 'index'])->name('station.show');
+
+Route::get('/radio-click/{uuid}', [RadioIneractionController::class, 'clickStation'])
+    ->name('radio.click')
+    ->middleware('throttle:40,1');
 
 Route::get('/podcasts', function () {
     $client = new PodcastIndexWrapper\Client([

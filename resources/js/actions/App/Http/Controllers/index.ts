@@ -7,6 +7,7 @@ import TalkRadioController from './TalkRadioController'
 import RadioExploreController from './RadioExploreController'
 import FavoriteStationsController from './FavoriteStationsController'
 import StationController from './StationController'
+import RadioIneractionController from './RadioIneractionController'
 
 const Controllers = {
     HomeStationsController, 
@@ -17,7 +18,8 @@ const Controllers = {
     TalkRadioController, 
     RadioExploreController, 
     FavoriteStationsController, 
-    StationController,
+    StationController, 
+    RadioIneractionController,
 }
 
 export default Controllers

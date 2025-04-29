@@ -1,4 +1,5 @@
 import Station from '@/Interfaces/Station'
+import { click } from '@/routes/radio/click'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useRecentStationStore } from './useRecentStationStore'
@@ -123,6 +124,10 @@ export const usePlayerStore = defineStore('player', () => {
         radioInit.value = true
         loading.value = true
         recentStore.addRecent(s)
+        fetch(`${click.url(s.stationuuid)}`, {
+            method: 'GET',
+            keepalive: true,
+        }).catch(err => console.error(err))
         // prioritize plain url over resolved
         if (audio.value.src !== s.url || s.url_resolved) {
             station.value = s

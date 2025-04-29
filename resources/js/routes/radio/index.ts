@@ -4,6 +4,7 @@ import sports from './sports'
 import talk from './talk'
 import explore from './explore'
 import favorites from './favorites'
+import click from './click'
 
 const radio = {
     music, 
@@ -11,7 +12,8 @@ const radio = {
     sports, 
     talk, 
     explore, 
-    favorites,
+    favorites, 
+    click,
 }
 
 export default radio
