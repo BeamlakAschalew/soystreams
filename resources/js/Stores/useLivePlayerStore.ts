@@ -27,7 +27,7 @@ export const usePlayerStore = defineStore('player', () => {
 
     audio.value.onstalled = () => {
         console.log('Stream Stalled')
-        // only retry when actually playing
+        // only retry when audio is actually playing
         if (isPlaying.value) handleStreamError()
     }
 
