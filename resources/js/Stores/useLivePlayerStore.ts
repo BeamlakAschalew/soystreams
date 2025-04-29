@@ -12,6 +12,8 @@ export const usePlayerStore = defineStore('player', () => {
     const audio = ref(new Audio())
     const loading = ref(false)
     const stopped = ref(true)
+    // manage retry timer to avoid retries after manual pause/stop
+    const retryTimeout = ref<number | null>(null)
 
     audio.value.onwaiting = () => {
         loading.value = true
@@ -25,51 +27,51 @@ export const usePlayerStore = defineStore('player', () => {
 
     audio.value.onstalled = () => {
         console.log('Stream Stalled')
-        if (!isPlaying.value) {
-            handleStreamError()
-        }
+        // only retry when actually playing
+        if (isPlaying.value) handleStreamError()
     }
 
     audio.value.onerror = e => {
-        if (!isPlaying.value) {
-            const src = station.value?.url_resolved || station.value?.url || audio.value.src
-            const pageIsHttps = window.location.protocol === 'https:'
-            const streamIsHttp = src.startsWith('http:')
-            const mediaErr = audio.value.error
+        const src = station.value?.url_resolved || audio.value.src
+        const pageIsHttps = window.location.protocol === 'https:'
+        const streamIsHttp = src.startsWith('http:')
+        const mediaErr = audio.value.error
 
-            // MEDIA_ERR_SRC_NOT_SUPPORTED (code 4) is what Chrome/Firefox throw on mixed‐content
-            const isMixedContentBlocked =
-                pageIsHttps &&
-                streamIsHttp &&
-                mediaErr?.code === mediaErr?.MEDIA_ERR_SRC_NOT_SUPPORTED
+        // MEDIA_ERR_SRC_NOT_SUPPORTED (code 4) is what Chrome/Firefox throw on mixed‐content
+        const isMixedContentBlocked =
+            pageIsHttps && streamIsHttp && mediaErr?.code === mediaErr?.MEDIA_ERR_SRC_NOT_SUPPORTED
 
-            if (isMixedContentBlocked) {
-                console.warn('Mixed‑content blocked HTTP stream, skipping retry:', src)
-                stopped.value = true
-                loading.value = false
-                isPlaying.value = false
-                return
-            }
-
-            // all other errors (including HTTP streams on HTTP pages)
-            console.log('Stream Error', e, mediaErr)
-            handleStreamError()
+        if (isMixedContentBlocked) {
+            console.warn('Mixed‑content blocked HTTP stream, skipping retry:', src)
+            stopped.value = true
+            loading.value = false
+            isPlaying.value = false
+            return
         }
+
+        // all other errors (including HTTP streams on HTTP pages)
+        console.log('Stream Error', e, mediaErr)
+        handleStreamError()
     }
 
-    // ignore retry if stream is http
-
     function handleStreamError() {
-        if (!stopped.value && station.value) {
+        if (isPlaying.value && station.value) {
             console.warn('Stream stopped unexpectedly. Retrying...')
-            setTimeout(retryStream, 7000)
+            // clear any existing retry
+            if (retryTimeout.value) clearTimeout(retryTimeout.value)
+            retryTimeout.value = window.setTimeout(retryStream, 7000)
         }
     }
 
     function retryStream() {
+        // clear this retry handle
+        if (retryTimeout.value) {
+            clearTimeout(retryTimeout.value)
+            retryTimeout.value = null
+        }
         if (station.value) {
             loading.value = true
-            audio.value.src = station.value.url_resolved || station.value.url
+            audio.value.src = station.value.url_resolved
             audio.value.load()
             if (isPlaying.value) {
                 audio.value
@@ -105,6 +107,11 @@ export const usePlayerStore = defineStore('player', () => {
     function turnOff() {
         audio.value.pause()
         isPlaying.value = false
+        // clear any pending retries on manual pause
+        if (retryTimeout.value) {
+            clearTimeout(retryTimeout.value)
+            retryTimeout.value = null
+        }
     }
 
     function setVolume(newVolume: number) {
@@ -115,9 +122,9 @@ export const usePlayerStore = defineStore('player', () => {
     function setRadio(s: Station) {
         radioInit.value = true
         loading.value = true
-        if (audio.value.src !== s.url_resolved || s.url) {
+        if (audio.value.src !== s.url_resolved) {
             station.value = s
-            audio.value.src = s.url_resolved || s.url
+            audio.value.src = s.url_resolved
             audio.value.load()
             turnOn()
             updateMediaMetadata(s)
@@ -188,6 +195,11 @@ export const usePlayerStore = defineStore('player', () => {
         isPlaying.value = false
         stopped.value = true
         loading.value = false
+        // clear any pending retries on stop
+        if (retryTimeout.value) {
+            clearTimeout(retryTimeout.value)
+            retryTimeout.value = null
+        }
     }
 
     return {
