@@ -4,7 +4,7 @@ import Station from '@/Interfaces/Station'
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { explore } from '@/routes/radio/explore'
 import { router } from '@inertiajs/vue3'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 defineOptions({
     layout: MainLayout,
 })
@@ -23,23 +23,29 @@ const props = defineProps<{
     }
 }>()
 
-const formData = ref({
-    name: props.meta.filters.name,
-    nameExact: props.meta.filters.nameExact,
-    country: props.meta.filters.country,
-    countryExact: props.meta.filters.countryExact,
-    language: props.meta.filters.language,
-    languageExact: props.meta.filters.languageExact,
-    tag: props.meta.filters.tag,
-    tagExact: props.meta.filters.tagExact,
+const selectedTag = ref(
+    props.meta.filters.customTag === 'true' ? 'custom' : props.meta.filters.tag || '',
+)
+const showCustomTagInput = ref(props.meta.filters.customTag === 'true')
 
+const formData = ref({
+    name: props.meta.filters.name ?? '',
+    nameExact: props.meta.filters.nameExact ?? false,
+    country: props.meta.filters.country ?? '',
+    countryExact: props.meta.filters.countryExact ?? false,
+    language: props.meta.filters.language ?? '',
+    languageExact: props.meta.filters.languageExact ?? false,
+    tag: props.meta.filters.tag ?? '',
+    tagExact: props.meta.filters.tagExact ?? false,
     order: props.meta.filters.order ?? 'votes',
     reverse: props.meta.filters.reverse.value ?? true,
+    customTag: showCustomTagInput.value,
 })
 
-// For tag dropdown with custom input
-const selectedTag = ref('')
-const showCustomTagInput = ref(false)
+watch(showCustomTagInput, (newVal: any) => {
+    console.log(newVal)
+    formData.value.customTag = newVal
+})
 
 const handleTagSelect = () => {
     if (selectedTag.value === 'custom') {
@@ -78,6 +84,7 @@ const resetForm = () => {
         tagExact: false,
         order: 'votes',
         reverse: true,
+        customTag: false,
     }
     selectedTag.value = ''
     showCustomTagInput.value = false
