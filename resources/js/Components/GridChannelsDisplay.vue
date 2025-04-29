@@ -6,14 +6,14 @@ defineProps<{
     currentPage: number
     hasMore: boolean
     stations: Station[]
-    title: string
+    title: string | null
     loadMore: () => void
 }>()
 </script>
 
 <template>
     <div v-if="!noInput" class="mt-6">
-        <h2 class="mb-2 text-lg font-semibold text-neutral-900 dark:text-neutral-50">
+        <h2 v-if="title" class="mb-2 text-lg font-semibold text-neutral-900 dark:text-neutral-50">
             {{ title }}
         </h2>
         <div

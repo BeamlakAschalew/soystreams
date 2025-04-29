@@ -2,6 +2,7 @@
 import SidebarMenuItem from '@/Components/Sidebar/SidebarMenuItem.vue'
 import { home } from '@/routes/home'
 import { explore } from '@/routes/radio/explore'
+import { favorites } from '@/routes/radio/favorites'
 import { music } from '@/routes/radio/music'
 import { news } from '@/routes/radio/news'
 import { sports } from '@/routes/radio/sports'
@@ -9,6 +10,7 @@ import { talk } from '@/routes/radio/talk'
 import { search } from '@/routes/search'
 import {
     Compass,
+    Heart,
     House,
     Languages,
     MapPin,
@@ -61,6 +63,12 @@ import {
                 <SidebarMenuItem :path="talk().url" :active="$page.url.startsWith('/radio/talk')"
                     ><template #icon="{ size }"><Mic :size="size" /></template>
                     Talk</SidebarMenuItem
+                >
+                <SidebarMenuItem
+                    :path="favorites().url"
+                    :active="$page.url.startsWith('/radio/favorites')"
+                    ><template #icon="{ size }"><Heart :size="size" /></template> Favorite
+                    Stations</SidebarMenuItem
                 >
                 <SidebarMenuItem path="/podcasts"
                     ><template #icon="{ size }"><Podcast :size="size" /></template>

@@ -30,6 +30,7 @@ class HomeStationsController extends Controller {
         $ip = $request->ip() ?? '::1';
         $country = LocationService::getCountry($ip);
         $locationStations = $browser->searchStation(['limit' => 15, 'country' => $country, 'order' => 'votes', 'reverse' => true, 'hidebroken' => true]);
+        $locationMusicStations = $browser->searchStation(['limit' => 15, 'country' => $country, 'order' => 'votes', 'reverse' => true, 'tag' => 'music', 'hidebroken' => true]);
 
         // $searchTerms = ['countrycode' => 'US', 'limit' => 50, 'order' => 'votes', 'language' => 'english', 'languageExact' => true, 'reverse' => true, 'hidebroken' => true,];
         return Inertia::render('Home', [
@@ -46,6 +47,16 @@ class HomeStationsController extends Controller {
                     'view_more' => '/radio/news',
                 ],
                 [
+                    'name' => 'Top Stations in '.$country,
+                    'stations' => $locationStations,
+                    'view_more' => '/radio/country/'.$country,
+                ],
+                [
+                    'name' => 'Top Music Stations in '.$country,
+                    'stations' => $locationMusicStations,
+                    'view_more' => '/radio/country/'.$country,
+                ],
+                [
                     'name' => 'Top Talk Stations',
                     'stations' => $talkStations,
                     'view_more' => '/radio/talk',
@@ -59,11 +70,7 @@ class HomeStationsController extends Controller {
                     'name' => 'Top Stations',
                     'stations' => $stations,
                 ],
-                [
-                    'name' => 'Top Stations in '.$country,
-                    'stations' => $locationStations,
-                    'view_more' => '/radio/country/'.$country,
-                ],
+
             ],
             'pageInfo' => [
                 'title' => 'Soystreams - Listen to the Best Radio Stations and Podcasts',

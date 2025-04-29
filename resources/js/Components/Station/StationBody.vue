@@ -6,6 +6,7 @@ defineProps({
     },
 })
 import Station from '@/Interfaces/Station'
+import { useFavoriteStationStore } from '@/Stores/useFavoriteStationStore'
 import { usePlayerStore } from '@/Stores/useLivePlayerStore'
 import {
     ChevronDownIcon,
@@ -27,6 +28,7 @@ function toggleInfo() {
 }
 
 const playerStore = usePlayerStore()
+const favoriteStore = useFavoriteStationStore()
 
 function playRadio(station: Station) {
     if (
@@ -51,7 +53,7 @@ function playRadio(station: Station) {
         <div class="mb-6 flex items-center justify-center gap-6 md:justify-start">
             <button
                 @click="playRadio(station)"
-                class="flex h-14 w-14 items-center justify-center rounded-full bg-gray-900 text-white transition-colors hover:bg-gray-800 dark:bg-neutral-900 dark:hover:bg-gray-600"
+                class="flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-gray-900 text-white transition-colors hover:bg-gray-800 dark:bg-gray-50 dark:hover:bg-gray-300"
             >
                 <component
                     v-if="
@@ -59,7 +61,7 @@ function playRadio(station: Station) {
                         playerStore.station?.stationuuid === station.stationuuid
                     "
                     :is="LoaderCircle"
-                    class="h-6 w-6 animate-spin text-gray-100 dark:text-gray-200"
+                    class="h-6 w-6 animate-spin text-white dark:text-gray-900"
                 />
 
                 <component
@@ -68,14 +70,19 @@ function playRadio(station: Station) {
                         playerStore.isPlaying
                     "
                     :is="Pause"
-                    class="h-6 w-6 text-gray-100 dark:text-gray-200"
+                    class="h-6 w-6 text-white dark:text-gray-900"
                 />
-                <component v-else :is="Play" class="h-6 w-6 text-gray-100 dark:text-gray-200" />
+                <component v-else :is="Play" class="h-6 w-6 text-white dark:text-gray-900" />
             </button>
-            <button
-                class="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
-            >
-                <HeartIcon class="h-6 w-6" />
+            <button @click="favoriteStore.toggleFavorite(station)" class="transition-colors">
+                <HeartIcon
+                    class="h-6 w-6 cursor-pointer stroke-current"
+                    :class="
+                        favoriteStore.isFavorited(station.stationuuid)
+                            ? 'fill-gray-900 hover:fill-gray-800 dark:fill-[#e5e7eb] dark:hover:fill-gray-300'
+                            : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
+                    "
+                />
             </button>
             <button
                 class="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"

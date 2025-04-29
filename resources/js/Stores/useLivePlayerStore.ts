@@ -1,6 +1,7 @@
 import Station from '@/Interfaces/Station'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { useRecentStationStore } from './useRecentStationStore'
 
 const DEFAULT_ICON = '/images/soy-square.png'
 
@@ -13,6 +14,8 @@ export const usePlayerStore = defineStore('player', () => {
     const loading = ref(false)
     const stopped = ref(true)
 
+    const recentStore = useRecentStationStore()
+
     audio.value.onwaiting = () => {
         loading.value = true
     }
@@ -21,6 +24,7 @@ export const usePlayerStore = defineStore('player', () => {
     }
     audio.value.onended = () => {
         isPlaying.value = false
+        stopped.value = true
     }
 
     audio.value.onstalled = () => {
@@ -118,6 +122,7 @@ export const usePlayerStore = defineStore('player', () => {
     function setRadio(s: Station) {
         radioInit.value = true
         loading.value = true
+        recentStore.addRecent(s)
         // prioritize plain url over resolved
         if (audio.value.src !== s.url || s.url_resolved) {
             station.value = s

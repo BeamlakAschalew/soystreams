@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import station from '@/routes/station/show'
+import { useFavoriteStationStore } from '@/Stores/useFavoriteStationStore'
 import { usePlayerStore } from '@/Stores/useLivePlayerStore'
 import { Heart, LoaderCircle, Pause, Play, Volume1, Volume2, VolumeOff } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
 
 const playerStore = usePlayerStore()
+const favoriteStore = useFavoriteStationStore()
 const showVolumeControl = ref(false)
 
 const currentIcon = computed(() => {
@@ -16,6 +18,12 @@ const currentIcon = computed(() => {
 
 function toggleVolumeControl() {
     showVolumeControl.value = !showVolumeControl.value
+}
+
+function favoriteStyling() {
+    return favoriteStore.isFavorited(playerStore.station?.stationuuid!)
+        ? 'fill-gray-900 hover:fill-gray-800 dark:fill-[#e5e7eb] dark:hover:fill-gray-300'
+        : 'fill-transparent'
 }
 </script>
 
@@ -50,7 +58,7 @@ function toggleVolumeControl() {
             >
                 <div
                     id="playBtn"
-                    class="rounded-full bg-gray-800 p-3 dark:bg-neutral-800"
+                    class="cursor-pointer rounded-full bg-gray-900 p-3 text-white hover:bg-gray-800 dark:bg-gray-50 dark:hover:bg-gray-300"
                     @click="playerStore.togglePlayPause"
                 >
                     <div class="hidden max-sm:block">
@@ -58,7 +66,7 @@ function toggleVolumeControl() {
                             :is="currentIcon"
                             :size="20"
                             :class="[
-                                'text-gray-100 dark:text-gray-200',
+                                'text-gray-100 dark:text-gray-800',
                                 { 'animate-spin': playerStore.loading },
                             ]"
                         />
@@ -68,7 +76,7 @@ function toggleVolumeControl() {
                             :is="currentIcon"
                             :size="28"
                             :class="[
-                                'text-gray-100 dark:text-gray-200',
+                                'text-gray-100 dark:text-gray-800',
                                 { 'animate-spin': playerStore.loading },
                             ]"
                         />
@@ -78,7 +86,7 @@ function toggleVolumeControl() {
                             :is="currentIcon"
                             :size="36"
                             :class="[
-                                'text-gray-100 dark:text-gray-200',
+                                'text-gray-100 dark:text-gray-800',
                                 { 'animate-spin': playerStore.loading },
                             ]"
                         />
@@ -103,7 +111,7 @@ function toggleVolumeControl() {
                                   : Volume2
                         "
                         @click="toggleVolumeControl"
-                        class="text-neutral-800 dark:text-gray-200"
+                        class="cursor-pointer text-neutral-800 dark:text-gray-200"
                     />
                     <transition
                         enter-active-class="transition duration-200 ease-out"
@@ -126,7 +134,13 @@ function toggleVolumeControl() {
                         />
                     </transition>
                 </div>
-                <Heart class="text-neutral-800 dark:text-gray-200" />
+                <Heart
+                    @click="favoriteStore.toggleFavorite(playerStore.station!)"
+                    :class="[
+                        favoriteStyling(),
+                        'cursor-pointer stroke-current text-neutral-800 dark:text-gray-200',
+                    ]"
+                />
             </div>
         </div>
     </div>

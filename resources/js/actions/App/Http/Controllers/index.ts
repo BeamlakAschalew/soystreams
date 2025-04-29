@@ -5,6 +5,7 @@ import NewsStationController from './NewsStationController'
 import SportsRadioController from './SportsRadioController'
 import TalkRadioController from './TalkRadioController'
 import RadioExploreController from './RadioExploreController'
+import FavoriteStationsController from './FavoriteStationsController'
 import StationController from './StationController'
 
 const Controllers = {
@@ -15,6 +16,7 @@ const Controllers = {
     SportsRadioController, 
     TalkRadioController, 
     RadioExploreController, 
+    FavoriteStationsController, 
     StationController,
 }
 

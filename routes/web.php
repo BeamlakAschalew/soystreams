@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoriteStationsController;
 use App\Http\Controllers\HomeStationsController;
 use App\Http\Controllers\MusicRadioController;
 use App\Http\Controllers\NewsStationController;
@@ -21,6 +22,7 @@ Route::match(['get', 'post'], '/radio/sports', SportsRadioController::class)->na
 Route::match(['get', 'post'], '/radio/talk', TalkRadioController::class)->name('radio.talk');
 
 Route::get('/radio/explore', RadioExploreController::class)->name('radio.explore');
+Route::get('/radio/favorites', FavoriteStationsController::class)->name('radio.favorites');
 
 Route::get('/station/{uuid}', [StationController::class, 'index'])->name('station.show');
 
