@@ -61,6 +61,7 @@ export const usePlayerStore = defineStore('player', () => {
     }
 
     function retryStream() {
+        console.log('Retrying stream!')
         if (station.value) {
             loading.value = true
             // fallback to plain url if resolved url fails
