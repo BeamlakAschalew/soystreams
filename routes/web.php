@@ -49,7 +49,7 @@ Route::get('/about', function () {
     return Inertia::render('About', [
         'title' => 'About',
     ]);
-});
+})->name('about');
 
 Route::fallback(function () {
     return redirect('/');
