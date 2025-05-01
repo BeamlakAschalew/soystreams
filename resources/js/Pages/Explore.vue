@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import GridChannelsDisplay from '@/Components/GridChannelsDisplay.vue'
+import GridChannelsDisplay from '@/Components/Radio/GridStationsDisplay.vue'
 import Station from '@/Interfaces/Station'
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { explore } from '@/routes/radio/explore'

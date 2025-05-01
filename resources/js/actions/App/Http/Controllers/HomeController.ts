@@ -1,8 +1,8 @@
 import { queryParams, type QueryParams } from './../../../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\HomeStationsController::index
- * @see app/Http/Controllers/HomeStationsController.php:12
+ * @see \App\Http\Controllers\HomeController::index
+ * @see app/Http/Controllers/HomeController.php:12
  * @route /
  */
 export const index = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ index.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\HomeStationsController::index
- * @see app/Http/Controllers/HomeStationsController.php:12
+ * @see \App\Http\Controllers\HomeController::index
+ * @see app/Http/Controllers/HomeController.php:12
  * @route /
  */
 index.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -28,8 +28,8 @@ index.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
 }
 
 /**
- * @see \App\Http\Controllers\HomeStationsController::index
- * @see app/Http/Controllers/HomeStationsController.php:12
+ * @see \App\Http\Controllers\HomeController::index
+ * @see app/Http/Controllers/HomeController.php:12
  * @route /
  */
 index.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -41,8 +41,8 @@ index.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 })
 
 /**
- * @see \App\Http\Controllers\HomeStationsController::index
- * @see app/Http/Controllers/HomeStationsController.php:12
+ * @see \App\Http\Controllers\HomeController::index
+ * @see app/Http/Controllers/HomeController.php:12
  * @route /
  */
 index.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -53,6 +53,6 @@ index.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
     method: 'head',
 })
 
-const HomeStationsController = { index }
+const HomeController = { index }
 
-export default HomeStationsController
+export default HomeController

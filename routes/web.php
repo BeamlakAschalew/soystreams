@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\FavoriteStationsController;
-use App\Http\Controllers\HomeStationsController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MusicRadioController;
 use App\Http\Controllers\NewsStationController;
 use App\Http\Controllers\RadioExploreController;
@@ -13,7 +13,7 @@ use App\Http\Controllers\TalkRadioController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', [HomeStationsController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::match(['get', 'post'], '/search', [SearchController::class, 'index'])->name('search');
 

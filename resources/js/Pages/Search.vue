@@ -6,7 +6,7 @@ import { debounce } from 'lodash'
 import { Search } from 'lucide-vue-next'
 import { nextTick, onMounted, ref, watch } from 'vue'
 
-import GridChannelsDisplay from '@/Components/GridChannelsDisplay.vue'
+import GridChannelsDisplay from '@/Components/Radio/GridStationsDisplay.vue'
 import Station from '@/Interfaces/Station'
 import MainLayout from '@/Layouts/MainLayout.vue'
 

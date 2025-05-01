@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Station from '@/Interfaces/Station'
-import RadioCard from './Radio/RadioCard.vue'
+import RadioCard from './RadioCard.vue'
 
 withDefaults(
     defineProps<{

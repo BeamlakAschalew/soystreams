@@ -8,7 +8,7 @@ use App\Services\RadioBrowserServer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class HomeStationsController extends Controller {
+class HomeController extends Controller {
     public function index(Request $request) {
         $browser = new RadioBrowser(RadioBrowserServer::getServerUrl());
 

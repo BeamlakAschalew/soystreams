@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import GridChannelsDisplay from '@/Components/GridChannelsDisplay.vue'
+import GridChannelsDisplay from '@/Components/Radio/GridStationsDisplay.vue'
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { useFavoriteStationStore } from '@/Stores/useFavoriteStationStore'
 defineOptions({

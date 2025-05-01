@@ -1,4 +1,4 @@
-import HomeStationsController from './HomeStationsController'
+import HomeController from './HomeController'
 import SearchController from './SearchController'
 import MusicRadioController from './MusicRadioController'
 import NewsStationController from './NewsStationController'
@@ -10,7 +10,7 @@ import StationController from './StationController'
 import RadioIneractionController from './RadioIneractionController'
 
 const Controllers = {
-    HomeStationsController, 
+    HomeController, 
     SearchController, 
     MusicRadioController, 
     NewsStationController, 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LivePlayer from '@/Components/LivePlayer/LivePlayer.vue'
+import LivePlayer from '@/Components/Radio/LivePlayer/LivePlayer.vue'
 import Navbar from '@/Components/Navbar.vue'
 import Sidebar from '@/Components/Sidebar/Sidebar.vue'
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import StationBody from '@/Components/Station/StationBody.vue'
-import StationHeader from '@/Components/Station/StationHeader.vue'
+import StationBody from '@/Components/Radio/Station/StationBody.vue'
+import StationHeader from '@/Components/Radio/Station/StationHeader.vue'
 import Station from '@/Interfaces/Station'
 import MainLayout from '@/Layouts/MainLayout.vue'
 import type { PropType } from 'vue'

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import StationSlider from '@/Components/StationSlider.vue'
+import StationSlider from '@/Components/Radio/StationSlider.vue'
 import Station from '@/Interfaces/Station'
 import MainLayout from '@/Layouts/MainLayout.vue'
 defineProps<{
