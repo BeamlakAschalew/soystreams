@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RadioCard from '@/Components/RadioCard.vue'
+import RadioCard from '@/Components/Radio/RadioCard.vue'
 import Station from '@/Interfaces/Station'
 defineProps<{
     noInput: boolean
