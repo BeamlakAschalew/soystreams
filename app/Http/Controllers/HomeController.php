@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use AdinanCenci\RadioBrowser\RadioBrowser;
 use App\Services\LocationService;
+use App\Services\PodcastIndexService;
 use App\Services\RadioBrowserServer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use PodcastIndexWrapper\Client;
 
 class HomeController extends Controller {
     public function index(Request $request) {
@@ -27,6 +29,9 @@ class HomeController extends Controller {
         $searchTopStationsTerms = ['language' => 'english', 'languageExact' => true, 'limit' => 15, 'order' => 'clickcount', 'reverse' => true, 'hidebroken' => true];
         $stations = $browser->searchStation($searchTopStationsTerms);
 
+        $client = new Client(PodcastIndexService::config());
+        $trendingPodcasts = $client->podcasts->trending(['lang' => 'en'])->json();
+
         $ip = $request->ip() ?? '::1';
         $country = LocationService::getCountry($ip);
         $locationStations = $browser->searchStation(['limit' => 15, 'country' => $country, 'order' => 'votes', 'reverse' => true, 'hidebroken' => true]);
@@ -35,6 +40,7 @@ class HomeController extends Controller {
         // $searchTerms = ['countrycode' => 'US', 'limit' => 50, 'order' => 'votes', 'language' => 'english', 'languageExact' => true, 'reverse' => true, 'hidebroken' => true,];
         return Inertia::render('Home', [
             'title' => 'Home',
+            // TODO: change view more to proper route()
             'home_stations' => [
                 [
                     'name' => 'Top Music Stations',
@@ -71,6 +77,13 @@ class HomeController extends Controller {
                     'stations' => $stations,
                 ],
 
+            ],
+            'home_podcasts' => [
+                [
+                    'name' => 'Trending Podcasts',
+                    'podcasts' => $trendingPodcasts->feeds,
+                    'view_more' => '/podcasts',
+                ],
             ],
             'pageInfo' => [
                 'title' => 'Soystreams - Listen to the Best Radio Stations and Podcasts',

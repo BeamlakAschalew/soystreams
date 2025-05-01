@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "708c36755dea3ca462d2ab58328bec17",
+    "content-hash": "403d8fe324737a5893cb5bb0bb2db44e",
     "packages": [
         {
             "name": "adinan-cenci/radio-browser",
@@ -54,22 +54,21 @@
         },
         {
             "name": "beamlak/podcastindex-wrapper",
-            "version": "dev-master",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BeamlakAschalew/podcastindex-wrapper.git",
-                "reference": "d394df96389db98460ce45315b0709da715dd863"
+                "reference": "553759e20ded7f95d319225182c1428247a2d747"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BeamlakAschalew/podcastindex-wrapper/zipball/d394df96389db98460ce45315b0709da715dd863",
-                "reference": "d394df96389db98460ce45315b0709da715dd863",
+                "url": "https://api.github.com/repos/BeamlakAschalew/podcastindex-wrapper/zipball/553759e20ded7f95d319225182c1428247a2d747",
+                "reference": "553759e20ded7f95d319225182c1428247a2d747",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.9"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -89,9 +88,9 @@
             "description": "A wrapper around podcastindex.org API for a simpler usage",
             "support": {
                 "issues": "https://github.com/BeamlakAschalew/podcastindex-wrapper/issues",
-                "source": "https://github.com/BeamlakAschalew/podcastindex-wrapper/tree/master"
+                "source": "https://github.com/BeamlakAschalew/podcastindex-wrapper/tree/v1.1.0"
             },
-            "time": "2025-03-21T03:58:08+00:00"
+            "time": "2025-05-01T18:42:33+00:00"
         },
         {
             "name": "brick/math",
@@ -9666,9 +9665,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "beamlak/podcastindex-wrapper": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

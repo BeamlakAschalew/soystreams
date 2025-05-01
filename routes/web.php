@@ -38,7 +38,7 @@ Route::get('/podcasts', function () {
         'secret' => env('PODCASTINDEX_SECRET'),
     ]);
 
-    $searchResult = $client->search->byTerm('meri');
+    $searchResult = $client->search->byTerm('office ladies');
 
     dd($searchResult->json());
 

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Station from '@/Interfaces/Station'
-import RadioCard from './RadioCard.vue'
+import Podcast from '@/Interfaces/Podcast'
+import PodcastCard from './PodcastCard.vue'
 
 withDefaults(
     defineProps<{
         name: string
-        stations: Station[]
+        podcasts: Podcast[]
         showViewMore?: boolean
         viewMore?: string | null
     }>(),
@@ -50,12 +50,12 @@ withDefaults(
                     class="hs-carousel-body hs-carousel-dragging:cursor-grabbing hs-carousel-dragging:transition-none absolute start-0 top-0 bottom-0 flex cursor-grab flex-nowrap items-center justify-center transition-transform duration-700"
                 >
                     <div
-                        v-for="station in stations"
-                        :key="station.stationuuid"
+                        v-for="podcast in podcasts"
+                        :key="podcast.podcastGuid"
                         class="hs-carousel-slide flex items-center justify-center"
                     >
-                        <RadioCard
-                            :station="station"
+                        <PodcastCard
+                            :podcast="podcast"
                             class="max-w-[150px] flex-shrink-0 px-0 sm:max-w-[200px] sm:min-w-[150px] sm:px-4"
                         />
                     </div>
