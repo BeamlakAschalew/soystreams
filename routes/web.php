@@ -31,20 +31,6 @@ Route::get('/radio-click/{uuid}', [RadioIneractionController::class, 'clickStati
     ->name('radio.click')
     ->middleware('throttle:40,1');
 
-Route::get('/podcasts', function () {
-    $client = new PodcastIndexWrapper\Client([
-        'app' => env('PODCASTINDEX_APP'),
-        'key' => env('PODCASTINDEX_KEY'),
-        'secret' => env('PODCASTINDEX_SECRET'),
-    ]);
-
-    $searchResult = $client->search->byTerm('office ladies');
-
-    dd($searchResult->json());
-
-    return $searchResult;
-});
-
 Route::get('/about', function () {
     return Inertia::render('About', [
         'title' => 'About',
