@@ -31,6 +31,12 @@ Route::get('/radio-click/{uuid}', [RadioIneractionController::class, 'clickStati
     ->name('radio.click')
     ->middleware('throttle:40,1');
 
+Route::get('/podcasts', function () {
+    return Inertia::render('Podcasts', [
+        'title' => 'Podcasts',
+    ]);
+})->name('podcasts.index');
+
 Route::get('/about', function () {
     return Inertia::render('About', [
         'title' => 'About',

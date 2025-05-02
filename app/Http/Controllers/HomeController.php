@@ -49,7 +49,7 @@ class HomeController extends Controller {
         $country = LocationService::getCountry($ip);
         $sessionId = $request->session()->getId();
 
-        $locationStations = Cache::remember("locationStations_{$sessionId}", 7200, function () use ($browser, $country) {
+        $locationStations = Cache::remember("locationStations_{$sessionId}", 1800, function () use ($browser, $country) {
             return $browser->searchStation([
                 'limit' => 15,
                 'country' => $country,
@@ -59,7 +59,7 @@ class HomeController extends Controller {
             ]);
         });
 
-        $locationMusicStations = Cache::remember("locationMusicStations_{$sessionId}", 7200, function () use ($browser, $country) {
+        $locationMusicStations = Cache::remember("locationMusicStations_{$sessionId}", 1800, function () use ($browser, $country) {
             return $browser->searchStation([
                 'limit' => 15,
                 'country' => $country,
@@ -112,7 +112,7 @@ class HomeController extends Controller {
                 [
                     'name' => 'Trending Podcasts',
                     'podcasts' => $trendingPodcasts->feeds,
-                    'view_more' => '/podcasts',
+                    'view_more' => route('podcasts.index'),
                 ],
             ],
             'pageInfo' => [
