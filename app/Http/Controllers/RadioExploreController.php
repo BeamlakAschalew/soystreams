@@ -35,7 +35,7 @@ class RadioExploreController extends Controller {
         $languages = RadioBrowserStatics::getLanguages();
         $tags = RadioBrowserStatics::getTags();
 
-        return Inertia::render('Explore', [
+        return Inertia::render('Radio/Explore', [
             'title' => 'Explore',
             'stations' => $exploredStations,
             'no_input' => $request->toArray() == [],

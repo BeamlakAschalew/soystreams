@@ -39,7 +39,7 @@ class MusicRadioController extends Controller {
             ];
         }
 
-        return Inertia::render('CategoryRadio', [
+        return Inertia::render('Radio/CategoryRadio', [
             'title' => 'Music Radio',
             'stations' => $stationResults,
             'pageInfo' => [

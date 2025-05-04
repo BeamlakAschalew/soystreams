@@ -20,7 +20,7 @@ class StationController extends Controller {
             abort(404);
         }
 
-        return Inertia::render('Station', [
+        return Inertia::render('Radio/Station', [
             'station' => $stations[0] ?? null,
             'pageInfo' => [
                 'title' => $stations[0]['name'] ?? 'Unknown Station',

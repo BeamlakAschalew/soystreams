@@ -35,7 +35,7 @@ class SportsRadioController extends Controller {
             'hidebroken' => true,
         ]);
 
-        return Inertia::render('CategoryRadio', [
+        return Inertia::render('Radio/CategoryRadio', [
             'title' => 'Sports Radio',
             'stations' => [
                 [

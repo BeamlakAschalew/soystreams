@@ -36,7 +36,7 @@ class TalkRadioController extends Controller {
             ];
         }
 
-        return Inertia::render('CategoryRadio', [
+        return Inertia::render('Radio/CategoryRadio', [
             'title' => 'Talk Radio',
             'stations' => $stationResults,
             'pageInfo' => [

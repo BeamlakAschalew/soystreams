@@ -35,7 +35,7 @@ class NewsStationController extends Controller {
             'hidebroken' => true,
         ]);
 
-        return Inertia::render('CategoryRadio', [
+        return Inertia::render('Radio/CategoryRadio', [
             'title' => 'News Radio',
             'stations' => [
                 [

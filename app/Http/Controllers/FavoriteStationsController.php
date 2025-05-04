@@ -10,7 +10,7 @@ class FavoriteStationsController extends Controller {
      * Handle the incoming request.
      */
     public function __invoke(Request $request) {
-        return Inertia::render('FavoriteStations', [
+        return Inertia::render('Radio/FavoriteStations', [
             'title' => 'Favorite Stations',
             'pageInfo' => [
                 'title' => 'Soystreams - Listen to the Best Radio Stations and Podcasts',
