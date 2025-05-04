@@ -3,7 +3,7 @@ import { about } from '@/routes/about'
 </script>
 
 <template>
-    <footer class="mt-20 border-t border-gray-200 py-6 dark:border-neutral-700">
+    <footer class="border-t border-gray-200 py-6 dark:border-neutral-700">
         <div
             class="mx-10 flex flex-col items-center justify-between space-y-4 sm:flex-row sm:space-y-0"
         >

@@ -1,36 +1,7 @@
-<script setup lang="ts">
-import { about } from '@/routes/about'
-</script>
+<script setup lang="ts"></script>
 
 <template>
     <footer class="mt-auto border-t border-gray-200 p-2 dark:border-neutral-700">
-        <div
-            class="hs-dropdown relative inline-flex w-full [--auto-close:inside] [--strategy:absolute]"
-        >
-            <Link
-                :href="about().url"
-                type="button"
-                class="flex w-full items-center rounded-lg p-2 text-left text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-neutral-800"
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="mr-2 inline-block"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 16v.01" />
-                    <path d="M12 8v4" />
-                </svg>
-                About
-            </Link>
-        </div>
         <div
             class="hs-dropdown relative inline-flex w-full [--auto-close:inside] [--strategy:absolute]"
         >
