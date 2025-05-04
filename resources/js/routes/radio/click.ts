@@ -1,8 +1,8 @@
 import { queryParams, type QueryParams } from './../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\RadioIneractionController::click
- * @see app/Http/Controllers/RadioIneractionController.php:9
+ * @see \App\Http\Controllers\Radio\RadioIneractionController::click
+ * @see app/Http/Controllers/Radio/RadioIneractionController.php:10
  * @route /radio-click/{uuid}
  */
 export const click = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ click.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\RadioIneractionController::click
- * @see app/Http/Controllers/RadioIneractionController.php:9
+ * @see \App\Http\Controllers\Radio\RadioIneractionController::click
+ * @see app/Http/Controllers/Radio/RadioIneractionController.php:10
  * @route /radio-click/{uuid}
  */
 click.url = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -44,8 +44,8 @@ click.url = (args: { uuid: string | number } | [uuid: string | number] | string 
 }
 
 /**
- * @see \App\Http\Controllers\RadioIneractionController::click
- * @see app/Http/Controllers/RadioIneractionController.php:9
+ * @see \App\Http\Controllers\Radio\RadioIneractionController::click
+ * @see app/Http/Controllers/Radio/RadioIneractionController.php:10
  * @route /radio-click/{uuid}
  */
 click.get = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -57,8 +57,8 @@ click.get = (args: { uuid: string | number } | [uuid: string | number] | string 
 })
 
 /**
- * @see \App\Http\Controllers\RadioIneractionController::click
- * @see app/Http/Controllers/RadioIneractionController.php:9
+ * @see \App\Http\Controllers\Radio\RadioIneractionController::click
+ * @see app/Http/Controllers/Radio/RadioIneractionController.php:10
  * @route /radio-click/{uuid}
  */
 click.head = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

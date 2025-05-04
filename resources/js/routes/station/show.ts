@@ -1,8 +1,8 @@
 import { queryParams, type QueryParams } from './../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\StationController::show
- * @see app/Http/Controllers/StationController.php:13
+ * @see \App\Http\Controllers\Radio\StationController::show
+ * @see app/Http/Controllers/Radio/StationController.php:14
  * @route /station/{uuid}
  */
 export const show = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ show.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\StationController::show
- * @see app/Http/Controllers/StationController.php:13
+ * @see \App\Http\Controllers\Radio\StationController::show
+ * @see app/Http/Controllers/Radio/StationController.php:14
  * @route /station/{uuid}
  */
 show.url = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -44,8 +44,8 @@ show.url = (args: { uuid: string | number } | [uuid: string | number] | string |
 }
 
 /**
- * @see \App\Http\Controllers\StationController::show
- * @see app/Http/Controllers/StationController.php:13
+ * @see \App\Http\Controllers\Radio\StationController::show
+ * @see app/Http/Controllers/Radio/StationController.php:14
  * @route /station/{uuid}
  */
 show.get = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -57,8 +57,8 @@ show.get = (args: { uuid: string | number } | [uuid: string | number] | string |
 })
 
 /**
- * @see \App\Http\Controllers\StationController::show
- * @see app/Http/Controllers/StationController.php:13
+ * @see \App\Http\Controllers\Radio\StationController::show
+ * @see app/Http/Controllers/Radio/StationController.php:14
  * @route /station/{uuid}
  */
 show.head = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

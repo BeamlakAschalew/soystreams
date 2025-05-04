@@ -1,8 +1,8 @@
 import { queryParams, type QueryParams } from './../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\FavoriteStationsController::favorites
- * @see app/Http/Controllers/FavoriteStationsController.php:12
+ * @see \App\Http\Controllers\Radio\FavoriteStationsController::favorites
+ * @see app/Http/Controllers/Radio/FavoriteStationsController.php:13
  * @route /radio/favorites
  */
 export const favorites = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ favorites.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\FavoriteStationsController::favorites
- * @see app/Http/Controllers/FavoriteStationsController.php:12
+ * @see \App\Http\Controllers\Radio\FavoriteStationsController::favorites
+ * @see app/Http/Controllers/Radio/FavoriteStationsController.php:13
  * @route /radio/favorites
  */
 favorites.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -28,8 +28,8 @@ favorites.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) =>
 }
 
 /**
- * @see \App\Http\Controllers\FavoriteStationsController::favorites
- * @see app/Http/Controllers/FavoriteStationsController.php:12
+ * @see \App\Http\Controllers\Radio\FavoriteStationsController::favorites
+ * @see app/Http/Controllers/Radio/FavoriteStationsController.php:13
  * @route /radio/favorites
  */
 favorites.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -41,8 +41,8 @@ favorites.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 })
 
 /**
- * @see \App\Http\Controllers\FavoriteStationsController::favorites
- * @see app/Http/Controllers/FavoriteStationsController.php:12
+ * @see \App\Http\Controllers\Radio\FavoriteStationsController::favorites
+ * @see app/Http/Controllers/Radio/FavoriteStationsController.php:13
  * @route /radio/favorites
  */
 favorites.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

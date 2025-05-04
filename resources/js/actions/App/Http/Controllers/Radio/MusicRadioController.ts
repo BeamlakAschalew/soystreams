@@ -1,8 +1,8 @@
-import { queryParams, type QueryParams } from './../../../../wayfinder'
+import { queryParams, type QueryParams } from './../../../../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\Radio\MusicRadioController::MusicRadioController
+ * @see app/Http/Controllers/Radio/MusicRadioController.php:11
  * @route /radio/music
  */
 const MusicRadioController = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ MusicRadioController.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\Radio\MusicRadioController::MusicRadioController
+ * @see app/Http/Controllers/Radio/MusicRadioController.php:11
  * @route /radio/music
  */
 MusicRadioController.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -28,8 +28,8 @@ MusicRadioController.url = (options?: { query?: QueryParams, mergeQuery?: QueryP
 }
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\Radio\MusicRadioController::MusicRadioController
+ * @see app/Http/Controllers/Radio/MusicRadioController.php:11
  * @route /radio/music
  */
 MusicRadioController.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -41,8 +41,8 @@ MusicRadioController.get = (options?: { query?: QueryParams, mergeQuery?: QueryP
 })
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\Radio\MusicRadioController::MusicRadioController
+ * @see app/Http/Controllers/Radio/MusicRadioController.php:11
  * @route /radio/music
  */
 MusicRadioController.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -54,8 +54,8 @@ MusicRadioController.post = (options?: { query?: QueryParams, mergeQuery?: Query
 })
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::MusicRadioController
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\Radio\MusicRadioController::MusicRadioController
+ * @see app/Http/Controllers/Radio/MusicRadioController.php:11
  * @route /radio/music
  */
 MusicRadioController.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

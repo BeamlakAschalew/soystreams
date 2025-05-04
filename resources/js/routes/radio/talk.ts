@@ -1,8 +1,8 @@
 import { queryParams, type QueryParams } from './../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\TalkRadioController::talk
- * @see app/Http/Controllers/TalkRadioController.php:11
+ * @see \App\Http\Controllers\Radio\TalkRadioController::talk
+ * @see app/Http/Controllers/Radio/TalkRadioController.php:12
  * @route /radio/talk
  */
 export const talk = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ talk.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\TalkRadioController::talk
- * @see app/Http/Controllers/TalkRadioController.php:11
+ * @see \App\Http\Controllers\Radio\TalkRadioController::talk
+ * @see app/Http/Controllers/Radio/TalkRadioController.php:12
  * @route /radio/talk
  */
 talk.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -28,8 +28,8 @@ talk.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
 }
 
 /**
- * @see \App\Http\Controllers\TalkRadioController::talk
- * @see app/Http/Controllers/TalkRadioController.php:11
+ * @see \App\Http\Controllers\Radio\TalkRadioController::talk
+ * @see app/Http/Controllers/Radio/TalkRadioController.php:12
  * @route /radio/talk
  */
 talk.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -41,8 +41,8 @@ talk.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 })
 
 /**
- * @see \App\Http\Controllers\TalkRadioController::talk
- * @see app/Http/Controllers/TalkRadioController.php:11
+ * @see \App\Http\Controllers\Radio\TalkRadioController::talk
+ * @see app/Http/Controllers/Radio/TalkRadioController.php:12
  * @route /radio/talk
  */
 talk.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -54,8 +54,8 @@ talk.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 })
 
 /**
- * @see \App\Http\Controllers\TalkRadioController::talk
- * @see app/Http/Controllers/TalkRadioController.php:11
+ * @see \App\Http\Controllers\Radio\TalkRadioController::talk
+ * @see app/Http/Controllers/Radio/TalkRadioController.php:12
  * @route /radio/talk
  */
 talk.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

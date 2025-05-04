@@ -1,8 +1,8 @@
-import { queryParams, type QueryParams } from './../../../../wayfinder'
+import { queryParams, type QueryParams } from './../../../../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\TalkRadioController::TalkRadioController
- * @see app/Http/Controllers/TalkRadioController.php:11
+ * @see \App\Http\Controllers\Radio\TalkRadioController::TalkRadioController
+ * @see app/Http/Controllers/Radio/TalkRadioController.php:12
  * @route /radio/talk
  */
 const TalkRadioController = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ TalkRadioController.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\TalkRadioController::TalkRadioController
- * @see app/Http/Controllers/TalkRadioController.php:11
+ * @see \App\Http\Controllers\Radio\TalkRadioController::TalkRadioController
+ * @see app/Http/Controllers/Radio/TalkRadioController.php:12
  * @route /radio/talk
  */
 TalkRadioController.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -28,8 +28,8 @@ TalkRadioController.url = (options?: { query?: QueryParams, mergeQuery?: QueryPa
 }
 
 /**
- * @see \App\Http\Controllers\TalkRadioController::TalkRadioController
- * @see app/Http/Controllers/TalkRadioController.php:11
+ * @see \App\Http\Controllers\Radio\TalkRadioController::TalkRadioController
+ * @see app/Http/Controllers/Radio/TalkRadioController.php:12
  * @route /radio/talk
  */
 TalkRadioController.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -41,8 +41,8 @@ TalkRadioController.get = (options?: { query?: QueryParams, mergeQuery?: QueryPa
 })
 
 /**
- * @see \App\Http\Controllers\TalkRadioController::TalkRadioController
- * @see app/Http/Controllers/TalkRadioController.php:11
+ * @see \App\Http\Controllers\Radio\TalkRadioController::TalkRadioController
+ * @see app/Http/Controllers/Radio/TalkRadioController.php:12
  * @route /radio/talk
  */
 TalkRadioController.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -54,8 +54,8 @@ TalkRadioController.post = (options?: { query?: QueryParams, mergeQuery?: QueryP
 })
 
 /**
- * @see \App\Http\Controllers\TalkRadioController::TalkRadioController
- * @see app/Http/Controllers/TalkRadioController.php:11
+ * @see \App\Http\Controllers\Radio\TalkRadioController::TalkRadioController
+ * @see app/Http/Controllers/Radio/TalkRadioController.php:12
  * @route /radio/talk
  */
 TalkRadioController.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

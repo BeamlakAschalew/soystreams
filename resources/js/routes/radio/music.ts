@@ -1,8 +1,8 @@
 import { queryParams, type QueryParams } from './../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::music
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\Radio\MusicRadioController::music
+ * @see app/Http/Controllers/Radio/MusicRadioController.php:11
  * @route /radio/music
  */
 export const music = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ music.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::music
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\Radio\MusicRadioController::music
+ * @see app/Http/Controllers/Radio/MusicRadioController.php:11
  * @route /radio/music
  */
 music.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -28,8 +28,8 @@ music.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
 }
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::music
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\Radio\MusicRadioController::music
+ * @see app/Http/Controllers/Radio/MusicRadioController.php:11
  * @route /radio/music
  */
 music.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -41,8 +41,8 @@ music.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 })
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::music
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\Radio\MusicRadioController::music
+ * @see app/Http/Controllers/Radio/MusicRadioController.php:11
  * @route /radio/music
  */
 music.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -54,8 +54,8 @@ music.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 })
 
 /**
- * @see \App\Http\Controllers\MusicRadioController::music
- * @see app/Http/Controllers/MusicRadioController.php:10
+ * @see \App\Http\Controllers\Radio\MusicRadioController::music
+ * @see app/Http/Controllers/Radio/MusicRadioController.php:11
  * @route /radio/music
  */
 music.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

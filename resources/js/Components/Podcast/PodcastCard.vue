@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Podcast from '@/Interfaces/Podcast'
-import stationRoute from '@/routes/station/show'
+import podcastRoute from '@/routes/podcast/show'
 defineProps<{
     podcast: Podcast
 }>()
@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
     <div id="podcastCard" class="w-full">
-        <Link :href="stationRoute.url(podcast.id)">
+        <Link :href="podcastRoute.url(podcast.id)">
             <div id="imageContainer" class="group relative aspect-square w-full object-cover">
                 <div
                     class="from-primary-600 absolute bottom-0 h-12 w-full rounded-br-lg rounded-bl-lg bg-gradient-to-t to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"

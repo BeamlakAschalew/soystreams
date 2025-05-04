@@ -1,8 +1,8 @@
-import { queryParams, type QueryParams } from './../../../../wayfinder'
+import { queryParams, type QueryParams } from './../../../../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\RadioExploreController::RadioExploreController
- * @see app/Http/Controllers/RadioExploreController.php:15
+ * @see \App\Http\Controllers\Radio\RadioExploreController::RadioExploreController
+ * @see app/Http/Controllers/Radio/RadioExploreController.php:16
  * @route /radio/explore
  */
 const RadioExploreController = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ RadioExploreController.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\RadioExploreController::RadioExploreController
- * @see app/Http/Controllers/RadioExploreController.php:15
+ * @see \App\Http\Controllers\Radio\RadioExploreController::RadioExploreController
+ * @see app/Http/Controllers/Radio/RadioExploreController.php:16
  * @route /radio/explore
  */
 RadioExploreController.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -28,8 +28,8 @@ RadioExploreController.url = (options?: { query?: QueryParams, mergeQuery?: Quer
 }
 
 /**
- * @see \App\Http\Controllers\RadioExploreController::RadioExploreController
- * @see app/Http/Controllers/RadioExploreController.php:15
+ * @see \App\Http\Controllers\Radio\RadioExploreController::RadioExploreController
+ * @see app/Http/Controllers/Radio/RadioExploreController.php:16
  * @route /radio/explore
  */
 RadioExploreController.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -41,8 +41,8 @@ RadioExploreController.get = (options?: { query?: QueryParams, mergeQuery?: Quer
 })
 
 /**
- * @see \App\Http\Controllers\RadioExploreController::RadioExploreController
- * @see app/Http/Controllers/RadioExploreController.php:15
+ * @see \App\Http\Controllers\Radio\RadioExploreController::RadioExploreController
+ * @see app/Http/Controllers/Radio/RadioExploreController.php:16
  * @route /radio/explore
  */
 RadioExploreController.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

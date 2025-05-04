@@ -1,8 +1,8 @@
-import { queryParams, type QueryParams } from './../../../../wayfinder'
+import { queryParams, type QueryParams } from './../../../../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\NewsStationController::NewsStationController
- * @see app/Http/Controllers/NewsStationController.php:11
+ * @see \App\Http\Controllers\Radio\NewsStationController::NewsStationController
+ * @see app/Http/Controllers/Radio/NewsStationController.php:12
  * @route /radio/news
  */
 const NewsStationController = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ NewsStationController.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\NewsStationController::NewsStationController
- * @see app/Http/Controllers/NewsStationController.php:11
+ * @see \App\Http\Controllers\Radio\NewsStationController::NewsStationController
+ * @see app/Http/Controllers/Radio/NewsStationController.php:12
  * @route /radio/news
  */
 NewsStationController.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -28,8 +28,8 @@ NewsStationController.url = (options?: { query?: QueryParams, mergeQuery?: Query
 }
 
 /**
- * @see \App\Http\Controllers\NewsStationController::NewsStationController
- * @see app/Http/Controllers/NewsStationController.php:11
+ * @see \App\Http\Controllers\Radio\NewsStationController::NewsStationController
+ * @see app/Http/Controllers/Radio/NewsStationController.php:12
  * @route /radio/news
  */
 NewsStationController.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -41,8 +41,8 @@ NewsStationController.get = (options?: { query?: QueryParams, mergeQuery?: Query
 })
 
 /**
- * @see \App\Http\Controllers\NewsStationController::NewsStationController
- * @see app/Http/Controllers/NewsStationController.php:11
+ * @see \App\Http\Controllers\Radio\NewsStationController::NewsStationController
+ * @see app/Http/Controllers/Radio/NewsStationController.php:12
  * @route /radio/news
  */
 NewsStationController.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -54,8 +54,8 @@ NewsStationController.post = (options?: { query?: QueryParams, mergeQuery?: Quer
 })
 
 /**
- * @see \App\Http\Controllers\NewsStationController::NewsStationController
- * @see app/Http/Controllers/NewsStationController.php:11
+ * @see \App\Http\Controllers\Radio\NewsStationController::NewsStationController
+ * @see app/Http/Controllers/Radio/NewsStationController.php:12
  * @route /radio/news
  */
 NewsStationController.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

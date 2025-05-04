@@ -1,8 +1,8 @@
-import { queryParams, type QueryParams } from './../../../../wayfinder'
+import { queryParams, type QueryParams } from './../../../../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\SportsRadioController::SportsRadioController
- * @see app/Http/Controllers/SportsRadioController.php:11
+ * @see \App\Http\Controllers\Radio\SportsRadioController::SportsRadioController
+ * @see app/Http/Controllers/Radio/SportsRadioController.php:12
  * @route /radio/sports
  */
 const SportsRadioController = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ SportsRadioController.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\SportsRadioController::SportsRadioController
- * @see app/Http/Controllers/SportsRadioController.php:11
+ * @see \App\Http\Controllers\Radio\SportsRadioController::SportsRadioController
+ * @see app/Http/Controllers/Radio/SportsRadioController.php:12
  * @route /radio/sports
  */
 SportsRadioController.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -28,8 +28,8 @@ SportsRadioController.url = (options?: { query?: QueryParams, mergeQuery?: Query
 }
 
 /**
- * @see \App\Http\Controllers\SportsRadioController::SportsRadioController
- * @see app/Http/Controllers/SportsRadioController.php:11
+ * @see \App\Http\Controllers\Radio\SportsRadioController::SportsRadioController
+ * @see app/Http/Controllers/Radio/SportsRadioController.php:12
  * @route /radio/sports
  */
 SportsRadioController.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -41,8 +41,8 @@ SportsRadioController.get = (options?: { query?: QueryParams, mergeQuery?: Query
 })
 
 /**
- * @see \App\Http\Controllers\SportsRadioController::SportsRadioController
- * @see app/Http/Controllers/SportsRadioController.php:11
+ * @see \App\Http\Controllers\Radio\SportsRadioController::SportsRadioController
+ * @see app/Http/Controllers/Radio/SportsRadioController.php:12
  * @route /radio/sports
  */
 SportsRadioController.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -54,8 +54,8 @@ SportsRadioController.post = (options?: { query?: QueryParams, mergeQuery?: Quer
 })
 
 /**
- * @see \App\Http\Controllers\SportsRadioController::SportsRadioController
- * @see app/Http/Controllers/SportsRadioController.php:11
+ * @see \App\Http\Controllers\Radio\SportsRadioController::SportsRadioController
+ * @see app/Http/Controllers/Radio/SportsRadioController.php:12
  * @route /radio/sports
  */
 SportsRadioController.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

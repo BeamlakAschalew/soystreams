@@ -1,8 +1,8 @@
 import { queryParams, type QueryParams } from './../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\NewsStationController::news
- * @see app/Http/Controllers/NewsStationController.php:11
+ * @see \App\Http\Controllers\Radio\NewsStationController::news
+ * @see app/Http/Controllers/Radio/NewsStationController.php:12
  * @route /radio/news
  */
 export const news = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ news.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\NewsStationController::news
- * @see app/Http/Controllers/NewsStationController.php:11
+ * @see \App\Http\Controllers\Radio\NewsStationController::news
+ * @see app/Http/Controllers/Radio/NewsStationController.php:12
  * @route /radio/news
  */
 news.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -28,8 +28,8 @@ news.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
 }
 
 /**
- * @see \App\Http\Controllers\NewsStationController::news
- * @see app/Http/Controllers/NewsStationController.php:11
+ * @see \App\Http\Controllers\Radio\NewsStationController::news
+ * @see app/Http/Controllers/Radio/NewsStationController.php:12
  * @route /radio/news
  */
 news.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -41,8 +41,8 @@ news.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 })
 
 /**
- * @see \App\Http\Controllers\NewsStationController::news
- * @see app/Http/Controllers/NewsStationController.php:11
+ * @see \App\Http\Controllers\Radio\NewsStationController::news
+ * @see app/Http/Controllers/Radio/NewsStationController.php:12
  * @route /radio/news
  */
 news.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -54,8 +54,8 @@ news.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 })
 
 /**
- * @see \App\Http\Controllers\NewsStationController::news
- * @see app/Http/Controllers/NewsStationController.php:11
+ * @see \App\Http\Controllers\Radio\NewsStationController::news
+ * @see app/Http/Controllers/Radio/NewsStationController.php:12
  * @route /radio/news
  */
 news.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

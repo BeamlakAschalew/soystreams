@@ -1,21 +1,23 @@
 <?php
 
-use App\Http\Controllers\FavoriteStationsController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MusicRadioController;
-use App\Http\Controllers\NewsStationController;
-use App\Http\Controllers\RadioExploreController;
-use App\Http\Controllers\RadioIneractionController;
+use App\Http\Controllers\Podcast\PodcastController;
+use App\Http\Controllers\Radio\FavoriteStationsController;
+use App\Http\Controllers\Radio\MusicRadioController;
+use App\Http\Controllers\Radio\NewsStationController;
+use App\Http\Controllers\Radio\RadioExploreController;
+use App\Http\Controllers\Radio\RadioIneractionController;
+use App\Http\Controllers\Radio\SportsRadioController;
+use App\Http\Controllers\Radio\StationController;
+use App\Http\Controllers\Radio\TalkRadioController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\SportsRadioController;
-use App\Http\Controllers\StationController;
-use App\Http\Controllers\TalkRadioController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
 Route::match(['get', 'post'], '/search', [SearchController::class, 'index'])->name('search');
+
+// RADIO
 
 Route::match(['get', 'post'], '/radio/music', MusicRadioController::class)->name('radio.music');
 Route::match(['get', 'post'], '/radio/news', NewsStationController::class)->name('radio.news');
@@ -31,11 +33,14 @@ Route::get('/radio-click/{uuid}', [RadioIneractionController::class, 'clickStati
     ->name('radio.click')
     ->middleware('throttle:40,1');
 
+// PODCASTS
+
 Route::get('/podcasts', function () {
-    return Inertia::render('Podcasts', [
+    return Inertia::render('Podcast/Podcasts', [
         'title' => 'Podcasts',
     ]);
 })->name('podcasts.index');
+Route::get('/podcast/{id}', [PodcastController::class, 'index'])->name('podcast.show');
 
 Route::get('/about', function () {
     return Inertia::render('About', [

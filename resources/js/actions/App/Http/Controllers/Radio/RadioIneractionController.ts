@@ -1,8 +1,8 @@
-import { queryParams, type QueryParams } from './../../../../wayfinder'
+import { queryParams, type QueryParams } from './../../../../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\RadioIneractionController::clickStation
- * @see app/Http/Controllers/RadioIneractionController.php:9
+ * @see \App\Http\Controllers\Radio\RadioIneractionController::clickStation
+ * @see app/Http/Controllers/Radio/RadioIneractionController.php:10
  * @route /radio-click/{uuid}
  */
 export const clickStation = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ clickStation.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\RadioIneractionController::clickStation
- * @see app/Http/Controllers/RadioIneractionController.php:9
+ * @see \App\Http\Controllers\Radio\RadioIneractionController::clickStation
+ * @see app/Http/Controllers/Radio/RadioIneractionController.php:10
  * @route /radio-click/{uuid}
  */
 clickStation.url = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -44,8 +44,8 @@ clickStation.url = (args: { uuid: string | number } | [uuid: string | number] | 
 }
 
 /**
- * @see \App\Http\Controllers\RadioIneractionController::clickStation
- * @see app/Http/Controllers/RadioIneractionController.php:9
+ * @see \App\Http\Controllers\Radio\RadioIneractionController::clickStation
+ * @see app/Http/Controllers/Radio/RadioIneractionController.php:10
  * @route /radio-click/{uuid}
  */
 clickStation.get = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -57,8 +57,8 @@ clickStation.get = (args: { uuid: string | number } | [uuid: string | number] | 
 })
 
 /**
- * @see \App\Http\Controllers\RadioIneractionController::clickStation
- * @see app/Http/Controllers/RadioIneractionController.php:9
+ * @see \App\Http\Controllers\Radio\RadioIneractionController::clickStation
+ * @see app/Http/Controllers/Radio/RadioIneractionController.php:10
  * @route /radio-click/{uuid}
  */
 clickStation.head = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

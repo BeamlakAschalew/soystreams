@@ -1,8 +1,8 @@
-import { queryParams, type QueryParams } from './../../../../wayfinder'
+import { queryParams, type QueryParams } from './../../../../../wayfinder'
 
 /**
- * @see \App\Http\Controllers\StationController::index
- * @see app/Http/Controllers/StationController.php:13
+ * @see \App\Http\Controllers\Radio\StationController::index
+ * @see app/Http/Controllers/Radio/StationController.php:14
  * @route /station/{uuid}
  */
 export const index = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,8 +19,8 @@ index.definition = {
 }
 
 /**
- * @see \App\Http\Controllers\StationController::index
- * @see app/Http/Controllers/StationController.php:13
+ * @see \App\Http\Controllers\Radio\StationController::index
+ * @see app/Http/Controllers/Radio/StationController.php:14
  * @route /station/{uuid}
  */
 index.url = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -44,8 +44,8 @@ index.url = (args: { uuid: string | number } | [uuid: string | number] | string 
 }
 
 /**
- * @see \App\Http\Controllers\StationController::index
- * @see app/Http/Controllers/StationController.php:13
+ * @see \App\Http\Controllers\Radio\StationController::index
+ * @see app/Http/Controllers/Radio/StationController.php:14
  * @route /station/{uuid}
  */
 index.get = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -57,8 +57,8 @@ index.get = (args: { uuid: string | number } | [uuid: string | number] | string 
 })
 
 /**
- * @see \App\Http\Controllers\StationController::index
- * @see app/Http/Controllers/StationController.php:13
+ * @see \App\Http\Controllers\Radio\StationController::index
+ * @see app/Http/Controllers/Radio/StationController.php:14
  * @route /station/{uuid}
  */
 index.head = (args: { uuid: string | number } | [uuid: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
