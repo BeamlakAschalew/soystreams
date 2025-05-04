@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import LivePlayer from '@/Components/Radio/LivePlayer/LivePlayer.vue'
+import Footer from '@/Components/Footer.vue'
 import Navbar from '@/Components/Navbar.vue'
+import LivePlayer from '@/Components/Radio/LivePlayer/LivePlayer.vue'
 import Sidebar from '@/Components/Sidebar/Sidebar.vue'
 
 defineProps<{
@@ -23,4 +24,5 @@ defineProps<{
         </div>
         <slot></slot>
     </div>
+    <Footer class="lg:mr-10 lg:ml-80" />
 </template>
