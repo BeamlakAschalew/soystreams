@@ -2,7 +2,7 @@ import { queryParams, type QueryParams } from './../../wayfinder'
 
 /**
  * @see \App\Http\Controllers\Podcast\PodcastController::show
- * @see app/Http/Controllers/Podcast/PodcastController.php:15
+ * @see app/Http/Controllers/Podcast/PodcastController.php:21
  * @route /podcast/{id}
  */
 export const show = (args: { id: string | number } | [id: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -20,7 +20,7 @@ show.definition = {
 
 /**
  * @see \App\Http\Controllers\Podcast\PodcastController::show
- * @see app/Http/Controllers/Podcast/PodcastController.php:15
+ * @see app/Http/Controllers/Podcast/PodcastController.php:21
  * @route /podcast/{id}
  */
 show.url = (args: { id: string | number } | [id: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -45,7 +45,7 @@ show.url = (args: { id: string | number } | [id: string | number] | string | num
 
 /**
  * @see \App\Http\Controllers\Podcast\PodcastController::show
- * @see app/Http/Controllers/Podcast/PodcastController.php:15
+ * @see app/Http/Controllers/Podcast/PodcastController.php:21
  * @route /podcast/{id}
  */
 show.get = (args: { id: string | number } | [id: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -58,7 +58,7 @@ show.get = (args: { id: string | number } | [id: string | number] | string | num
 
 /**
  * @see \App\Http\Controllers\Podcast\PodcastController::show
- * @see app/Http/Controllers/Podcast/PodcastController.php:15
+ * @see app/Http/Controllers/Podcast/PodcastController.php:21
  * @route /podcast/{id}
  */
 show.head = (args: { id: string | number } | [id: string | number] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

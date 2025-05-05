@@ -41,6 +41,7 @@ Route::get('/podcasts', function () {
     ]);
 })->name('podcasts.index');
 Route::get('/podcast/{id}', [PodcastController::class, 'index'])->name('podcast.show');
+Route::get('/api/podcasts/{id}/all-episodes', [PodcastController::class, 'fetchAllEpisodes'])->name('podcast.episodes.all.api');
 
 Route::get('/about', function () {
     return Inertia::render('About', [
