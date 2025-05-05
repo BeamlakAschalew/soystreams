@@ -1,5 +1,6 @@
 import Station from '@/Interfaces/Station'
 import { click } from '@/routes/radio/click'
+import Hls from 'hls.js'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useRecentStationStore } from './useRecentStationStore'
@@ -14,6 +15,7 @@ export const usePlayerStore = defineStore('player', () => {
     const audio = ref(new Audio())
     const loading = ref(false)
     const stopped = ref(true)
+    const hls = ref<Hls | null>(null)
 
     const recentStore = useRecentStationStore()
 
@@ -51,48 +53,54 @@ export const usePlayerStore = defineStore('player', () => {
             return
         }
 
-        // all other errors (including HTTP streams on HTTP pages)
         console.log('Stream Error', e, mediaErr)
         handleStreamError()
     }
 
     // ignore retry if stream is http
-
     function handleStreamError() {
-        if (!stopped.value && station.value) {
+        if (hls.value) {
+            // HLS.js has its own retry logic, handle specific HLS errors if needed
+            console.warn('HLS stream error occurred.')
+            // Optionally implement custom retry logic or error handling for HLS
+        } else if (!stopped.value && station.value) {
             console.warn('Stream stopped unexpectedly. Retrying...')
             setTimeout(retryStream, 7000)
         }
     }
 
     function retryStream() {
-        if (station.value) {
-            loading.value = true
-            // fallback to plain url first, then resolved
-            const plainUrl = station.value.url
-            const resolvedUrl = station.value.url_resolved
-            const currentSrc = audio.value.src
-            const nextSrc =
-                currentSrc === plainUrl && resolvedUrl ? resolvedUrl : plainUrl || resolvedUrl
-            if (nextSrc === resolvedUrl) {
-                console.warn('Falling back to station.url_resolved')
-            }
-            audio.value.src = nextSrc
-            audio.value.load()
-            if (isPlaying.value) {
-                audio.value
-                    .play()
-                    .then(() => {
-                        isPlaying.value = true
-                        loading.value = false
-                    })
-                    .catch(err => {
-                        console.log(err)
-                        loading.value = false
-                        setTimeout(retryStream, 7000)
-                    })
+        if (station.value && !hls.value) {
+            // Only retry for non-HLS streams here
+            if (station.value) {
+                loading.value = true
+                // fallback to plain url first, then resolved
+                const plainUrl = station.value.url
+                const resolvedUrl = station.value.url_resolved
+                const currentSrc = audio.value.src
+                const nextSrc =
+                    currentSrc === plainUrl && resolvedUrl ? resolvedUrl : plainUrl || resolvedUrl
+                if (nextSrc === resolvedUrl) {
+                    console.warn('Falling back to station.url_resolved')
+                }
+                audio.value.src = nextSrc
+                audio.value.load()
+                if (isPlaying.value) {
+                    audio.value
+                        .play()
+                        .then(() => {
+                            isPlaying.value = true
+                            loading.value = false
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            loading.value = false
+                            setTimeout(retryStream, 7000)
+                        })
+                }
             }
         }
+        // HLS retry is often handled internally by hls.js
     }
 
     function togglePlayPause() {
@@ -128,12 +136,60 @@ export const usePlayerStore = defineStore('player', () => {
             method: 'GET',
             keepalive: true,
         }).catch(err => console.error(err))
-        // prioritize plain url over resolved
-        if (audio.value.src !== s.url || s.url_resolved) {
+
+        const streamUrl = s.url || s.url_resolved
+        const isHls = streamUrl.endsWith('.m3u8')
+
+        if (hls.value) {
+            hls.value.destroy()
+            hls.value = null
+        }
+
+        if (audio.value.src !== streamUrl) {
             station.value = s
-            audio.value.src = s.url || s.url_resolved
-            audio.value.load()
-            turnOn()
+            if (isHls && Hls.isSupported()) {
+                console.log('Playing HLS stream:', streamUrl)
+                hls.value = new Hls()
+                hls.value.loadSource(streamUrl)
+                hls.value.attachMedia(audio.value)
+                hls.value.on(Hls.Events.MANIFEST_PARSED, () => {
+                    turnOn()
+                })
+                hls.value.on(Hls.Events.ERROR, (event, data) => {
+                    console.error('HLS Error:', event, data)
+                    if (data.fatal) {
+                        switch (data.type) {
+                            case Hls.ErrorTypes.NETWORK_ERROR:
+                                console.warn('HLS network error, attempting to recover...')
+                                hls.value?.startLoad()
+                                break
+                            case Hls.ErrorTypes.MEDIA_ERROR:
+                                console.warn('HLS media error, attempting to recover...')
+                                hls.value?.recoverMediaError()
+                                break
+                            default:
+                                // Cannot recover, destroy HLS instance
+                                console.error('Unrecoverable HLS error, stopping playback.')
+                                stop()
+                                break
+                        }
+                    }
+                    handleStreamError() // Call generic handler too if needed
+                })
+            } else if (isHls) {
+                console.warn('HLS is not supported by this browser.')
+                // Handle fallback or show error message
+                loading.value = false
+                // Maybe try playing directly if browser *might* support it?
+                audio.value.src = streamUrl
+                audio.value.load()
+                turnOn()
+            } else {
+                console.log('Playing standard stream:', streamUrl)
+                audio.value.src = streamUrl
+                audio.value.load()
+                turnOn()
+            }
             updateMediaMetadata(s)
             showNotification(s)
         } else {
@@ -195,6 +251,10 @@ export const usePlayerStore = defineStore('player', () => {
     }
 
     function stop() {
+        if (hls.value) {
+            hls.value.destroy()
+            hls.value = null
+        }
         audio.value.pause()
         audio.value.src = ''
         station.value = null
