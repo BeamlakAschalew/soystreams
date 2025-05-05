@@ -157,24 +157,62 @@ export const usePlayerStore = defineStore('player', () => {
                 })
                 hls.value.on(Hls.Events.ERROR, (event, data) => {
                     console.error('HLS Error:', event, data)
+
                     if (data.fatal) {
+                        console.error(`Fatal HLS Error encountered: ${data.type} - ${data.details}`)
                         switch (data.type) {
                             case Hls.ErrorTypes.NETWORK_ERROR:
-                                console.warn('HLS network error, attempting to recover...')
-                                hls.value?.startLoad()
+                                // Network errors might be recoverable, especially manifest/playlist load errors
+                                console.warn('HLS Network Error:', data.details)
+                                if (
+                                    data.details === Hls.ErrorDetails.MANIFEST_LOAD_ERROR ||
+                                    data.details === Hls.ErrorDetails.MANIFEST_LOAD_TIMEOUT
+                                ) {
+                                    console.warn('Attempting to reload HLS source...')
+                                    // Optional: Implement backoff delay here
+                                    setTimeout(() => hls.value?.loadSource(streamUrl), 5000) // Retry after 5s
+                                } else {
+                                    // For other network errors (like fragment load), try startLoad
+                                    console.warn('Attempting HLS startLoad...')
+                                    hls.value?.startLoad()
+                                }
                                 break
                             case Hls.ErrorTypes.MEDIA_ERROR:
-                                console.warn('HLS media error, attempting to recover...')
-                                hls.value?.recoverMediaError()
+                                console.warn('HLS Media Error:', data.details)
+                                if (
+                                    data.details ===
+                                    Hls.ErrorDetails.MANIFEST_INCOMPATIBLE_CODECS_ERROR
+                                ) {
+                                    console.error(
+                                        'Incompatible HLS codecs. Cannot play this stream.',
+                                    )
+                                    // Notify user? Stop playback cleanly.
+                                    stop()
+                                } else {
+                                    // Try to recover from other media errors
+                                    console.warn('Attempting HLS recoverMediaError...')
+                                    hls.value?.recoverMediaError()
+                                }
                                 break
+                            case Hls.ErrorTypes.KEY_SYSTEM_ERROR:
+                            case Hls.ErrorTypes.MUX_ERROR:
+                            case Hls.ErrorTypes.OTHER_ERROR:
                             default:
-                                // Cannot recover, destroy HLS instance
-                                console.error('Unrecoverable HLS error, stopping playback.')
-                                stop()
+                                // These errors are generally unrecoverable
+                                console.error('Unrecoverable HLS error. Destroying HLS instance.')
+                                hls.value?.destroy()
+                                hls.value = null
+                                stop() // Stop playback
+                                // Optionally notify the user about the failure
                                 break
                         }
+                    } else {
+                        // Non-fatal errors are often handled internally by hls.js
+                        console.warn(`Non-fatal HLS Error: ${data.type} - ${data.details}`)
+                        // You might add specific handling for non-fatal errors if needed
                     }
-                    handleStreamError() // Call generic handler too if needed
+                    // Consider if handleStreamError() is still needed here or if the specific handling is sufficient
+                    // handleStreamError() // Call generic handler too if needed
                 })
             } else if (isHls) {
                 console.warn('HLS is not supported by this browser.')
