@@ -60,14 +60,26 @@ export const usePlayerStore = defineStore('player', () => {
     // ignore retry if stream is http
     function handleStreamError() {
         if (hls.value) {
-            // HLS.js has its own retry logic, handle specific HLS errors if needed
-            console.warn('HLS stream error occurred.')
-            // Optionally implement custom retry logic or error handling for HLS
-        } else if (!stopped.value && station.value) {
-            console.warn('Stream stopped unexpectedly. Retrying...')
-            setTimeout(retryStream, 7000)
+            // HLS.js has its own retry logic, handled in its specific error event
+            console.warn('HLS stream error occurred. See HLS error handler for details.')
+        } else if (!stopped.value && isPlaying.value) {
+            // Only retry standard streams if it was playing and not explicitly stopped.
+            console.warn('Standard stream stopped unexpectedly while playing. Retrying...')
+            // Clear any pending retries to avoid duplicates
+            clearTimeout(retryTimeoutId.value)
+            retryTimeoutId.value = setTimeout(retryStream, 7000)
+        } else if (!stopped.value && !isPlaying.value) {
+            // Stream stalled/errored while paused by the user, do not retry.
+            console.warn('Standard stream stalled/errored while paused. No retry scheduled.')
+            loading.value = false // Ensure loading indicator is off if paused
+        } else {
+            // Stream was stopped explicitly, do nothing.
+            console.log('Stream error/stall occurred after explicit stop. Ignoring.')
         }
     }
+
+    // Add a ref to hold the timeout ID
+    const retryTimeoutId = ref<number | undefined>(undefined)
 
     function retryStream() {
         if (station.value && !hls.value) {
@@ -101,6 +113,7 @@ export const usePlayerStore = defineStore('player', () => {
             }
         }
         // HLS retry is often handled internally by hls.js
+        retryTimeoutId.value = undefined // Clear the stored ID after retry runs
     }
 
     function togglePlayPause() {
@@ -121,6 +134,13 @@ export const usePlayerStore = defineStore('player', () => {
     function turnOff() {
         audio.value.pause()
         isPlaying.value = false
+        // Clear any pending retry attempts when the user manually pauses
+        if (retryTimeoutId.value) {
+            clearTimeout(retryTimeoutId.value)
+            retryTimeoutId.value = undefined
+            console.log('Cleared pending stream retry due to manual pause.')
+        }
+        loading.value = false // Ensure loading is false when paused
     }
 
     function setVolume(newVolume: number) {
@@ -300,6 +320,12 @@ export const usePlayerStore = defineStore('player', () => {
         isPlaying.value = false
         stopped.value = true
         loading.value = false
+        // Clear any pending retry attempts when stopping
+        if (retryTimeoutId.value) {
+            clearTimeout(retryTimeoutId.value)
+            retryTimeoutId.value = undefined
+            console.log('Cleared pending stream retry due to stop.')
+        }
     }
 
     return {
