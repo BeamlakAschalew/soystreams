@@ -65,7 +65,7 @@ withDefaults(
 
         <button
             type="button"
-            class="hs-carousel-prev hs-carousel-disabled:pointer-events-none hs-carousel-disabled:opacity-50 text-primary dark:text-primary absolute inset-y-0 start-0 inline-flex h-full w-11.5 items-center justify-center rounded-s-lg hover:bg-green-400/10 focus:bg-green-400/10 focus:outline-hidden dark:hover:bg-green-400/10 dark:focus:bg-green-400/10"
+            class="hs-carousel-prev hs-carousel-disabled:pointer-events-none hs-carousel-disabled:opacity-50 text-primary dark:text-primary absolute inset-y-0 start-0 -ml-7 inline-flex h-full w-11.5 items-center justify-center rounded-s-lg hover:bg-green-400/10 focus:bg-green-400/10 focus:outline-hidden dark:hover:bg-green-400/10 dark:focus:bg-green-400/10"
         >
             <span class="text-2xl" aria-hidden="true">
                 <svg
@@ -87,7 +87,7 @@ withDefaults(
         </button>
         <button
             type="button"
-            class="hs-carousel-next hs-carousel-disabled:pointer-events-none hs-carousel-disabled:opacity-50 text-primary dark:text-primary absolute inset-y-0 end-0 inline-flex h-full w-11.5 items-center justify-center rounded-e-lg hover:bg-green-400/10 focus:bg-green-400/10 focus:outline-hidden dark:hover:bg-green-400/10 dark:focus:bg-green-400/10"
+            class="hs-carousel-next hs-carousel-disabled:pointer-events-none hs-carousel-disabled:opacity-50 text-primary dark:text-primary absolute inset-y-0 end-0 -mr-7 inline-flex h-full w-11.5 items-center justify-center rounded-e-lg hover:bg-green-400/10 focus:bg-green-400/10 focus:outline-hidden dark:hover:bg-green-400/10 dark:focus:bg-green-400/10"
         >
             <span class="sr-only">Next</span>
             <span class="text-2xl" aria-hidden="true">

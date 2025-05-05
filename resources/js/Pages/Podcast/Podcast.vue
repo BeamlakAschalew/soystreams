@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import EpisodeCard from '@/Components/Podcast/EpisodeCard.vue'
 import PodcastBody from '@/Components/Podcast/Podcast/PodcastBody.vue'
 import PodcastHeader from '@/Components/Podcast/Podcast/PodcastHeader.vue'
 import Podcast from '@/Interfaces/Podcast'
@@ -29,5 +30,21 @@ defineOptions({
             <!-- Podcast info section -->
             <PodcastBody :podcast="podcast" />
         </div>
+        <EpisodeCard
+            title="Episode Title"
+            date="2023-10-01"
+            description="This is a description of the episode."
+            duration="00:45:00"
+            :isPlaying="true"
+            :progress="20"
+        />
+        <EpisodeCard
+            title="Episode Title"
+            date="2023-10-01"
+            description="This is a description of the episode."
+            duration="00:45:00"
+            :isPlaying="false"
+            :progress="99"
+        />
     </div>
 </template>
