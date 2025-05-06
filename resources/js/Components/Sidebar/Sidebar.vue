@@ -13,7 +13,7 @@ const podcastPlayerStore = usePodcastPlayerStore()
         id="hs-sidebar-collapsible-group"
         :class="[
             'hs-overlay hs-overlay-open:translate-x-0 fixed start-0 top-0 bottom-0 z-20 hidden h-full w-64 -translate-x-full transform border-e border-gray-200 bg-white transition-all duration-300 [--auto-close:lg] max-md:z-50 lg:end-auto lg:bottom-0 lg:block lg:translate-x-0 dark:border-neutral-700 dark:bg-neutral-950',
-            playerStore.radioInit || podcastPlayerStore.podcastInit ? 'pb-0 md:pb-23' : '',
+            playerStore.radioInit || podcastPlayerStore.podcastInit ? 'pb-0 md:pb-20' : '',
         ]"
         role="dialog"
         tabindex="-1"

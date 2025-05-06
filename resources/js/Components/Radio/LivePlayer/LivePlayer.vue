@@ -92,10 +92,6 @@ function favoriteStyling() {
                         />
                     </div>
                 </div>
-                <div class="flex flex-col items-center">
-                    <span class="text-xs font-bold text-green-600">LIVE</span>
-                    <div class="mt-1 w-10 border-b-2 border-green-600"></div>
-                </div>
             </div>
             <div id="endControls" class="flex items-center justify-end gap-8">
                 <div

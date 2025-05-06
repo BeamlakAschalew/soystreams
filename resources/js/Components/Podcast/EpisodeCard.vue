@@ -1,9 +1,81 @@
+<script setup lang="ts">
+import Podcast from '@/Interfaces/Podcast'
+import type PodcastEpisode from '@/Interfaces/PodcastEpisode'
+import { usePodcastPlayerStore } from '@/Stores/usePodcastPlayerStore'
+import { computed, PropType, ref } from 'vue'
+const props = defineProps({
+    episode: {
+        type: Object as PropType<PodcastEpisode>,
+        required: true,
+    },
+    podcast: {
+        type: Object as PropType<Podcast>,
+        required: true,
+    },
+})
+
+const playerStore = usePodcastPlayerStore()
+
+const isPlaying = computed(
+    () =>
+        playerStore.podcastInit &&
+        playerStore.isPlaying &&
+        playerStore.episode?.id === props.episode.id,
+)
+
+const isExpanded = ref(false)
+
+const radius = 18
+const circumference = 2 * Math.PI * radius
+
+const formattedCurrentTime = computed(() => playerStore.currentTime)
+const formattedDuration = computed(() => playerStore.duration)
+
+const progressOffset = computed(() => {
+    if (playerStore.podcastInit && playerStore.episode?.id === props.episode.id) {
+        console.log(`POFFSET: ${progressOffset.value}`)
+        return (
+            circumference - (formattedCurrentTime.value / formattedDuration.value) * circumference
+        )
+    }
+    console.log(`POFFSET: ${progressOffset.value}`)
+    return 180
+})
+
+const toggleDescription = () => {
+    isExpanded.value = !isExpanded.value
+}
+
+function formatDuration(seconds: number): string {
+    if (!seconds || seconds <= 0) return 'N/A'
+    const h = Math.floor(seconds / 3600)
+    const m = Math.floor((seconds % 3600) / 60)
+    const s = Math.floor(seconds % 60)
+    const hStr = h > 0 ? `${h}:` : ''
+    const mStr = m < 10 ? `0${m}` : `${m}`
+    const sStr = s < 10 ? `0${s}` : `${s}`
+    return `${hStr}${mStr}:${sStr}`
+}
+
+function playPodcastEpisode(podcast: Podcast, podcastEpisode: PodcastEpisode) {
+    if (
+        playerStore.podcast?.id === podcast.id &&
+        (playerStore.isPlaying || playerStore.loading) &&
+        playerStore.episode?.id === podcastEpisode.id
+    ) {
+        playerStore.stop()
+    } else {
+        playerStore.setEpisode(podcastEpisode, podcast)
+    }
+}
+</script>
+
 <template>
     <div class="episode-card py-4">
         <div class="mb-2 flex items-center">
             <button
-                @click="togglePlay"
-                class="play-button focus:ring-primary-500 relative mr-3 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full focus:ring-2 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-gray-800"
+                @click="playPodcastEpisode(podcast, episode)"
+                class="play-button relative mr-3 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full"
                 :aria-label="isPlaying ? 'Pause episode' : 'Play episode'"
             >
                 <svg class="absolute inset-0 h-full w-full" viewBox="0 0 40 40">
@@ -57,8 +129,15 @@
             </button>
 
             <div class="flex-grow">
-                <h3 class="text-md font-semibold text-gray-800 dark:text-gray-200">{{ title }}</h3>
-                <p class="text-sm text-gray-500 dark:text-gray-400">{{ date }}</p>
+                <h3 class="text-md font-semibold text-gray-800 dark:text-gray-200">
+                    {{ episode.title }}
+                </h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                    {{
+                        episode.datePublishedPretty ||
+                        new Date(episode.datePublished * 1000).toLocaleDateString()
+                    }}
+                </p>
             </div>
         </div>
         <div class="ml-[3.25rem]">
@@ -96,62 +175,11 @@
             </button>
 
             <div v-if="isExpanded" class="mt-2 text-sm text-gray-700 dark:text-gray-300">
-                <p>{{ description }}</p>
+                <p>{{ episode.description }}</p>
                 <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                    Duration: {{ duration }}
+                    Duration: {{ formatDuration(episode.duration) }}
                 </p>
             </div>
         </div>
     </div>
 </template>
-
-<script setup lang="ts">
-import { computed, ref } from 'vue'
-
-const props = defineProps({
-    title: {
-        type: String,
-        required: true,
-    },
-    date: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    duration: {
-        type: String,
-        required: true,
-    },
-    isPlaying: {
-        type: Boolean,
-        default: false,
-    },
-    progress: {
-        type: Number,
-        default: 0,
-        validator: (value: number) => value >= 0 && value <= 100,
-    },
-})
-
-const emit = defineEmits(['toggle-play', 'show-details'])
-
-const isExpanded = ref(false)
-
-const radius = 18
-const circumference = 2 * Math.PI * radius
-
-const progressOffset = computed(() => {
-    return circumference - (props.progress / 100) * circumference
-})
-
-const togglePlay = () => {
-    emit('toggle-play')
-}
-
-const toggleDescription = () => {
-    isExpanded.value = !isExpanded.value
-}
-</script>
