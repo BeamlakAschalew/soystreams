@@ -77,17 +77,17 @@ const toggleFavorite = () => {
     <div
         id="podcastPlayer"
         v-if="playerStore.podcastInit"
-        class="fixed right-0 bottom-0 left-0 z-40 flex w-full flex-col items-stretch border-t-2 border-gray-200 bg-white p-3 md:flex-row md:items-center md:px-4 md:py-2 dark:border-neutral-700 dark:bg-neutral-950"
+        class="fixed bottom-0 z-40 flex max-h-24 w-full flex-row flex-wrap items-center justify-between border-t-2 border-gray-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-950"
     >
         <!-- Left Section: Media Info -->
         <Link
             :href="getEpisodeLink"
             id="mediaInfo"
-            class="mb-2 flex w-full flex-shrink-0 flex-row items-center justify-start gap-3 md:mb-0 md:w-1/3 md:pr-4"
+            class="flex max-w-3/5 flex-shrink-0 flex-row items-center justify-between gap-3 sm:w-full sm:flex-1 md:pr-2"
         >
             <img
                 v-lazy="playerStore.episode?.image || playerStore.podcast?.image"
-                class="h-10 w-10 rounded-md bg-white object-cover p-0.5 md:h-12 md:w-12 dark:bg-neutral-900"
+                class="h-12 w-12 rounded-md bg-white object-cover p-0.5 md:h-16 md:w-16 dark:bg-neutral-900"
                 alt="Episode/Podcast artwork"
             />
             <div id="mediaTitle" class="min-w-0 flex-1">
@@ -106,12 +106,9 @@ const toggleFavorite = () => {
         </Link>
 
         <!-- Center Section: Controls & Seek Bar -->
-        <div
-            id="centerControls"
-            class="mb-2 flex w-full flex-col items-center md:mb-0 md:flex-grow md:px-4"
-        >
+        <div id="centerControls" class="flex flex-col items-center sm:flex-1 md:flex-grow md:px-4">
             <!-- Control Buttons -->
-            <div class="mb-1.5 flex items-center justify-center gap-4 md:gap-5">
+            <div class="flex items-center justify-center gap-4 md:gap-5">
                 <button
                     @click="handleRewind"
                     aria-label="Rewind 15 seconds"
@@ -145,7 +142,7 @@ const toggleFavorite = () => {
             </div>
 
             <!-- Seek Bar and Time -->
-            <div class="flex w-full max-w-sm items-center space-x-2">
+            <div class="hidden w-full max-w-sm items-center space-x-2 md:flex">
                 <span class="w-10 text-center text-xs text-neutral-500 dark:text-neutral-400">{{
                     formattedCurrentTime
                 }}</span>
@@ -168,76 +165,52 @@ const toggleFavorite = () => {
             </div>
         </div>
 
-        <!-- Right Section: Volume & Favorite -->
         <div
-            id="endControls"
-            class="flex w-full items-center justify-center gap-3 md:justify-end md:pl-4"
+            id="trailing"
+            class="hidden flex-1 flex-row items-center justify-end gap-8 sm:flex sm:flex-1"
         >
-            <div
-                id="volume"
-                class="hidden flex-row flex-wrap items-center justify-center gap-3 md:flex"
-            >
-                <component
-                    :is="
-                        playerStore.volume === 0
-                            ? VolumeOff
-                            : playerStore.volume <= 20
-                              ? Volume1
-                              : Volume2
-                    "
-                    @click="toggleVolumeControl"
-                    class="cursor-pointer text-neutral-800 dark:text-gray-200"
-                />
-                <transition
-                    enter-active-class="transition duration-200 ease-out"
-                    enter-from-class="opacity-0 scale-y-0"
-                    enter-to-class="opacity-100 scale-y-100"
-                    leave-active-class="transition duration-200 ease-in"
-                    leave-from-class="opacity-100 scale-y-100"
-                    leave-to-class="opacity-0 scale-y-0"
-                >
-                    <input
-                        v-show="showVolumeControl"
-                        type="range"
-                        class="accent-primary [&::-moz-range-thumb]:bg-primary [&::-webkit-slider-thumb]:bg-primary h-1 w-32 cursor-pointer appearance-none rounded-lg bg-gray-300 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:rounded-full [&::-webkit-slider-runnable-track]:bg-gray-300 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
-                        :value="playerStore.volume"
-                        @input="
-                            playerStore.setVolume(Number(($event.target as HTMLInputElement).value))
-                        "
-                    />
-                </transition>
-            </div>
-            <Heart :class="['cursor-pointer stroke-current text-neutral-800 dark:text-gray-200']" />
-
-            <!-- Mobile Volume Control (absolutely positioned) -->
-            <div class="absolute right-4 bottom-4 md:hidden">
-                <button
-                    @click="toggleVolumeControl"
-                    class="rounded-full p-1.5 text-neutral-600 hover:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
-                    aria-label="Toggle volume control"
+            <div id="endControls" class="hidden items-center justify-end gap-8 sm:flex">
+                <div
+                    id="volume"
+                    class="hidden flex-row flex-wrap items-center justify-center gap-3 sm:flex"
                 >
                     <component
                         :is="
                             playerStore.volume === 0
                                 ? VolumeOff
-                                : playerStore.volume <= 50
+                                : playerStore.volume <= 20
                                   ? Volume1
                                   : Volume2
                         "
-                        :size="20"
+                        @click="toggleVolumeControl"
+                        class="cursor-pointer text-neutral-800 dark:text-gray-200"
                     />
-                </button>
-                <input
-                    v-show="showVolumeControl"
-                    type="range"
-                    min="0"
-                    :max="100"
-                    class="accent-primary dark:[&::-moz-range-thumb]:bg-primary dark:[&::-webkit-slider-thumb]:bg-primary writing-mode-vertical-lr [&::-moz-range-thumb]:bg-primary [&::-webkit-slider-thumb]:bg-primary absolute -top-12 right-0 h-20 w-5 -translate-x-1/2 cursor-pointer appearance-none bg-transparent dark:bg-transparent [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:rounded-full [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
-                    :value="playerStore.volume"
-                    @input="
-                        playerStore.setVolume(Number(($event.target as HTMLInputElement).value))
-                    "
-                    orient="vertical"
+                    <transition
+                        enter-active-class="transition duration-200 ease-out"
+                        enter-from-class="opacity-0 scale-y-0"
+                        enter-to-class="opacity-100 scale-y-100"
+                        leave-active-class="transition duration-200 ease-in"
+                        leave-from-class="opacity-100 scale-y-100"
+                        leave-to-class="opacity-0 scale-y-0"
+                    >
+                        <input
+                            v-show="showVolumeControl"
+                            type="range"
+                            class="accent-primary [&::-moz-range-thumb]:bg-primary [&::-webkit-slider-thumb]:bg-primary h-1 w-32 cursor-pointer appearance-none rounded-lg bg-gray-300 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:rounded-full [&::-webkit-slider-runnable-track]:bg-gray-300 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
+                            :value="playerStore.volume"
+                            @input="
+                                playerStore.setVolume(
+                                    Number(($event.target as HTMLInputElement).value),
+                                )
+                            "
+                        />
+                    </transition>
+                </div>
+                <Heart
+                    :class="[
+                        'hidden sm:flex',
+                        'cursor-pointer stroke-current text-neutral-800 dark:text-gray-200',
+                    ]"
                 />
             </div>
         </div>

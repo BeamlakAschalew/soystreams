@@ -1,4 +1,5 @@
 import Podcast from '@/Interfaces/Podcast'
+import { usePlayerStore } from '@/Stores/useLivePlayerStore'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import PodcastEpisode from '../Interfaces/PodcastEpisode'
@@ -16,6 +17,7 @@ export const usePodcastPlayerStore = defineStore('podcastPlayer', () => {
     const stopped = ref(true)
     const currentTime = ref(0)
     const duration = ref(0)
+    const playerStore = usePlayerStore()
 
     // const recentStore = useRecentStationStore()
 
@@ -131,6 +133,9 @@ export const usePodcastPlayerStore = defineStore('podcastPlayer', () => {
         episode.value = podcastEpisode
         podcast.value = p
         loading.value = true
+        if (playerStore.radioInit) {
+            playerStore.stop()
+        }
         // recentStore.addRecent(e)
         audio.value.src = podcastEpisode.enclosureUrl
         audio.value.load()

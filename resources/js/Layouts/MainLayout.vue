@@ -2,6 +2,7 @@
 import Footer from '@/Components/Footer.vue'
 import Navbar from '@/Components/Navbar.vue'
 import PodcastPlayer from '@/Components/Podcast/PodcastPlayer/PodcastPlayer.vue'
+import LivePlayer from '@/Components/Radio/LivePlayer/LivePlayer.vue'
 import Sidebar from '@/Components/Sidebar/Sidebar.vue'
 defineProps<{
     title: string
@@ -13,7 +14,7 @@ defineProps<{
         <Navbar />
         <div id="playerContainer" class="flex flex-col">
             <Sidebar />
-            <!-- <LivePlayer /> -->
+            <LivePlayer />
             <PodcastPlayer />
         </div>
         <div id="slotWrapper" class="mx-10 flex flex-1 flex-col py-4 max-sm:mx-5 lg:mr-10 lg:ml-80">

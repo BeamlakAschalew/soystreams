@@ -1,9 +1,10 @@
 import Station from '@/Interfaces/Station'
 import { click } from '@/routes/radio/click'
+import { usePodcastPlayerStore } from '@/Stores/usePodcastPlayerStore'
+import { useRecentStationStore } from '@/Stores/useRecentStationStore'
 import Hls from 'hls.js'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useRecentStationStore } from './useRecentStationStore'
 
 const DEFAULT_ICON = '/images/soy-square.png'
 
@@ -16,6 +17,7 @@ export const usePlayerStore = defineStore('player', () => {
     const loading = ref(false)
     const stopped = ref(true)
     const hls = ref<Hls | null>(null)
+    const podcastPlayerStore = usePodcastPlayerStore()
 
     const recentStore = useRecentStationStore()
 
@@ -156,6 +158,10 @@ export const usePlayerStore = defineStore('player', () => {
             method: 'GET',
             keepalive: true,
         }).catch(err => console.error(err))
+
+        if (podcastPlayerStore.podcastInit) {
+            podcastPlayerStore.stop()
+        }
 
         const streamUrl = s.url || s.url_resolved
         const isHls = streamUrl.endsWith('.m3u8')
