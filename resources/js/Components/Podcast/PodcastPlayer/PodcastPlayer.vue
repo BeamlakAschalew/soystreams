@@ -1,12 +1,20 @@
 <script setup lang="ts">
-import station from '@/routes/station/show'
-import { useFavoriteStationStore } from '@/Stores/useFavoriteStationStore'
-import { usePlayerStore } from '@/Stores/useLivePlayerStore'
-import { Heart, LoaderCircle, Pause, Play, Volume1, Volume2, VolumeOff } from 'lucide-vue-next'
+import { usePodcastPlayerStore } from '@/Stores/usePodcastPlayerStore'
+import { Link } from '@inertiajs/vue3'
+import {
+    HeartIcon,
+    LoaderCircle,
+    Pause,
+    Play,
+    RotateCcwIcon,
+    RotateCwIcon,
+    Volume1,
+    Volume2,
+    VolumeOff,
+} from 'lucide-vue-next'
 import { computed, ref } from 'vue'
 
-const playerStore = usePlayerStore()
-const favoriteStore = useFavoriteStationStore()
+const playerStore = usePodcastPlayerStore()
 const showVolumeControl = ref(false)
 
 const currentIcon = computed(() => {
@@ -20,126 +28,230 @@ function toggleVolumeControl() {
     showVolumeControl.value = !showVolumeControl.value
 }
 
-function favoriteStyling() {
-    return favoriteStore.isFavorited(playerStore.station?.stationuuid!)
-        ? 'fill-gray-900 hover:fill-gray-800 dark:fill-[#e5e7eb] dark:hover:fill-gray-300'
-        : 'fill-transparent'
+const getEpisodeLink = computed(() => {
+    if (playerStore.episode && playerStore.podcast) {
+        return '#' // Placeholder
+    }
+    return '#'
+})
+
+const formatTime = (timeInSeconds: number) => {
+    if (isNaN(timeInSeconds) || timeInSeconds === Infinity || timeInSeconds < 0) {
+        return '00:00'
+    }
+    const minutes = Math.floor(timeInSeconds / 60)
+    const seconds = Math.floor(timeInSeconds % 60)
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+}
+
+const formattedCurrentTime = computed(() => formatTime(playerStore.currentTime))
+const formattedDuration = computed(() => formatTime(playerStore.duration))
+
+const handleSeek = (event: Event) => {
+    const target = event.target as HTMLInputElement
+    playerStore.seek(Number(target.value))
+}
+
+const handleRewind = () => {
+    let newTime = playerStore.currentTime - 15
+    if (newTime < 0) newTime = 0
+    playerStore.seek(newTime)
+}
+
+const handleFastForward = () => {
+    let newTime = playerStore.currentTime + 15
+    if (newTime > playerStore.duration && playerStore.duration > 0) {
+        newTime = playerStore.duration
+    }
+    playerStore.seek(newTime)
+}
+
+// Placeholder for favorite action
+const toggleFavorite = () => {
+    console.log('Favorite toggled for:', playerStore.episode?.title)
+    // Implement actual favoriting logic here, likely involving the store
 }
 </script>
 
 <template>
     <div
-        id="livePlayer"
-        v-if="playerStore.radioInit"
-        class="fixed bottom-0 z-40 flex max-h-24 w-full flex-row flex-wrap items-center justify-between border-t-2 border-gray-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-950"
+        id="podcastPlayer"
+        v-if="playerStore.podcastInit"
+        class="fixed right-0 bottom-0 left-0 z-40 flex w-full flex-col items-stretch border-t-2 border-gray-200 bg-white p-3 md:flex-row md:items-center md:px-4 md:py-2 dark:border-neutral-700 dark:bg-neutral-950"
     >
+        <!-- Left Section: Media Info -->
         <Link
-            :href="station.url(playerStore.station?.stationuuid!)"
-            id="imageTitle"
-            class="flex flex-1 flex-row items-center justify-start gap-4"
+            :href="getEpisodeLink"
+            id="mediaInfo"
+            class="mb-2 flex w-full flex-shrink-0 flex-row items-center justify-start gap-3 md:mb-0 md:w-1/3 md:pr-4"
         >
             <img
-                v-lazy="playerStore.station?.favicon"
-                class="h-16 w-16 rounded-lg bg-white object-cover p-1 max-md:h-10 max-md:w-10 dark:bg-neutral-900"
-                alt=""
+                v-lazy="playerStore.episode?.image || playerStore.podcast?.image"
+                class="h-10 w-10 rounded-md bg-white object-cover p-0.5 md:h-12 md:w-12 dark:bg-neutral-900"
+                alt="Episode/Podcast artwork"
             />
-            <div id="radioTitle" class="line-clamp-1 text-neutral-900 dark:text-neutral-50">
-                {{ playerStore.station?.name }}
+            <div id="mediaTitle" class="min-w-0 flex-1">
+                <div
+                    class="line-clamp-1 text-sm font-medium text-neutral-900 md:text-base dark:text-neutral-50"
+                >
+                    {{ playerStore.episode?.title || playerStore.podcast?.title || 'No Title' }}
+                </div>
+                <div
+                    v-if="playerStore.podcast && playerStore.episode"
+                    class="line-clamp-1 text-xs text-gray-500 dark:text-gray-400"
+                >
+                    {{ playerStore.podcast.title }}
+                </div>
             </div>
         </Link>
 
+        <!-- Center Section: Controls & Seek Bar -->
         <div
-            id="trailing"
-            class="flex flex-1 flex-row flex-wrap items-center justify-between gap-8 max-md:justify-end"
+            id="centerControls"
+            class="mb-2 flex w-full flex-col items-center md:mb-0 md:flex-grow md:px-4"
         >
-            <div
-                id="playControl"
-                class="order-last flex flex-col items-center justify-center md:order-first"
-            >
-                <div
-                    id="playBtn"
-                    class="cursor-pointer rounded-full bg-gray-900 p-3 text-white hover:bg-gray-800 dark:bg-gray-50 dark:hover:bg-gray-300"
-                    @click="playerStore.togglePlayPause"
+            <!-- Control Buttons -->
+            <div class="mb-1.5 flex items-center justify-center gap-4 md:gap-5">
+                <button
+                    @click="handleRewind"
+                    aria-label="Rewind 15 seconds"
+                    class="hover:text-primary-dark dark:hover:text-primary-light text-neutral-600 disabled:opacity-50 dark:text-neutral-400"
+                    :disabled="!playerStore.episode"
                 >
-                    <div class="hidden max-sm:block">
-                        <component
-                            :is="currentIcon"
-                            :size="20"
-                            :class="[
-                                'text-gray-100 dark:text-gray-800',
-                                { 'animate-spin': playerStore.loading },
-                            ]"
-                        />
-                    </div>
-                    <div class="hidden sm:max-lg:block">
-                        <component
-                            :is="currentIcon"
-                            :size="28"
-                            :class="[
-                                'text-gray-100 dark:text-gray-800',
-                                { 'animate-spin': playerStore.loading },
-                            ]"
-                        />
-                    </div>
-                    <div class="hidden lg:block">
-                        <component
-                            :is="currentIcon"
-                            :size="36"
-                            :class="[
-                                'text-gray-100 dark:text-gray-800',
-                                { 'animate-spin': playerStore.loading },
-                            ]"
-                        />
-                    </div>
-                </div>
-                <div class="flex flex-col items-center">
-                    <span class="text-xs font-bold text-green-600">LIVE</span>
-                    <div class="mt-1 w-10 border-b-2 border-green-600"></div>
-                </div>
+                    <RotateCcwIcon :size="20" />
+                </button>
+
+                <button
+                    @click="playerStore.togglePlayPause"
+                    :aria-label="playerStore.isPlaying ? 'Pause' : 'Play'"
+                    class="rounded-full bg-neutral-800 p-2 text-white shadow-sm hover:bg-neutral-700 disabled:opacity-50 md:p-2.5 dark:bg-neutral-200 dark:text-neutral-900 dark:hover:bg-neutral-300"
+                    :disabled="!playerStore.episode"
+                >
+                    <component
+                        :is="currentIcon"
+                        :size="24"
+                        :class="[{ 'animate-spin': playerStore.loading }]"
+                    />
+                </button>
+
+                <button
+                    @click="handleFastForward"
+                    aria-label="Fast forward 15 seconds"
+                    class="hover:text-primary-dark dark:hover:text-primary-light text-neutral-600 disabled:opacity-50 dark:text-neutral-400"
+                    :disabled="!playerStore.episode"
+                >
+                    <RotateCwIcon :size="20" />
+                </button>
             </div>
-            <div id="endControls" class="flex items-center justify-end gap-8">
-                <div
-                    id="volume"
-                    class="hidden flex-row flex-wrap items-center justify-center gap-3 md:flex"
+
+            <!-- Seek Bar and Time -->
+            <div class="flex w-full max-w-sm items-center space-x-2">
+                <span class="w-10 text-center text-xs text-neutral-500 dark:text-neutral-400">{{
+                    formattedCurrentTime
+                }}</span>
+                <input
+                    type="range"
+                    min="0"
+                    :max="playerStore.duration"
+                    :value="playerStore.currentTime"
+                    @input="handleSeek"
+                    class="h-0.5 flex-1 cursor-pointer appearance-none rounded-lg bg-gray-300 accent-neutral-700 dark:bg-neutral-600 dark:accent-neutral-300 [&::-moz-range-thumb]:h-2.5 [&::-moz-range-thumb]:w-2.5 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-neutral-700 dark:[&::-moz-range-thumb]:bg-neutral-300 [&::-webkit-slider-thumb]:h-2.5 [&::-webkit-slider-thumb]:w-2.5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-neutral-700 dark:[&::-webkit-slider-thumb]:bg-neutral-300"
+                    :disabled="
+                        !playerStore.duration ||
+                        playerStore.duration === Infinity ||
+                        playerStore.duration <= 0
+                    "
+                />
+                <span class="w-10 text-center text-xs text-neutral-500 dark:text-neutral-400">{{
+                    formattedDuration
+                }}</span>
+            </div>
+        </div>
+
+        <!-- Right Section: Volume & Favorite -->
+        <div
+            id="endControls"
+            class="flex w-full items-center justify-center gap-3 md:w-1/3 md:justify-end md:pl-4"
+        >
+            <!-- Desktop Volume Control -->
+            <div class="relative hidden md:flex md:items-center">
+                <button
+                    @click="toggleVolumeControl"
+                    class="hover:text-primary dark:hover:text-primary-light rounded-full p-1.5 text-neutral-600 hover:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
+                    aria-label="Toggle volume control"
                 >
                     <component
                         :is="
                             playerStore.volume === 0
                                 ? VolumeOff
-                                : playerStore.volume <= 20
+                                : playerStore.volume <= 50
                                   ? Volume1
                                   : Volume2
                         "
-                        @click="toggleVolumeControl"
-                        class="cursor-pointer text-neutral-800 dark:text-gray-200"
+                        :size="20"
                     />
-                    <transition
-                        enter-active-class="transition duration-200 ease-out"
-                        enter-from-class="opacity-0 scale-y-0"
-                        enter-to-class="opacity-100 scale-y-100"
-                        leave-active-class="transition duration-200 ease-in"
-                        leave-from-class="opacity-100 scale-y-100"
-                        leave-to-class="opacity-0 scale-y-0"
-                    >
-                        <input
-                            v-show="showVolumeControl"
-                            type="range"
-                            class="accent-primary [&::-moz-range-thumb]:bg-primary [&::-webkit-slider-thumb]:bg-primary h-1 w-32 cursor-pointer appearance-none rounded-lg bg-gray-300 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:rounded-full [&::-webkit-slider-runnable-track]:bg-gray-300 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
-                            :value="playerStore.volume"
-                            @input="
-                                playerStore.setVolume(
-                                    Number(($event.target as HTMLInputElement).value),
-                                )
-                            "
-                        />
-                    </transition>
-                </div>
-                <Heart
-                    @click="favoriteStore.toggleFavorite(playerStore.station!)"
-                    :class="[
-                        favoriteStyling(),
-                        'cursor-pointer stroke-current text-neutral-800 dark:text-gray-200',
-                    ]"
+                </button>
+                <transition
+                    enter-active-class="transition duration-100 ease-out"
+                    enter-from-class="transform scale-95 opacity-0"
+                    enter-to-class="transform scale-100 opacity-100"
+                    leave-active-class="transition duration-75 ease-in"
+                    leave-from-class="transform scale-100 opacity-100"
+                    leave-to-class="transform scale-95 opacity-0"
+                >
+                    <input
+                        v-show="showVolumeControl"
+                        type="range"
+                        min="0"
+                        :max="100"
+                        class="accent-primary dark:[&::-moz-range-thumb]:bg-primary dark:[&::-webkit-slider-thumb]:bg-primary [&::-moz-range-thumb]:bg-primary [&::-webkit-slider-thumb]:bg-primary absolute -top-8 left-1/2 h-1 w-20 -translate-x-1/2 cursor-pointer appearance-none rounded-lg bg-gray-300 dark:bg-neutral-700 [&::-moz-range-thumb]:h-2.5 [&::-moz-range-thumb]:w-2.5 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:rounded-full [&::-webkit-slider-thumb]:h-2.5 [&::-webkit-slider-thumb]:w-2.5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
+                        :value="playerStore.volume"
+                        @input="
+                            playerStore.setVolume(Number(($event.target as HTMLInputElement).value))
+                        "
+                    />
+                </transition>
+            </div>
+
+            <!-- Favorite Button -->
+            <button
+                @click="toggleFavorite"
+                aria-label="Favorite episode"
+                class="rounded-full p-1.5 text-neutral-600 hover:text-pink-500 disabled:opacity-50 dark:text-neutral-400 dark:hover:text-pink-400"
+                :disabled="!playerStore.episode"
+            >
+                <HeartIcon :size="20" />
+            </button>
+
+            <!-- Mobile Volume Control (absolutely positioned) -->
+            <div class="absolute right-4 bottom-4 md:hidden">
+                <button
+                    @click="toggleVolumeControl"
+                    class="rounded-full p-1.5 text-neutral-600 hover:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
+                    aria-label="Toggle volume control"
+                >
+                    <component
+                        :is="
+                            playerStore.volume === 0
+                                ? VolumeOff
+                                : playerStore.volume <= 50
+                                  ? Volume1
+                                  : Volume2
+                        "
+                        :size="20"
+                    />
+                </button>
+                <input
+                    v-show="showVolumeControl"
+                    type="range"
+                    min="0"
+                    :max="100"
+                    class="accent-primary dark:[&::-moz-range-thumb]:bg-primary dark:[&::-webkit-slider-thumb]:bg-primary writing-mode-vertical-lr [&::-moz-range-thumb]:bg-primary [&::-webkit-slider-thumb]:bg-primary absolute -top-12 right-0 h-20 w-5 -translate-x-1/2 cursor-pointer appearance-none bg-transparent dark:bg-transparent [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:rounded-full [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
+                    :value="playerStore.volume"
+                    @input="
+                        playerStore.setVolume(Number(($event.target as HTMLInputElement).value))
+                    "
+                    orient="vertical"
                 />
             </div>
         </div>

@@ -127,6 +127,7 @@ export const usePodcastPlayerStore = defineStore('podcastPlayer', () => {
     }
 
     function setEpisode(podcastEpisode: PodcastEpisode, p: Podcast) {
+        podcastInit.value = true
         episode.value = podcastEpisode
         podcast.value = p
         loading.value = true
