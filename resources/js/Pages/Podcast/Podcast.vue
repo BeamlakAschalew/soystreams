@@ -136,7 +136,7 @@ function formatDuration(seconds: number): string {
             class="relative mb-6 flex w-full flex-col overflow-hidden rounded-lg bg-gradient-to-b from-green-400/80 via-green-200/40 to-transparent p-6 md:flex-row md:items-start md:p-8 dark:from-green-700/80 dark:via-green-900/40"
         >
             <PodcastHeader :podcastName="podcast.title" :podcastFavicon="podcast.image" />
-            <PodcastBody :podcast="podcast" />
+            <PodcastBody :podcast="podcast" :latest-podcast="allEpisodes[0]" />
         </div>
 
         <!-- Episode List - iterates over computed 'displayedEpisodes' -->
@@ -187,7 +187,7 @@ function formatDuration(seconds: number): string {
                 totalEpisodes > 0 &&
                 !isShowingMore
             "
-            class="mt-4 text-center text-gray-500 dark:text-gray-400"
+            class="mt-4 text-gray-500 dark:text-gray-400"
         >
             All episodes shown.
         </div>
@@ -196,7 +196,7 @@ function formatDuration(seconds: number): string {
         <!-- Show only after fetch attempt AND if list is empty AND not loading -->
         <div
             v-if="hasFetchedAll && allEpisodes.length === 0 && !isShowingMore"
-            class="mt-4 text-center text-gray-500 dark:text-gray-400"
+            class="mt-4 text-gray-500 dark:text-gray-400"
         >
             No episodes found for this podcast.
         </div>

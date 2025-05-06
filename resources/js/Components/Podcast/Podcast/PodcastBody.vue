@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import Podcast from '@/Interfaces/Podcast'
+import PodcastEpisode from '@/Interfaces/PodcastEpisode'
+import { usePodcastPlayerStore } from '@/Stores/usePodcastPlayerStore'
 import {
     ChevronDownIcon,
     ChevronUpIcon,
@@ -11,10 +13,16 @@ import {
 import type { PropType } from 'vue'
 import { ref } from 'vue'
 
+const playerStore = usePodcastPlayerStore()
+
 defineProps({
     podcast: {
         type: Object as PropType<Podcast>,
         required: true,
+    },
+    latestPodcast: {
+        type: Object as PropType<PodcastEpisode>,
+        required: false,
     },
 })
 
@@ -23,21 +31,15 @@ const showInfo = ref(false)
 function toggleInfo() {
     showInfo.value = !showInfo.value
 }
-
-// const playerStore = usePlayerStore()
 // const favoriteStore = useFavoriteStationStore()
 
-// function playPodcast(podcast: Podcast) {
-//     if (
-//         playerStore.station?.stationuuid === station.stationuuid &&
-//         (playerStore.isPlaying || playerStore.loading)
-//     ) {
-//         playerStore.stop()
-//     } else {
-//         playerStore.setRadio(station)
-//     }
-// }
-const playing = ref(false)
+function playPodcast(podcast: Podcast, podcastEpisode: PodcastEpisode) {
+    if (playerStore.podcast?.id === podcast.id && (playerStore.isPlaying || playerStore.loading)) {
+        playerStore.stop()
+    } else {
+        playerStore.setEpisode(podcastEpisode, podcast)
+    }
+}
 </script>
 <template>
     <div class="flex flex-col items-center text-center md:flex-1 md:items-start md:text-left">
@@ -50,17 +52,18 @@ const playing = ref(false)
 
         <div class="mb-6 flex items-center justify-center gap-6 md:justify-start">
             <button
-                @click="playing = !playing"
+                v-if="latestPodcast"
+                @click="playPodcast(podcast, latestPodcast)"
                 class="flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-gray-900 text-white transition-colors hover:bg-gray-800 dark:bg-gray-50 dark:hover:bg-gray-300"
             >
                 <component
-                    v-if="playing"
+                    v-if="playerStore.loading && playerStore.podcast?.id === podcast.id"
                     :is="LoaderCircle"
                     class="h-6 w-6 animate-spin text-white dark:text-gray-900"
                 />
 
                 <component
-                    v-else-if="!playing"
+                    v-else-if="playerStore.podcast?.id === podcast.id && playerStore.isPlaying"
                     :is="Pause"
                     class="h-6 w-6 text-white dark:text-gray-900"
                 />

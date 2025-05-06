@@ -1,13 +1,16 @@
+import Podcast from '@/Interfaces/Podcast'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import PodcastEpisode from '../Interfaces/PodcastEpisode'
 const DEFAULT_ICON = '/images/soy-square.png'
 
 export const usePodcastPlayerStore = defineStore('podcastPlayer', () => {
-    const radioInit = ref(false)
+    const podcastInit = ref(false)
     const isPlaying = ref(false)
     const volume = ref(50)
     const episode = ref<PodcastEpisode | null>(null)
+    const podcast = ref<Podcast | null>(null)
+    const podcastId = ref<number | null>(null)
     const audio = ref(new Audio())
     const loading = ref(false)
     const stopped = ref(true)
@@ -123,15 +126,16 @@ export const usePodcastPlayerStore = defineStore('podcastPlayer', () => {
         audio.value.volume = newVolume / 100
     }
 
-    function setEpisode(p: PodcastEpisode) {
-        episode.value = p
+    function setEpisode(podcastEpisode: PodcastEpisode, p: Podcast) {
+        episode.value = podcastEpisode
+        podcast.value = p
         loading.value = true
         // recentStore.addRecent(e)
-        audio.value.src = p.enclosureUrl
+        audio.value.src = podcastEpisode.enclosureUrl
         audio.value.load()
         turnOn()
-        updateMediaMetadata(p)
-        showNotification(p)
+        updateMediaMetadata(podcastEpisode)
+        showNotification(podcastEpisode)
     }
 
     function updateMediaMetadata(p: PodcastEpisode) {
@@ -192,7 +196,7 @@ export const usePodcastPlayerStore = defineStore('podcastPlayer', () => {
         audio.value.pause()
         audio.value.src = ''
         episode.value = null
-        radioInit.value = false
+        podcastInit.value = false
         isPlaying.value = false
         stopped.value = true
         loading.value = false
@@ -200,7 +204,7 @@ export const usePodcastPlayerStore = defineStore('podcastPlayer', () => {
 
     return {
         isPlaying,
-        radioInit,
+        podcastInit,
         volume,
         loading,
         stopped,
@@ -212,5 +216,7 @@ export const usePodcastPlayerStore = defineStore('podcastPlayer', () => {
         seek,
         stop,
         episode,
+        podcast,
+        podcastId,
     }
 })
