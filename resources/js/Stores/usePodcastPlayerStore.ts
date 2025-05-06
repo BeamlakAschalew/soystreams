@@ -69,11 +69,24 @@ export const usePodcastPlayerStore = defineStore('podcastPlayer', () => {
     // ignore retry if stream is http
 
     function handleStreamError() {
-        if (!stopped.value && episode.value) {
-            console.warn('Stream stopped unexpectedly. Retrying...')
-            setTimeout(retryStream, 7000)
+        if (!stopped.value && isPlaying.value) {
+            // Only retry standard streams if it was playing and not explicitly stopped.
+            console.warn('Standard stream stopped unexpectedly while playing. Retrying...')
+            // Clear any pending retries to avoid duplicates
+            clearTimeout(retryTimeoutId.value)
+            retryTimeoutId.value = setTimeout(retryStream, 7000)
+        } else if (!stopped.value && !isPlaying.value) {
+            // Stream stalled/errored while paused by the user, do not retry.
+            console.warn('Standard stream stalled/errored while paused. No retry scheduled.')
+            loading.value = false // Ensure loading indicator is off if paused
+        } else {
+            // Stream was stopped explicitly, do nothing.
+            console.log('Stream error/stall occurred after explicit stop. Ignoring.')
         }
     }
+
+    // Add a ref to hold the timeout ID
+    const retryTimeoutId = ref<number | undefined>(undefined)
 
     function retryStream() {
         if (episode.value) {
