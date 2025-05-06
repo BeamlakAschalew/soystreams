@@ -31,7 +31,7 @@ defineProps<{
             <div
                 v-if="hasMore"
                 @click="loadMore"
-                class="px-4 py-2 font-semibold text-gray-800 hover:cursor-pointer hover:text-green-600 dark:text-gray-300"
+                class="py-2 font-semibold text-gray-800 hover:cursor-pointer hover:text-green-600 dark:text-gray-300"
             >
                 See More
             </div>

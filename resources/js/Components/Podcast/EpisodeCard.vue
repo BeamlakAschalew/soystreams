@@ -17,7 +17,7 @@
                         :r="radius"
                         fill="none"
                         stroke-width="2.5"
-                        class="stroke-gray-800 dark:stroke-gray-300"
+                        class="stroke-primary-800 dark:stroke-primary-300"
                         stroke-linecap="round"
                         :stroke-dasharray="circumference"
                         :stroke-dashoffset="progressOffset"

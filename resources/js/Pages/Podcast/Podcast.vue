@@ -20,7 +20,6 @@ const props = defineProps({
         required: true,
     },
     totalEpisodesHint: {
-        // Initial estimate/hint
         type: Number,
         required: true,
     },
@@ -38,17 +37,10 @@ defineOptions({
     layout: MainLayout,
 })
 
-// Holds ALL episodes (initial + fetched)
 const allEpisodes = ref<PodcastEpisode[]>([...props.initialEpisodes])
-// Tracks how many episodes from 'allEpisodes' should be rendered
 const displayedEpisodesCount = ref(props.initialEpisodes.length)
-// Loading state for the background fetch
-const isLoadingAll = ref(false)
-// Loading state for the "See More" button action (visual feedback)
 const isShowingMore = ref(false)
-// Flag to indicate if the background fetch has completed (or failed)
 const hasFetchedAll = ref(props.initialEpisodes.length >= props.totalEpisodesHint) // Assume fetched if initial >= hint
-// Store the potentially updated total count after fetching all
 const totalEpisodes = ref(props.totalEpisodesHint)
 
 // Computed property for the episodes to actually render in the template
@@ -59,74 +51,71 @@ const displayedEpisodes = computed(() => {
 
 // Computed property to determine if the "See More" button should be shown
 const canLoadMore = computed(() => {
-    // Show if we have fetched all AND there are more episodes to display than currently shown
-    return hasFetchedAll.value && displayedEpisodesCount.value < totalEpisodes.value
+    // Show button if we haven't fetched all OR if we have fetched all but haven't displayed all
+    return !hasFetchedAll.value || displayedEpisodesCount.value < totalEpisodes.value
 })
 
-// Function to fetch ALL remaining episodes in the background
-async function fetchRemainingEpisodesInBackground() {
-    // Don't fetch if we already know we have them all or if already loading
-    if (hasFetchedAll.value || isLoadingAll.value) return
+async function fetchRemainingEpisodes() {
+    if (hasFetchedAll.value) return
 
-    isLoadingAll.value = true
     try {
         const response = await axios.get(episodes.url(props.podcast.id))
 
         const fetchedEpisodes = response.data.episodes as PodcastEpisode[]
         const actualTotal = response.data.totalEpisodes as number
 
-        // Update the main list with ALL episodes (replace initial ones if they overlap, simple concat might duplicate)
-        // A more robust way is to create a Set from IDs of initialEpisodes, then filter fetchedEpisodes
         const initialIds = new Set(props.initialEpisodes.map(ep => ep.id))
         const remainingEpisodes = fetchedEpisodes.filter(ep => !initialIds.has(ep.id))
 
         allEpisodes.value = [...props.initialEpisodes, ...remainingEpisodes]
-        totalEpisodes.value = actualTotal // Update total count
-        hasFetchedAll.value = true // Mark as fetched
+        totalEpisodes.value = actualTotal
+        hasFetchedAll.value = true
     } catch (error) {
         console.error('Failed to fetch all episodes:', error)
-        // Optionally set a flag to prevent retries or show an error message
-        hasFetchedAll.value = true // Set true even on error to stop trying/hide loader maybe
-    } finally {
-        isLoadingAll.value = false
+        hasFetchedAll.value = true
     }
 }
 
 // Function called when "See More" is clicked
-function showMoreEpisodes() {
-    if (!canLoadMore.value) return
+async function showMoreEpisodes() {
+    // Prevent clicking if already loading or if all known episodes are shown
+    if (
+        isShowingMore.value ||
+        (hasFetchedAll.value && displayedEpisodesCount.value >= totalEpisodes.value)
+    ) {
+        return
+    }
 
-    isShowingMore.value = true // Indicate loading for the button action
+    isShowingMore.value = true
 
-    // Calculate the new count
-    const newCount = Math.min(
-        displayedEpisodesCount.value + props.episodesPerPage,
-        totalEpisodes.value, // Don't exceed the total number available
-    )
-    displayedEpisodesCount.value = newCount
+    try {
+        if (!hasFetchedAll.value) {
+            await fetchRemainingEpisodes()
+        }
 
-    // Simulate a small delay for visual feedback if needed, otherwise remove setTimeout
-    setTimeout(() => {
+        // If fetch was successful (or already done), update displayed count
+        // This happens even if fetch failed but set hasFetchedAll=true
+        if (hasFetchedAll.value) {
+            const newCount = Math.min(
+                displayedEpisodesCount.value + props.episodesPerPage,
+                totalEpisodes.value, // Use the potentially updated total
+            )
+            displayedEpisodesCount.value = newCount
+        }
+    } catch (error) {
+        console.error('Error during showMoreEpisodes:', error)
+    } finally {
         isShowingMore.value = false
-    }, 100) // Adjust delay as needed or remove
+    }
 }
 
-// Fetch remaining episodes when the component mounts if needed
+// Fetch remaining episodes when the component mounts if needed - REMOVED
 onMounted(() => {
-    // Only trigger background fetch if initial load count is less than the hint
-    // or if the hint itself suggests more than the per-page count
-    if (
-        props.initialEpisodes.length < props.totalEpisodesHint ||
-        props.totalEpisodesHint > props.episodesPerPage
-    ) {
-        fetchRemainingEpisodesInBackground()
-    } else {
-        // If initial episodes >= hint, assume we already have all needed
-        hasFetchedAll.value = true
-    }
+    // Ensure initial state is correct based on props.
+    // The ref definition already handles this based on initialEpisodes vs totalEpisodesHint.
+    hasFetchedAll.value = props.initialEpisodes.length >= props.totalEpisodesHint
 })
 
-// --- Helper function to format duration (example) ---
 function formatDuration(seconds: number): string {
     if (!seconds || seconds <= 0) return 'N/A'
     const h = Math.floor(seconds / 3600)
@@ -137,7 +126,6 @@ function formatDuration(seconds: number): string {
     const sStr = s < 10 ? `0${s}` : `${s}`
     return `${hStr}${mStr}:${sStr}`
 }
-// --- End Helper ---
 </script>
 
 <template>
@@ -173,37 +161,41 @@ function formatDuration(seconds: number): string {
             />
         </div>
 
-        <!-- Loading Indicator for the background fetch -->
-        <div v-if="isLoadingAll" class="mt-4 text-center text-gray-500 dark:text-gray-400">
-            Loading remaining episodes...
-        </div>
-
         <!-- See More Button -->
         <!-- Show button only if 'canLoadMore' is true and not currently showing more -->
-        <div v-if="canLoadMore && !isShowingMore" class="mt-4 flex justify-center">
-            <button
+        <div v-if="canLoadMore && !isShowingMore" class="mt-4 flex justify-start">
+            <div
                 @click="showMoreEpisodes"
-                class="rounded bg-green-600 px-4 py-2 font-semibold text-white hover:bg-green-700 disabled:opacity-50"
+                class="cursor-pointer py-2 font-semibold text-gray-800 hover:text-green-700 disabled:opacity-50 dark:text-gray-300"
             >
-                See More Episodes ({{ displayedEpisodesCount }} / {{ totalEpisodes }})
-            </button>
+                <!-- Button text depends on whether the full list has been fetched -->
+                <span v-if="!hasFetchedAll">Load Episodes</span>
+                <span v-else
+                    >See More Episodes ({{ displayedEpisodesCount }} / {{ totalEpisodes }})</span
+                >
+            </div>
         </div>
         <!-- Loading indicator specifically for the "See More" action -->
-        <div v-if="isShowingMore" class="mt-4 text-center text-gray-500 dark:text-gray-400">
-            Loading...
-        </div>
+        <div v-if="isShowingMore" class="mt-4 text-gray-500 dark:text-gray-400">Loading...</div>
 
         <!-- Message when all are displayed -->
+        <!-- Show only after fetch attempt AND when count >= total AND not loading -->
         <div
-            v-if="hasFetchedAll && displayedEpisodesCount >= totalEpisodes && totalEpisodes > 0"
+            v-if="
+                hasFetchedAll &&
+                displayedEpisodesCount >= totalEpisodes &&
+                totalEpisodes > 0 &&
+                !isShowingMore
+            "
             class="mt-4 text-center text-gray-500 dark:text-gray-400"
         >
             All episodes shown.
         </div>
 
         <!-- Message when no episodes found initially -->
+        <!-- Show only after fetch attempt AND if list is empty AND not loading -->
         <div
-            v-if="allEpisodes.length === 0 && !isLoadingAll"
+            v-if="hasFetchedAll && allEpisodes.length === 0 && !isShowingMore"
             class="mt-4 text-center text-gray-500 dark:text-gray-400"
         >
             No episodes found for this podcast.

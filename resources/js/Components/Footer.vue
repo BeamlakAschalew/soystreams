@@ -17,14 +17,6 @@ import { about } from '@/routes/about'
                 >
                     About
                 </Link>
-                <a
-                    href="https://t.me/soystreams"
-                    target="_blank"
-                    rel="noopener"
-                    class="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
-                >
-                    Telegram
-                </a>
             </div>
         </div>
     </footer>
