@@ -2,7 +2,7 @@
 import { usePodcastPlayerStore } from '@/Stores/usePodcastPlayerStore'
 import { Link } from '@inertiajs/vue3'
 import {
-    HeartIcon,
+    Heart,
     LoaderCircle,
     Pause,
     Play,
@@ -171,40 +171,35 @@ const toggleFavorite = () => {
         <!-- Right Section: Volume & Favorite -->
         <div
             id="endControls"
-            class="flex w-full items-center justify-center gap-3 md:w-1/3 md:justify-end md:pl-4"
+            class="flex w-full items-center justify-center gap-3 md:justify-end md:pl-4"
         >
-            <!-- Desktop Volume Control -->
-            <div class="relative hidden md:flex md:items-center">
-                <button
+            <div
+                id="volume"
+                class="hidden flex-row flex-wrap items-center justify-center gap-3 md:flex"
+            >
+                <component
+                    :is="
+                        playerStore.volume === 0
+                            ? VolumeOff
+                            : playerStore.volume <= 20
+                              ? Volume1
+                              : Volume2
+                    "
                     @click="toggleVolumeControl"
-                    class="hover:text-primary dark:hover:text-primary-light rounded-full p-1.5 text-neutral-600 hover:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
-                    aria-label="Toggle volume control"
-                >
-                    <component
-                        :is="
-                            playerStore.volume === 0
-                                ? VolumeOff
-                                : playerStore.volume <= 50
-                                  ? Volume1
-                                  : Volume2
-                        "
-                        :size="20"
-                    />
-                </button>
+                    class="cursor-pointer text-neutral-800 dark:text-gray-200"
+                />
                 <transition
-                    enter-active-class="transition duration-100 ease-out"
-                    enter-from-class="transform scale-95 opacity-0"
-                    enter-to-class="transform scale-100 opacity-100"
-                    leave-active-class="transition duration-75 ease-in"
-                    leave-from-class="transform scale-100 opacity-100"
-                    leave-to-class="transform scale-95 opacity-0"
+                    enter-active-class="transition duration-200 ease-out"
+                    enter-from-class="opacity-0 scale-y-0"
+                    enter-to-class="opacity-100 scale-y-100"
+                    leave-active-class="transition duration-200 ease-in"
+                    leave-from-class="opacity-100 scale-y-100"
+                    leave-to-class="opacity-0 scale-y-0"
                 >
                     <input
                         v-show="showVolumeControl"
                         type="range"
-                        min="0"
-                        :max="100"
-                        class="accent-primary dark:[&::-moz-range-thumb]:bg-primary dark:[&::-webkit-slider-thumb]:bg-primary [&::-moz-range-thumb]:bg-primary [&::-webkit-slider-thumb]:bg-primary absolute -top-8 left-1/2 h-1 w-20 -translate-x-1/2 cursor-pointer appearance-none rounded-lg bg-gray-300 dark:bg-neutral-700 [&::-moz-range-thumb]:h-2.5 [&::-moz-range-thumb]:w-2.5 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:rounded-full [&::-webkit-slider-thumb]:h-2.5 [&::-webkit-slider-thumb]:w-2.5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
+                        class="accent-primary [&::-moz-range-thumb]:bg-primary [&::-webkit-slider-thumb]:bg-primary h-1 w-32 cursor-pointer appearance-none rounded-lg bg-gray-300 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:rounded-full [&::-webkit-slider-runnable-track]:bg-gray-300 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full"
                         :value="playerStore.volume"
                         @input="
                             playerStore.setVolume(Number(($event.target as HTMLInputElement).value))
@@ -212,16 +207,7 @@ const toggleFavorite = () => {
                     />
                 </transition>
             </div>
-
-            <!-- Favorite Button -->
-            <button
-                @click="toggleFavorite"
-                aria-label="Favorite episode"
-                class="rounded-full p-1.5 text-neutral-600 hover:text-pink-500 disabled:opacity-50 dark:text-neutral-400 dark:hover:text-pink-400"
-                :disabled="!playerStore.episode"
-            >
-                <HeartIcon :size="20" />
-            </button>
+            <Heart :class="['cursor-pointer stroke-current text-neutral-800 dark:text-gray-200']" />
 
             <!-- Mobile Volume Control (absolutely positioned) -->
             <div class="absolute right-4 bottom-4 md:hidden">
