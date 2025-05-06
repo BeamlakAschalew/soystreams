@@ -91,28 +91,58 @@ export const usePodcastPlayerStore = defineStore('podcastPlayer', () => {
     function retryStream() {
         if (episode.value) {
             loading.value = true
-            // fallback to plain url first, then resolved
             const plainUrl = episode.value.enclosureUrl
-            const currentSrc = audio.value.src
-            const nextSrc = currentSrc === plainUrl ? plainUrl : plainUrl
-            if (nextSrc === plainUrl) {
-                console.warn('Falling back to episode.audioUrl')
-            }
-            audio.value.src = nextSrc
+            const timeToResume = currentTime.value // Store current time before changing src
+
+            // Clear any pending retries to avoid duplicates if this retry also fails
+            clearTimeout(retryTimeoutId.value)
+
+            audio.value.src = plainUrl
             audio.value.load()
-            if (isPlaying.value) {
+
+            // Attempt to play if it was playing or not explicitly stopped
+            if (isPlaying.value || !stopped.value) {
                 audio.value
                     .play()
                     .then(() => {
+                        audio.value.currentTime = timeToResume
                         isPlaying.value = true
                         loading.value = false
+                        stopped.value = false
                     })
                     .catch(err => {
-                        console.log(err)
+                        console.error('Error during retry play:', err)
                         loading.value = false
-                        setTimeout(retryStream, 7000)
+                        // If play fails again, schedule another retry, unless explicitly stopped
+                        if (!stopped.value) {
+                            console.warn('Retrying stream again after error.')
+                            retryTimeoutId.value = setTimeout(retryStream, 7000)
+                        } else {
+                            console.log(
+                                'Stream stopped during retry attempt, not retrying further.',
+                            )
+                        }
                     })
+            } else {
+                // If it was paused or stopped by user action, just load and set time, but don't auto-play
+                audio.value.onloadeddata = () => {
+                    audio.value.currentTime = timeToResume
+                    loading.value = false
+                    audio.value.onloadeddata = null // Clean up listener
+                }
+                // Handle cases where onloadeddata might not fire if already loaded or error
+                audio.value.onerror = e => {
+                    console.error('Error loading stream during paused retry:', e)
+                    loading.value = false
+                    // Potentially schedule another retry if appropriate, e.g., if not explicitly stopped
+                    if (!stopped.value) {
+                        retryTimeoutId.value = setTimeout(retryStream, 7000)
+                    }
+                    audio.value.onerror = null // Clean up
+                }
             }
+        } else {
+            loading.value = false
         }
     }
 
@@ -237,5 +267,7 @@ export const usePodcastPlayerStore = defineStore('podcastPlayer', () => {
         episode,
         podcast,
         podcastId,
+        turnOn,
+        turnOff,
     }
 })

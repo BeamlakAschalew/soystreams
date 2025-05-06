@@ -14,6 +14,7 @@ import type { PropType } from 'vue'
 import { ref } from 'vue'
 
 const playerStore = usePodcastPlayerStore()
+// const favoriteStore = useFavoriteStationStore()
 
 defineProps({
     podcast: {
@@ -31,11 +32,14 @@ const showInfo = ref(false)
 function toggleInfo() {
     showInfo.value = !showInfo.value
 }
-// const favoriteStore = useFavoriteStationStore()
 
 function playPodcast(podcast: Podcast, podcastEpisode: PodcastEpisode) {
     if (playerStore.podcast?.id === podcast.id && (playerStore.isPlaying || playerStore.loading)) {
         playerStore.stop()
+    } else if (playerStore.podcastInit && !playerStore.isPlaying) {
+        playerStore.turnOn()
+    } else if (playerStore.podcastInit && playerStore.isPlaying) {
+        playerStore.turnOff()
     } else {
         playerStore.setEpisode(podcastEpisode, podcast)
     }

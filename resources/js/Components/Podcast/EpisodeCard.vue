@@ -33,13 +33,12 @@ const formattedDuration = computed(() => playerStore.duration)
 
 const progressOffset = computed(() => {
     if (playerStore.podcastInit && playerStore.episode?.id === props.episode.id) {
-        console.log(`POFFSET: ${progressOffset.value}`)
         return (
             circumference - (formattedCurrentTime.value / formattedDuration.value) * circumference
         )
+    } else {
+        return circumference
     }
-    console.log(`POFFSET: ${progressOffset.value}`)
-    return 180
 })
 
 const toggleDescription = () => {
