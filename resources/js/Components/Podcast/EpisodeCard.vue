@@ -105,7 +105,7 @@ function playPodcastEpisode(podcast: Podcast, podcastEpisode: PodcastEpisode) {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        class="h-7 w-7"
+                        class="h-8 w-8"
                     >
                         <path
                             fill-rule="evenodd"

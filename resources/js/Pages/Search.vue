@@ -6,7 +6,9 @@ import { debounce } from 'lodash'
 import { Search } from 'lucide-vue-next'
 import { nextTick, onMounted, ref, watch } from 'vue'
 
+import GridPodcastsDisplay from '@/Components/Podcast/GridPodcastsDisplay.vue'
 import GridChannelsDisplay from '@/Components/Radio/GridStationsDisplay.vue'
+import Podcast from '@/Interfaces/Podcast'
 import Station from '@/Interfaces/Station'
 import MainLayout from '@/Layouts/MainLayout.vue'
 
@@ -14,12 +16,14 @@ defineOptions({ layout: MainLayout })
 
 const props = defineProps<{
     searched_stations: Station[]
+    searched_podcasts: Podcast[]
     query: any
     no_input: boolean
     meta: { current_page: number; has_more: boolean }
 }>()
 
 const stations = ref<Station[]>([...props.searched_stations])
+const podcasts = ref<Podcast[]>([...props.searched_podcasts])
 const page = ref(props.meta.current_page)
 const hasMore = ref(props.meta.has_more)
 const observerTarget = ref<HTMLElement | null>(null)
@@ -38,9 +42,10 @@ function loadMore() {
             preserveState: true,
             preserveScroll: true,
             replace: false,
-            only: ['searched_stations', 'meta'],
+            only: ['searched_stations', 'searched_podcasts', 'meta'],
             onSuccess: page => {
                 stations.value.push(...(page.props.searched_stations as Station[]))
+                podcasts.value.push(...(page.props.searched_podcasts as Podcast[]))
                 hasMore.value = (page.props.meta as { has_more: boolean }).has_more
 
                 const url = new URL(window.location.href)
@@ -169,8 +174,16 @@ watch(searchQuery, newQuery => {
             :current-page="page"
             :has-more="hasMore"
             :no-input="props.no_input"
-            title="Search Results"
+            title="Radio stations"
             :load-more="loadMore"
+        />
+
+        <GridPodcastsDisplay
+            :podcasts="podcasts"
+            :current-page="page"
+            :has-more="hasMore"
+            :no-input="props.no_input"
+            title="Podcasts"
         />
     </div>
 </template>

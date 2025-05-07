@@ -3,13 +3,19 @@
 namespace App\Http\Controllers;
 
 use AdinanCenci\RadioBrowser\RadioBrowser;
+use App\Services\PodcastIndexService;
 use App\Services\RadioBrowserServer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use PodcastIndexWrapper\Client;
 
 class SearchController extends Controller {
     private function getRadioBrowserInstance(): RadioBrowser {
         return new RadioBrowser(RadioBrowserServer::getServerUrl());
+    }
+
+    private function getPodcastIndexInstance() {
+        return new Client(PodcastIndexService::config());
     }
 
     private function getSearchParameters(Request $request): array {
@@ -24,7 +30,8 @@ class SearchController extends Controller {
 
     public function index(Request $request) {
         $browser = $this->getRadioBrowserInstance();
-        $query = $request->input('q');
+        $podcastBrowser = $this->getPodcastIndexInstance();
+        $query = $request->input('q') ?? '';
         $page = $request->input('page', 1);
         $limit = 20;
         $offset = ($page - 1) * $limit;
@@ -35,9 +42,12 @@ class SearchController extends Controller {
         $stations = $query ? $browser->searchStation($params) : [];
         $hasMore = $query && \count($stations) === $limit;
 
+        $podcasts = $query ? $podcastBrowser->search->byTerm($query, 1, 40)->json() : [];
+
         return Inertia::render('Search', [
             'title' => 'Search',
             'searched_stations' => $stations,
+            'searched_podcasts' => $podcasts->feeds ?? [],
             'query' => ['q' => $query],
             'no_input' => ! $query,
             'meta' => [
