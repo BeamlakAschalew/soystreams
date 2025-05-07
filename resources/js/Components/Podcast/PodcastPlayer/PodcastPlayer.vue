@@ -35,17 +35,19 @@ const getEpisodeLink = computed(() => {
     return '#'
 })
 
-const formatTime = (timeInSeconds: number) => {
-    if (isNaN(timeInSeconds) || timeInSeconds === Infinity || timeInSeconds < 0) {
-        return '00:00'
-    }
-    const minutes = Math.floor(timeInSeconds / 60)
-    const seconds = Math.floor(timeInSeconds % 60)
-    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+function formatDuration(seconds: number): string {
+    if (!seconds || seconds <= 0) return 'N/A'
+    const h = Math.floor(seconds / 3600)
+    const m = Math.floor((seconds % 3600) / 60)
+    const s = Math.floor(seconds % 60)
+    const hStr = h > 0 ? `${h}:` : ''
+    const mStr = m < 10 ? `0${m}` : `${m}`
+    const sStr = s < 10 ? `0${s}` : `${s}`
+    return `${hStr}${mStr}:${sStr}`
 }
 
-const formattedCurrentTime = computed(() => formatTime(playerStore.currentTime))
-const formattedDuration = computed(() => formatTime(playerStore.duration))
+const formattedCurrentTime = computed(() => formatDuration(playerStore.currentTime))
+const formattedDuration = computed(() => formatDuration(playerStore.duration))
 
 const handleSeek = (event: Event) => {
     const target = event.target as HTMLInputElement
