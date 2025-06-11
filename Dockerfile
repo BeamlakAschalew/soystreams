@@ -12,8 +12,8 @@ RUN apk add --no-cache \
     libpng-dev \
     libjpeg-turbo-dev \
     freetype-dev \
-    oniguruma-dev \ # for mbstring
-    libxml2-dev \   # for xml/dom
+    oniguruma-dev \ # for mbstring \
+    libxml2-dev \   # for xml/dom \
     supervisor \
     git # For composer dependencies from VCS if needed
 
