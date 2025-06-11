@@ -12,40 +12,25 @@ RUN apk add --no-cache \
     libpng-dev \
     libjpeg-turbo-dev \
     freetype-dev \
-    oniguruma-dev \ # for mbstring \
-    libxml2-dev \   # for xml/dom \
+    oniguruma-dev \   # for mbstring \
+    libxml2-dev \     # for xml/dom \
     supervisor \
-    git # For composer dependencies from VCS if needed
+    git               # For composer dependencies from VCS if needed
 
 # Install PHP extensions
-# Check your project's composer.json "require" section for specific PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) \
-    gd \
-    pdo_mysql \
-    bcmath \
-    sockets \
-    zip \
-    exif \
-    pcntl \
-    mbstring \
-    xml \
-    dom
-
-# Install Redis extension (as it seems to be used in your config)
-RUN pecl install redis && docker-php-ext-enable redis
-
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 WORKDIR /var/www/html
 
 # --- Node.js Frontend Builder ---
 FROM node:18-alpine AS frontend_builder
 WORKDIR /app
 
-RUN npm ci --only=production
+# Copy package.json and package-lock.json first
+COPY package.json package-lock.json ./
 
+# Install npm dependencies
+RUN npm ci --only=production --no-audit --no-fund # Added flags for cleaner production install
+
+# Copy the rest of the application code
 COPY . .
 # This command should build your Vite assets as defined in package.json scripts (e.g., "build": "vite build")
 RUN npm run build
