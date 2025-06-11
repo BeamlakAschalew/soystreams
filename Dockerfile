@@ -44,9 +44,6 @@ WORKDIR /var/www/html
 FROM node:18-alpine AS frontend_builder
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-# If you use npm instead of yarn, change yarn.lock to package-lock.json
-# and the next line to: RUN npm ci --only=production
 RUN npm ci --only=production
 
 COPY . .
