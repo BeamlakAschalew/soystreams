@@ -44,14 +44,14 @@ WORKDIR /var/www/html
 FROM node:18-alpine AS frontend_builder
 WORKDIR /app
 
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 # If you use npm instead of yarn, change yarn.lock to package-lock.json
 # and the next line to: RUN npm ci --only=production
-RUN yarn install --frozen-lockfile --production
+RUN npm ci --only=production
 
 COPY . .
 # This command should build your Vite assets as defined in package.json scripts (e.g., "build": "vite build")
-RUN yarn build
+RUN npm run build
 
 # --- Final Application Stage ---
 FROM php_base AS app
