@@ -1,14 +1,14 @@
 {
-  "_GridStationsDisplay.vue_vue_type_script_setup_true_lang-D2k5Bisg.js": {
-    "file": "assets/GridStationsDisplay.vue_vue_type_script_setup_true_lang-D2k5Bisg.js",
+  "_GridStationsDisplay.vue_vue_type_script_setup_true_lang-CUvLe9tW.js": {
+    "file": "assets/GridStationsDisplay.vue_vue_type_script_setup_true_lang-CUvLe9tW.js",
     "name": "GridStationsDisplay.vue_vue_type_script_setup_true_lang",
     "imports": [
-      "_RadioCard.vue_vue_type_script_setup_true_lang-CDFQ3lz4.js",
+      "_RadioCard.vue_vue_type_script_setup_true_lang-BTUhhqCe.js",
       "resources/js/app.ts"
     ]
   },
-  "_MainLayout.vue_vue_type_script_setup_true_lang-yIDBWnFS.js": {
-    "file": "assets/MainLayout.vue_vue_type_script_setup_true_lang-yIDBWnFS.js",
+  "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js": {
+    "file": "assets/MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js",
     "name": "MainLayout.vue_vue_type_script_setup_true_lang",
     "imports": [
       "resources/js/app.ts"
@@ -18,27 +18,35 @@
       "assets/soy-long-uN1wH7uv.png"
     ]
   },
-  "_RadioCard.vue_vue_type_script_setup_true_lang-CDFQ3lz4.js": {
-    "file": "assets/RadioCard.vue_vue_type_script_setup_true_lang-CDFQ3lz4.js",
-    "name": "RadioCard.vue_vue_type_script_setup_true_lang",
+  "_PodcastCard.vue_vue_type_script_setup_true_lang-CMxS7jZZ.js": {
+    "file": "assets/PodcastCard.vue_vue_type_script_setup_true_lang-CMxS7jZZ.js",
+    "name": "PodcastCard.vue_vue_type_script_setup_true_lang",
     "imports": [
-      "resources/js/app.ts",
-      "_MainLayout.vue_vue_type_script_setup_true_lang-yIDBWnFS.js"
-    ]
-  },
-  "_StationSlider.vue_vue_type_script_setup_true_lang-C0HNXCU5.js": {
-    "file": "assets/StationSlider.vue_vue_type_script_setup_true_lang-C0HNXCU5.js",
-    "name": "StationSlider.vue_vue_type_script_setup_true_lang",
-    "imports": [
-      "_RadioCard.vue_vue_type_script_setup_true_lang-CDFQ3lz4.js",
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js",
       "resources/js/app.ts"
     ]
   },
-  "_share-BjBpCGa9.js": {
-    "file": "assets/share-BjBpCGa9.js",
+  "_RadioCard.vue_vue_type_script_setup_true_lang-BTUhhqCe.js": {
+    "file": "assets/RadioCard.vue_vue_type_script_setup_true_lang-BTUhhqCe.js",
+    "name": "RadioCard.vue_vue_type_script_setup_true_lang",
+    "imports": [
+      "resources/js/app.ts",
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js"
+    ]
+  },
+  "_StationSlider.vue_vue_type_script_setup_true_lang-BM3xF81i.js": {
+    "file": "assets/StationSlider.vue_vue_type_script_setup_true_lang-BM3xF81i.js",
+    "name": "StationSlider.vue_vue_type_script_setup_true_lang",
+    "imports": [
+      "_RadioCard.vue_vue_type_script_setup_true_lang-BTUhhqCe.js",
+      "resources/js/app.ts"
+    ]
+  },
+  "_share-DrAv0MPK.js": {
+    "file": "assets/share-DrAv0MPK.js",
     "name": "share",
     "imports": [
-      "_MainLayout.vue_vue_type_script_setup_true_lang-yIDBWnFS.js"
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js"
     ]
   },
   "public/images/soy-long.png": {
@@ -50,135 +58,151 @@
     "src": "public/images/soy-short.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-C9q96KLy.css",
+    "file": "assets/app-DtGw5tMF.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/Pages/About.vue": {
-    "file": "assets/About-D9nlvGkp.js",
+    "file": "assets/About-BgAfOyqF.js",
     "name": "About",
     "src": "resources/js/Pages/About.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_MainLayout.vue_vue_type_script_setup_true_lang-yIDBWnFS.js",
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js",
       "resources/js/app.ts"
     ],
     "css": [
-      "assets/app-C9q96KLy.css"
+      "assets/app-DtGw5tMF.css"
+    ]
+  },
+  "resources/js/Pages/Error.vue": {
+    "file": "assets/Error-D5sl7UjM.js",
+    "name": "Error",
+    "src": "resources/js/Pages/Error.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js",
+      "resources/js/app.ts"
+    ],
+    "css": [
+      "assets/app-DtGw5tMF.css"
     ]
   },
   "resources/js/Pages/Home.vue": {
-    "file": "assets/Home-BYJ7CMuK.js",
+    "file": "assets/Home-jH180xxo.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_MainLayout.vue_vue_type_script_setup_true_lang-yIDBWnFS.js",
+      "_PodcastCard.vue_vue_type_script_setup_true_lang-CMxS7jZZ.js",
       "resources/js/app.ts",
-      "_StationSlider.vue_vue_type_script_setup_true_lang-C0HNXCU5.js",
-      "_RadioCard.vue_vue_type_script_setup_true_lang-CDFQ3lz4.js"
+      "_StationSlider.vue_vue_type_script_setup_true_lang-BM3xF81i.js",
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js",
+      "_RadioCard.vue_vue_type_script_setup_true_lang-BTUhhqCe.js"
     ],
     "css": [
-      "assets/app-C9q96KLy.css"
+      "assets/app-DtGw5tMF.css"
     ]
   },
   "resources/js/Pages/Podcast/Podcast.vue": {
-    "file": "assets/Podcast-BAqy_q1G.js",
+    "file": "assets/Podcast-xWYAz_uw.js",
     "name": "Podcast",
     "src": "resources/js/Pages/Podcast/Podcast.vue",
     "isDynamicEntry": true,
     "imports": [
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js",
       "resources/js/app.ts",
-      "_MainLayout.vue_vue_type_script_setup_true_lang-yIDBWnFS.js",
-      "_share-BjBpCGa9.js"
+      "_share-DrAv0MPK.js"
     ],
     "css": [
-      "assets/app-C9q96KLy.css"
+      "assets/app-DtGw5tMF.css"
     ]
   },
   "resources/js/Pages/Radio/CategoryRadio.vue": {
-    "file": "assets/CategoryRadio-DIeBcm7n.js",
+    "file": "assets/CategoryRadio-Dba25jjm.js",
     "name": "CategoryRadio",
     "src": "resources/js/Pages/Radio/CategoryRadio.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_StationSlider.vue_vue_type_script_setup_true_lang-C0HNXCU5.js",
-      "_MainLayout.vue_vue_type_script_setup_true_lang-yIDBWnFS.js",
+      "_StationSlider.vue_vue_type_script_setup_true_lang-BM3xF81i.js",
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js",
       "resources/js/app.ts",
-      "_RadioCard.vue_vue_type_script_setup_true_lang-CDFQ3lz4.js"
+      "_RadioCard.vue_vue_type_script_setup_true_lang-BTUhhqCe.js"
     ],
     "css": [
-      "assets/app-C9q96KLy.css"
+      "assets/app-DtGw5tMF.css"
     ]
   },
   "resources/js/Pages/Radio/Explore.vue": {
-    "file": "assets/Explore-X6CFcLHP.js",
+    "file": "assets/Explore-CvitwsdU.js",
     "name": "Explore",
     "src": "resources/js/Pages/Radio/Explore.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_GridStationsDisplay.vue_vue_type_script_setup_true_lang-D2k5Bisg.js",
-      "_MainLayout.vue_vue_type_script_setup_true_lang-yIDBWnFS.js",
-      "_RadioCard.vue_vue_type_script_setup_true_lang-CDFQ3lz4.js"
+      "_GridStationsDisplay.vue_vue_type_script_setup_true_lang-CUvLe9tW.js",
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js",
+      "_RadioCard.vue_vue_type_script_setup_true_lang-BTUhhqCe.js"
     ],
     "css": [
       "assets/Explore-CsN625Kb.css",
-      "assets/app-C9q96KLy.css"
+      "assets/app-DtGw5tMF.css"
     ]
   },
   "resources/js/Pages/Radio/FavoriteStations.vue": {
-    "file": "assets/FavoriteStations-CwCXkBwD.js",
+    "file": "assets/FavoriteStations-CQIhdFr7.js",
     "name": "FavoriteStations",
     "src": "resources/js/Pages/Radio/FavoriteStations.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_GridStationsDisplay.vue_vue_type_script_setup_true_lang-D2k5Bisg.js",
-      "_MainLayout.vue_vue_type_script_setup_true_lang-yIDBWnFS.js",
+      "_GridStationsDisplay.vue_vue_type_script_setup_true_lang-CUvLe9tW.js",
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js",
       "resources/js/app.ts",
-      "_RadioCard.vue_vue_type_script_setup_true_lang-CDFQ3lz4.js"
+      "_RadioCard.vue_vue_type_script_setup_true_lang-BTUhhqCe.js"
     ],
     "css": [
-      "assets/app-C9q96KLy.css"
+      "assets/app-DtGw5tMF.css"
     ]
   },
   "resources/js/Pages/Radio/Station.vue": {
-    "file": "assets/Station-DbXskgTs.js",
+    "file": "assets/Station-BYfcUSxK.js",
     "name": "Station",
     "src": "resources/js/Pages/Radio/Station.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_MainLayout.vue_vue_type_script_setup_true_lang-yIDBWnFS.js",
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js",
       "resources/js/app.ts",
-      "_share-BjBpCGa9.js"
+      "_share-DrAv0MPK.js"
     ],
     "css": [
       "assets/Station-Ca2MPEkP.css",
-      "assets/app-C9q96KLy.css"
+      "assets/app-DtGw5tMF.css"
     ]
   },
   "resources/js/Pages/Search.vue": {
-    "file": "assets/Search-kIeLFiey.js",
+    "file": "assets/Search-BSgVssFp.js",
     "name": "Search",
     "src": "resources/js/Pages/Search.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.ts",
-      "_MainLayout.vue_vue_type_script_setup_true_lang-yIDBWnFS.js",
-      "_GridStationsDisplay.vue_vue_type_script_setup_true_lang-D2k5Bisg.js",
-      "_RadioCard.vue_vue_type_script_setup_true_lang-CDFQ3lz4.js"
+      "_MainLayout.vue_vue_type_script_setup_true_lang-D-IxzxSB.js",
+      "_PodcastCard.vue_vue_type_script_setup_true_lang-CMxS7jZZ.js",
+      "_GridStationsDisplay.vue_vue_type_script_setup_true_lang-CUvLe9tW.js",
+      "_RadioCard.vue_vue_type_script_setup_true_lang-BTUhhqCe.js"
     ],
     "css": [
-      "assets/app-C9q96KLy.css"
+      "assets/app-DtGw5tMF.css"
     ]
   },
   "resources/js/app.ts": {
-    "file": "assets/app-DtAG2CNg.js",
+    "file": "assets/app-CIqSgJxc.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "dynamicImports": [
       "resources/js/Pages/About.vue",
+      "resources/js/Pages/Error.vue",
       "resources/js/Pages/Home.vue",
       "resources/js/Pages/Podcast/Podcast.vue",
       "resources/js/Pages/Radio/CategoryRadio.vue",
@@ -188,7 +212,7 @@
       "resources/js/Pages/Search.vue"
     ],
     "css": [
-      "assets/app-C9q96KLy.css"
+      "assets/app-DtGw5tMF.css"
     ]
   }
 }
