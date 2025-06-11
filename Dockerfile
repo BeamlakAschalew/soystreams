@@ -24,9 +24,6 @@ WORKDIR /var/www/html
 FROM node:18-alpine AS frontend_builder
 WORKDIR /app
 
-# Copy package.json and package-lock.json first
-COPY package.json package-lock.json ./
-
 # Install npm dependencies
 RUN npm ci --only=production --no-audit --no-fund # Added flags for cleaner production install
 
