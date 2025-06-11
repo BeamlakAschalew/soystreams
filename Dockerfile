@@ -24,11 +24,15 @@ WORKDIR /var/www/html
 FROM node:18-alpine AS frontend_builder
 WORKDIR /app
 
-# Install npm dependencies
-RUN npm ci --only=production --no-audit --no-fund # Added flags for cleaner production install
+# Copy package.json
+COPY package.json ./
+
+# Install npm dependencies using npm install
+RUN npm install --only=production --no-audit --no-fund
 
 # Copy the rest of the application code
 COPY . .
+
 # This command should build your Vite assets as defined in package.json scripts (e.g., "build": "vite build")
 RUN npm run build
 
