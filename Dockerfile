@@ -1,5 +1,5 @@
 # --- PHP Base ---
-FROM php:8.2-fpm-alpine AS php_base
+FROM php:8.3-fpm-alpine AS php_base
 ENV APP_ENV=production
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
@@ -78,7 +78,7 @@ COPY . /var/www/html
 # Copy .env.example to .env and ensure APP_KEY is present for build-time commands
 # This .env file will be part of the image.
 # For production, sensitive values should be injected as environment variables at runtime.
-RUN cp .env.example .env
+RUN [ -f .env.example ] && cp .env.example .env || touch .env
 # For debugging: List files to check if .env is present
 RUN ls -la
 
