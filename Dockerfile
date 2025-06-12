@@ -17,7 +17,31 @@ RUN apk add --no-cache \
     supervisor \
     git
 
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Install PHP extensions
+# Ensure this comes AFTER installing system dependencies and Composer if extensions depend on them
+# or if composer is used to manage PHP extensions (not typical for docker-php-ext-install)
+# Example: RUN docker-php-ext-install pdo_mysql zip bcmath exif pcntl sockets
+# Add your specific PHP extensions here based on your project's needs.
+# Check your project's composer.json "require" section for php extensions.
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+    gd \
+    pdo_mysql \
+    bcmath \
+    sockets \
+    zip \
+    exif \
+    pcntl \
+    mbstring \
+    xml \
+    dom
+# If you use Redis, uncomment and ensure php-redis is installed
+# RUN pecl install redis && docker-php-ext-enable redis
+
+
 WORKDIR /var/www/html
 
 # --- Node.js Frontend Builder ---
