@@ -61,4 +61,7 @@ RUN adduser -D -g '' www
 # Later in the Dockerfile...
 COPY --chown=www:www . .
 
+RUN chown -R www:www storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
+
 CMD ["php-fpm"]
