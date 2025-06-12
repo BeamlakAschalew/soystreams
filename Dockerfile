@@ -75,10 +75,15 @@ FROM php_base AS app
 # Copy application code
 COPY . /var/www/html
 
-# Copy .env.example to .env
+# Copy .env.example to .env and ensure APP_KEY is present for build-time commands
 # This .env file will be part of the image.
 # For production, sensitive values should be injected as environment variables at runtime.
-RUN cp .env.example .env
+RUN cp .env.example .env && \
+    if [ -z "$(grep '^APP_KEY=' .env)" ]; then echo "APP_KEY=" >> .env; fi && \
+    if [ "$(grep '^APP_KEY=' .env | cut -d '=' -f2)" = "" ]; then php artisan key:generate --show | awk '{print "APP_KEY="$1}' >> .env.tmp && sed -i '/^APP_KEY=/d' .env && cat .env.tmp >> .env && rm .env.tmp; fi
+
+# For debugging: List files to check if .env is present
+RUN ls -la
 
 # Copy built frontend assets from the builder stage
 COPY --from=frontend_builder /app/public/build /var/www/html/public/build
@@ -87,8 +92,7 @@ COPY --from=frontend_builder /app/public/build /var/www/html/public/build
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
 # Run Laravel-specific commands
-# Ensure APP_KEY is set in your .env file or passed via docker-compose environment.
-# Avoid running key:generate directly in the Dockerfile if APP_KEY is managed externally.
+# APP_KEY should now be set in the .env for these build-time commands
 RUN php artisan wayfinder:generate # As per your vite.config.js
 RUN php artisan storage:link       # Creates the public/storage symlink
 RUN php artisan config:cache
