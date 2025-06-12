@@ -15,7 +15,8 @@ RUN apk add --no-cache \
     oniguruma-dev \
     libxml2-dev \
     supervisor \
-    git
+    git \
+    linux-headers
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
