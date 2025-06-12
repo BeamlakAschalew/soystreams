@@ -1,15 +1,24 @@
-# Stage 1: Build frontend assets
+# Stage 1: Build frontend assets using pnpm
 FROM node:18-alpine AS node_builder
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+# Install pnpm globally
+RUN npm install -g pnpm
 
+# Copy only the package manifest
+COPY package.json ./
+
+# Install dependencies without lockfile
+RUN pnpm install --no-frozen-lockfile
+
+# Copy the rest of the app
 COPY . .
-RUN npm run build
 
-# Stage 2: Laravel (PHP) setup
+# Build the frontend assets (assumes you're using Vite or similar)
+RUN pnpm build
+
+# Stage 2: Laravel backend
 FROM php:8.3-fpm-alpine
 
 # Install system dependencies
@@ -32,16 +41,15 @@ RUN apk add --no-cache \
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Set working directory
 WORKDIR /var/www
 
-# Copy project files
+# Copy Laravel app
 COPY . .
 
-# Copy built assets from Node stage
+# Copy built frontend assets
 COPY --from=node_builder /app/public/build /var/www/public/build
 
-# Install PHP dependencies
+# Install Laravel dependencies (in production mode)
 RUN composer install --optimize-autoloader --no-dev
 
 # Set permissions
