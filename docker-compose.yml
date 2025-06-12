@@ -5,118 +5,59 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: soystreams-app
+        image: laravel-app
+        container_name: laravel-app
         restart: unless-stopped
-        working_dir: /var/www/html
+        working_dir: /var/www
         volumes:
-            - .:/var/www/html # Mounts your code for development; for production, you might prefer to rely solely on the COPY in Dockerfile
-            # Ensure storage permissions are correct if you mount like this in prod.
-            # The Dockerfile already sets permissions on the copied files.
-        environment:
-            # These variables will be read from your .env file
-            - APP_ENV=${APP_ENV:-production}
-            - APP_DEBUG=${APP_DEBUG:-false}
-            - APP_KEY=${APP_KEY}
-            - APP_URL=${APP_URL}
-
-            - DB_CONNECTION=${DB_CONNECTION:-mysql}
-            - DB_HOST=db # Service name of the database container
-            - DB_PORT=${DB_PORT:-3306}
-            - DB_DATABASE=${DB_DATABASE}
-            - DB_USERNAME=${DB_USERNAME}
-            - DB_PASSWORD=${DB_PASSWORD}
-
-            - REDIS_HOST=redis # Service name of the Redis container
-            - REDIS_PASSWORD=${REDIS_PASSWORD:-null}
-            - REDIS_PORT=${REDIS_PORT:-6379}
-
-            - SESSION_DRIVER=${SESSION_DRIVER:-redis}
-            - SESSION_DOMAIN=${SESSION_DOMAIN}
-            - SESSION_SECURE_COOKIE=${SESSION_SECURE_COOKIE:-false} # Set to true if using HTTPS
-
-            - CACHE_DRIVER=${CACHE_DRIVER:-redis}
-            - QUEUE_CONNECTION=${QUEUE_CONNECTION:-redis} # If using Laravel Queues with Redis
-
-            # Add any other .env variables your application needs
-        depends_on:
-            - db
-            - redis
+            - ./:/var/www
         networks:
-            - soystreams_network
+            - laravel
 
     nginx:
-        image: nginx:alpine
-        container_name: soystreams-nginx
+        image: nginx:stable-alpine
+        container_name: nginx
         restart: unless-stopped
         ports:
-            - '80:80'
-            # - "443:443" # Uncomment if handling SSL directly in this Nginx container
+            - '8000:80'
         volumes:
-            - .:/var/www/html # Nginx needs access to public assets and the storage symlink
+            - ./:/var/www
             - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-            # - ./certs:/etc/nginx/certs # Mount SSL certificates here if Nginx handles SSL
         depends_on:
             - app
         networks:
-            - soystreams_network
+            - laravel
 
-    db: # Example for MySQL
-        image: mysql:8.0 # Or mariadb:latest, postgres:latest
-        container_name: soystreams-db
+    mysql:
+        image: mysql:8.0
+        container_name: mysql
         restart: unless-stopped
+        ports:
+            - '3306:3306'
         environment:
-            MYSQL_DATABASE: ${DB_DATABASE}
-            MYSQL_USER: ${DB_USERNAME}
-            MYSQL_PASSWORD: ${DB_PASSWORD}
-            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-your_strong_root_password} # CHANGE THIS!
+            MYSQL_DATABASE: laravel
+            MYSQL_USER: user
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: rootsecret
         volumes:
-            - db_data:/var/lib/mysql
-        # ports: # Only expose if you need direct access from host machine (e.g., for debugging)
-        # - "33061:3306"
+            - mysql-data:/var/lib/mysql
         networks:
-            - soystreams_network
+            - laravel
 
-    redis:
-        image: redis:alpine
-        container_name: soystreams-redis
-        restart: unless-stopped
+    node:
+        image: node:18
+        container_name: node
+        working_dir: /var/www
         volumes:
-            - redis_data:/data
-        # ports:
-        # - "63791:6379"
+            - ./:/var/www
+        command: >
+            sh -c "npm install && npm run dev"
         networks:
-            - soystreams_network
-
-    # Optional: Laravel Queue Worker
-    # worker:
-    #   build:
-    #     context: .
-    #     dockerfile: Dockerfile
-    #   container_name: soystreams-worker
-    #   restart: unless-stopped
-    #   command: php artisan queue:work redis --sleep=3 --tries=3 --max-time=3600
-    #   working_dir: /var/www/html
-    #   volumes:
-    #     - .:/var/www/html
-    #   environment:
-    #     # Inherit or redefine necessary env vars for the worker
-    #     - APP_ENV=${APP_ENV:-production}
-    #     - APP_KEY=${APP_KEY}
-    #     - DB_HOST=db
-    #     - REDIS_HOST=redis
-    #     # ... other necessary env vars
-    #   depends_on:
-    #     - app # or db and redis directly
-    #     - redis
-    #   networks:
-    #     - soystreams_network
+            - laravel
 
 volumes:
-    db_data:
-        driver: local
-    redis_data:
-        driver: local
+    mysql-data:
 
 networks:
-    soystreams_network:
+    laravel:
         driver: bridge
