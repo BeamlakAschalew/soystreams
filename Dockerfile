@@ -24,17 +24,25 @@ WORKDIR /var/www/html
 FROM node:18-alpine AS frontend_builder
 WORKDIR /app
 
-# Copy package.json
-COPY package.json ./
+# Install pnpm
+RUN npm install -g pnpm
 
-# Install npm dependencies using npm install
-RUN npm install --only=production --no-audit --no-fund
+# Copy package.json and pnpm-lock.yaml (if you use one)
+# If you don't have pnpm-lock.yaml yet, pnpm will create it on the first install.
+COPY package.json ./
+# If you have a pnpm-lock.yaml, uncomment the next line
+# COPY pnpm-lock.yaml ./
+
+# Install dependencies using pnpm
+# pnpm install by default installs devDependencies, which are needed for the build.
+# Add --prod if you only want production dependencies, but this will likely break the build step.
+RUN pnpm install --no-frozen-lockfile
 
 # Copy the rest of the application code
 COPY . .
 
 # This command should build your Vite assets as defined in package.json scripts (e.g., "build": "vite build")
-RUN npm run build
+RUN pnpm run build
 
 # --- Final Application Stage ---
 FROM php_base AS app
