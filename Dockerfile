@@ -55,8 +55,10 @@ RUN composer install --optimize-autoloader --no-dev
 # Copy .env.example to .env if .env doesn't exist
 RUN cp .env.example .env
 
-# Set permissions
-RUN adduser -D -g '' www && chown -R www:www /var/www
-USER www
+# Add user
+RUN adduser -D -g '' www
+
+# Later in the Dockerfile...
+COPY --chown=www:www . .
 
 CMD ["php-fpm"]
