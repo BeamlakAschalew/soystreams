@@ -78,10 +78,7 @@ COPY . /var/www/html
 # Copy .env.example to .env and ensure APP_KEY is present for build-time commands
 # This .env file will be part of the image.
 # For production, sensitive values should be injected as environment variables at runtime.
-RUN cp .env.example .env && \
-    if [ -z "$(grep '^APP_KEY=' .env)" ]; then echo "APP_KEY=" >> .env; fi && \
-    if [ "$(grep '^APP_KEY=' .env | cut -d '=' -f2)" = "" ]; then php artisan key:generate --show | awk '{print "APP_KEY="$1}' >> .env.tmp && sed -i '/^APP_KEY=/d' .env && cat .env.tmp >> .env && rm .env.tmp; fi
-
+RUN cp .env.example .env
 # For debugging: List files to check if .env is present
 RUN ls -la
 
