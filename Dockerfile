@@ -64,4 +64,4 @@ COPY --chown=www:www . .
 RUN chown -R www:www storage bootstrap/cache
 RUN chmod -R 775 storage bootstrap/cache
 
-CMD ["php-fpm"]
+CMD ["sh", "-c", "cp .env.example .env && php-fpm"]
