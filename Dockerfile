@@ -12,10 +12,10 @@ RUN apk add --no-cache \
     libpng-dev \
     libjpeg-turbo-dev \
     freetype-dev \
-    oniguruma-dev \   # for mbstring \
-    libxml2-dev \     # for xml/dom \
+    oniguruma-dev \
+    libxml2-dev \
     supervisor \
-    git               # For composer dependencies from VCS if needed
+    git
 
 # Install PHP extensions
 WORKDIR /var/www/html
