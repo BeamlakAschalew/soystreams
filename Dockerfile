@@ -52,6 +52,9 @@ COPY --from=node_builder /app/public/build /var/www/public/build
 # Install Laravel dependencies (in production mode)
 RUN composer install --optimize-autoloader --no-dev
 
+# Copy .env.example to .env if .env doesn't exist
+RUN cp .env.example .env
+
 # Set permissions
 RUN adduser -D -g '' www && chown -R www:www /var/www
 USER www
