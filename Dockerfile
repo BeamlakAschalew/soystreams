@@ -75,6 +75,11 @@ FROM php_base AS app
 # Copy application code
 COPY . /var/www/html
 
+# Copy .env.example to .env
+# This .env file will be part of the image.
+# For production, sensitive values should be injected as environment variables at runtime.
+RUN cp .env.example .env
+
 # Copy built frontend assets from the builder stage
 COPY --from=frontend_builder /app/public/build /var/www/html/public/build
 
