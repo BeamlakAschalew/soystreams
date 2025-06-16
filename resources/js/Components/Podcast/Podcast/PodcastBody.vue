@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import Podcast from '@/Interfaces/Podcast'
 import PodcastEpisode from '@/Interfaces/PodcastEpisode'
+import { useFavoritePodcastStore } from '@/Stores/useFavoritePodcastStore'
 import { usePodcastPlayerStore } from '@/Stores/usePodcastPlayerStore'
 import {
     ChevronDownIcon,
     ChevronUpIcon,
+    HeartIcon,
     LoaderCircle,
     Pause,
     Play,
-    ShareIcon,
 } from 'lucide-vue-next'
 import type { PropType } from 'vue'
 import { ref } from 'vue'
 
 const playerStore = usePodcastPlayerStore()
-// const favoriteStore = useFavoriteStationStore()
+const favoriteStore = useFavoritePodcastStore()
 
 defineProps({
     podcast: {
@@ -73,20 +74,15 @@ function playPodcast(podcast: Podcast, podcastEpisode: PodcastEpisode) {
                 />
                 <component v-else :is="Play" class="h-6 w-6 text-white dark:text-gray-900" />
             </button>
-            <!-- <button @click="favoriteStore.toggleFavorite(station)" class="transition-colors">
+            <button @click="favoriteStore.toggleFavorite(podcast)" class="transition-colors">
                 <HeartIcon
                     class="h-6 w-6 cursor-pointer stroke-current"
                     :class="
-                        favoriteStore.isFavorited(station.stationuuid)
+                        favoriteStore.isFavorited(podcast.id)
                             ? 'fill-gray-900 hover:fill-gray-800 dark:fill-[#e5e7eb] dark:hover:fill-gray-300'
                             : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
                     "
                 />
-            </button> -->
-            <button
-                class="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
-            >
-                <ShareIcon class="h-6 w-6" />
             </button>
         </div>
 
