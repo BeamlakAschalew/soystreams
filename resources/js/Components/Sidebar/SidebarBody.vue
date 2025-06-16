@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SidebarMenuItem from '@/Components/Sidebar/SidebarMenuItem.vue'
 import { home } from '@/routes/home'
+import { favorites as podFav } from '@/routes/podcast/favorites'
 import { explore } from '@/routes/radio/explore'
 import { favorites } from '@/routes/radio/favorites'
 import { music } from '@/routes/radio/music'
@@ -69,6 +70,12 @@ import {
                     :active="$page.url.startsWith('/radio/favorites')"
                     ><template #icon="{ size }"><Heart :size="size" /></template> Favorite
                     Stations</SidebarMenuItem
+                >
+                <SidebarMenuItem
+                    :path="podFav().url"
+                    :active="$page.url.startsWith('/podcast/favorites')"
+                    ><template #icon="{ size }"><Heart :size="size" /></template> Favorite
+                    Podcasts</SidebarMenuItem
                 >
                 <SidebarMenuItem path="/podcasts"
                     ><template #icon="{ size }"><Podcast :size="size" /></template>

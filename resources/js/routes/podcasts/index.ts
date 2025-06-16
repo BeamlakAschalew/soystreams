@@ -2,7 +2,7 @@
 import { queryParams, type QueryParams } from './../../wayfinder'
 
 /**
- * @see routes/web.php:38
+ * @see routes/web.php:40
  * @route /podcasts
  */
 export const index = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,7 +19,7 @@ index.definition = {
 }
 
 /**
- * @see routes/web.php:38
+ * @see routes/web.php:40
  * @route /podcasts
  */
 index.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -27,7 +27,7 @@ index.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
 }
 
 /**
- * @see routes/web.php:38
+ * @see routes/web.php:40
  * @route /podcasts
  */
 index.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -39,7 +39,7 @@ index.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 })
 
 /**
- * @see routes/web.php:38
+ * @see routes/web.php:40
  * @route /podcasts
  */
 index.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

@@ -1,7 +1,11 @@
+import FavoritePodcastsController from './FavoritePodcastsController'
 import PodcastController from './PodcastController'
+import EpisodeController from './EpisodeController'
 
 const Podcast = {
-    PodcastController,
+    FavoritePodcastsController, 
+    PodcastController, 
+    EpisodeController,
 }
 
 export default Podcast

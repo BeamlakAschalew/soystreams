@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Podcast\EpisodeController;
+use App\Http\Controllers\Podcast\FavoritePodcastsController;
 use App\Http\Controllers\Podcast\PodcastController;
 use App\Http\Controllers\Radio\FavoriteStationsController;
 use App\Http\Controllers\Radio\MusicRadioController;
@@ -40,8 +42,11 @@ Route::get('/podcasts', function () {
         'title' => 'Podcasts',
     ]);
 })->name('podcasts.index');
+Route::get('/podcast/favorites', FavoritePodcastsController::class)->name('podcast.favorites');
 Route::get('/podcast/{id}', [PodcastController::class, 'index'])->name('podcast.show');
 Route::get('/api/podcasts/{id}/all-episodes', [PodcastController::class, 'fetchAllEpisodes'])->name('podcast.episodes.all.api');
+
+Route::get('/episode/{episodeId}', EpisodeController::class)->name('episode.index');
 
 Route::get('/about', function () {
     return Inertia::render('About', [
